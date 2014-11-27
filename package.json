@@ -31,7 +31,10 @@
     "glob": "^4.0.5"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "ember-form-master-2000",
+    "ember-forms",
+    "forms"
   ],
   "ember-addon": {
     "configPath": "tests/dummy/config"
