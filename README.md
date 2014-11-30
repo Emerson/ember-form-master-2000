@@ -1,25 +1,17 @@
-# Ember-form-master-2000
+# Ember Form Master 2000
 
-This README outlines the details of collaborating on this Ember addon.
+A currently unusable ember-cli form library.
 
-## Installation
+### API
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+```
+{{#fm-form}}
 
-## Running
+  {{fm-input type='text' value=model.first_name}}
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+  {{fm-input type='text' value=model.first_name}}
 
-## Running Tests
+  {{fm-submit value='Create'}}
 
-* `ember test`
-* `ember test --server`
-
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+{{/fm-form}}
+```
