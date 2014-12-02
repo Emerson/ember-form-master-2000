@@ -1,6 +1,6 @@
 {
   "name": "ember-form-master-2000",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -10,11 +10,11 @@
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "https://github.com/stefanpenner/ember-cli",
+  "repository": "https://github.com/Emerson/ember-form-master-2000",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Emerson Lackey",
   "license": "MIT",
   "devDependencies": {
     "body-parser": "^1.2.0",

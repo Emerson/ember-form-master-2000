@@ -1,6 +1,6 @@
 # Ember FormMaster2000
 
-A flexible and lightweight ember-cli addon will eventually make forms easier to deal with.
+A flexible and lightweight ember-cli addon that will _(eventually)_ make forms easier to deal with.
 
 ### Basic API
 
