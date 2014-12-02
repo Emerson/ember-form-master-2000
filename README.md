@@ -2,6 +2,14 @@
 
 A flexible and lightweight ember-cli addon that will _(eventually)_ make forms easier to deal with.
 
+### Installation
+
+This is an [ember-cli](http://www.ember-cli.com/) addon and can be installed using [npm](https://www.npmjs.org/package/ember-form-master-2000):
+
+```bash
+npm install --save-dev ember-form-master-2000
+```
+
 ### Basic API
 
 ```handlebars
