@@ -1,0 +1,21 @@
+<div {{bind-attr class='wrapperClass errorClass'}}>
+
+  {{#if label}}
+    <label {{bind-attr class='labelClass'}}>{{label}}</label>
+  {{/if}}
+
+  {{input
+    typeBinding=type
+    value=value
+    classNameBindings='errorClass inputClass'
+    placeholder=placeholder}}
+
+  {{#if errors}}
+    {{fm-errortext errors=errors}}
+  {{/if}}
+
+  {{#if helptext}}
+    {{fm-helptext helptext=helptext}}
+  {{/if}}
+
+</div>

@@ -5,7 +5,17 @@ if(Ember.libraries) {
 }
 
 export default {
-  name:       'ember-form-master-2000',
+  name: 'ember-form-master-2000',
   initialize: function(container, application) {
+    var config = {
+      submitButtonClasses: ['btn', 'btn-primary'],
+      errorClass: 'has-error',
+      wrapperClass: 'form-group',
+      labelClass: 'control-label',
+      inputClass: 'form-control',
+      formClass: 'form-horizontal'
+    };
+    application.register('fmconfig:main', config, { instantiate: false });
+    application.inject('component', 'fmconfig', 'fmconfig:main');
   }
 };
