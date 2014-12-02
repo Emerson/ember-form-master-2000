@@ -4,7 +4,7 @@ A flexible and lightweight ember-cli addon that will _(eventually)_ make forms e
 
 ### Basic API
 
-```
+```handlebars
 {{#fm-form for=model action='submit'}}
 
   {{fm-field type='text' value=model.first_name errors=model.errors.first_name label='First Name'}}
