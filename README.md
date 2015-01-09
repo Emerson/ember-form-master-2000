@@ -1,3 +1,7 @@
+<div align="right">
+  <img src="https://travis-ci.org/Emerson/ember-form-master-2000.svg?branch=master" alt="Build Status">
+</div>
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/Emerson/ember-form-master-2000/master/addon/assets/form-master-2000.png" alt="FormMaster2000"/>
 </p>
