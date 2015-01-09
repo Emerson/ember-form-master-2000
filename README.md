@@ -1,3 +1,5 @@
+[logo]: https://raw.githubusercontent.com/Emerson/ember-form-master-2000/master/addon/assets/form-master-2000.png "FormMaster2000"
+
 # Ember FormMaster2000
 
 A flexible and lightweight ember-cli addon that will _(eventually)_ make forms easier to deal with.
@@ -18,6 +20,15 @@ npm install --save-dev ember-form-master-2000
   {{fm-field type='text' value=model.first_name errors=model.errors.first_name label='First Name'}}
 
   {{fm-field type='password' value=model.password}}
+
+  {{fm-field 
+    label='Choose Something' 
+    type='select'
+    content=model.selectOptions
+    optionValuePath='content.id'
+    optionLabelPath='content.label'
+    prompt='Select Something'
+  }}
 
   {{fm-submit value='Create'}}
 
