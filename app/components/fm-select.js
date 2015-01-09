@@ -1,5 +1,2 @@
-import Ember from 'ember';
-
-export default Ember.Componenet.extend({
-
-});
+import FmSelectComponent from 'ember-form-master-2000/components/fm-select';
+export default FmSelectComponent;

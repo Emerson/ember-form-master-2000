@@ -13,7 +13,7 @@ test('renders helptext', function() {
   var component = this.subject();
   this.$();
   Ember.run(function() {
-    component.set('errors', ['This is an error', 'This is a second error']);
+    component.set('helptext', 'Fill in this field');
   });
-  equal(component.$().text(), 'This is an error', 'It renders the first error');
+  equal(component.$().text(), 'Fill in this field', 'It renders the passed in helptext');
 });

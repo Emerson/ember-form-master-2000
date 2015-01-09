@@ -4,11 +4,24 @@
     <label {{bind-attr class='labelClass'}}>{{label}}</label>
   {{/if}}
 
-  {{input
-    typeBinding=type
-    value=value
-    classNameBindings='errorClass inputClass'
-    placeholder=placeholder}}
+  {{#if isSelect}}
+
+    {{fm-select
+      content=content
+      optionValuePath=optionValuePath
+      optionLabelPath=optionLabelPath
+      prompt=prompt
+    }}
+
+  {{else}}
+  
+    {{input
+      type=type
+      value=value
+      classNameBindings='errorClass inputClass'
+      placeholder=placeholder}}
+
+  {{/if}}
 
   {{#if errors}}
     {{fm-errortext errors=errors}}

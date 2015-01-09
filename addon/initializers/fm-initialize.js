@@ -5,6 +5,7 @@ export function initialize(container, application) {
     wrapperClass: 'form-group',
     labelClass: 'control-label',
     inputClass: 'form-control',
+    selectClass: 'form-control',
     formClass: 'form-horizontal'
   };
   application.register('fmconfig:main', config, { instantiate: false });
