@@ -1,8 +1,12 @@
-![FormMaster2000](https://raw.githubusercontent.com/Emerson/ember-form-master-2000/master/addon/assets/form-master-2000.png "FormMaster2000")
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Emerson/ember-form-master-2000/master/addon/assets/form-master-2000.png" alt="FormMaster2000"/>
+</p>
 
-# Ember FormMaster2000
+<div align="center">
+  <h4>A flexible and lightweight ember-cli addon that will <em>(eventually)</em> make forms easier to deal with.</h4>
+</div>
 
-A flexible and lightweight ember-cli addon that will _(eventually)_ make forms easier to deal with.
+----------------------------
 
 ### Installation
 
