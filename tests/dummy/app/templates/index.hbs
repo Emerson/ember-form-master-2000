@@ -1,18 +1,18 @@
 {{#fm-form}}
 
-{{fm-field label='First Name'}}
+  {{fm-field label='First Name'}}
 
-{{fm-field label='Last Name'}}
+  {{fm-field label='Last Name'}}
 
-{{fm-field 
-  label='Choose Something' 
-  type='select'
-  content=model.selectOptions
-  optionValuePath='content.id'
-  optionLabelPath='content.label'
-  prompt='Select Something'
-}}
+  {{fm-field 
+    label='Choose Something' 
+    type='select'
+    content=model.selectOptions
+    optionValuePath='content.id'
+    optionLabelPath='content.label'
+    prompt='Select Something'
+  }}
 
-{{fm-submit value='Submit the Form'}}
+  {{fm-submit value='Submit the Form'}}
 
 {{/fm-form}}
