@@ -2,10 +2,10 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   init: function() {
-    this._super();
     this.set('wrapperClass', this.fmconfig.wrapperClass);
     this.set('labelClass', this.fmconfig.labelClass);
     this.set('inputClass', this.fmconfig.inputClass);
+    this._super();
   },
   placeholder: null,
   label: null,
