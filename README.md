@@ -1,4 +1,4 @@
-[logo]: https://raw.githubusercontent.com/Emerson/ember-form-master-2000/master/addon/assets/form-master-2000.png "FormMaster2000"
+![FormMaster2000](https://raw.githubusercontent.com/Emerson/ember-form-master-2000/master/addon/assets/form-master-2000.png "FormMaster2000")
 
 # Ember FormMaster2000
 
