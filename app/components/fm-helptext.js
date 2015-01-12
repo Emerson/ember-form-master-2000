@@ -1,7 +1,2 @@
-import Ember from 'ember';
-
-export default Ember.Component.extend({
-  tagName: 'span',
-  classNameBindings: ['helptextClass'],
-  helptextClass: 'help-block'
-});
+import FmHelpText from 'ember-form-master-2000/components/fm-helptext';
+export default FmHelpText;

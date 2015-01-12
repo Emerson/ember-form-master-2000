@@ -13,7 +13,7 @@ moduleForComponent('fm-field', {}, {
 test('renders properly', function() {
   var component = this.subject();
   this.$();
-  equal(component.$('.form-group').length, 1, 'Has a wrapper element with the form-group class');
+  ok(component.$().hasClass('form-group'), 'Has a wrapper element with the form-group class');
   equal(component.$('input.form-control').length, 1, 'Has a wrapper element with the form-group class');
 });
 

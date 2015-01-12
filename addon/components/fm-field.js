@@ -22,5 +22,6 @@ export default Ember.Component.extend({
   }.property('errors'),
   isSelect: function() {
     return this.get('type') === 'select';
-  }.property('type')
+  }.property('type'),
+  classNameBindings: ['wrapperClass', 'errorClass']
 });

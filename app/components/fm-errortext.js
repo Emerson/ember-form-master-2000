@@ -1,10 +1,2 @@
-import Ember from 'ember';
-
-export default Ember.Component.extend({
-  tagName: 'span',
-  classNameBindings: 'errortextClass',
-  error: function() {
-    return this.get('errors.firstObject');
-  }.property('errors'),
-  errortextClass: 'help-block'
-});
+import FmErrorText from 'ember-form-master-2000/components/fm-errortext';
+export default FmErrorText;

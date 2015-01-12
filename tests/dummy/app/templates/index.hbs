@@ -1,18 +1,47 @@
-{{#fm-form}}
+<div class="row">
 
-  {{fm-field label='First Name'}}
+  <div class="col-sm-8">
+    {{#fm-form action='submit'}}
 
-  {{fm-field label='Last Name'}}
+      {{fm-field label='First Name' 
+        value=model.exampleModel.first_name 
+        errors=model.exampleModel.errors.first_name
+      }}
 
-  {{fm-field 
-    label='Choose Something' 
-    type='select'
-    content=model.selectOptions
-    optionValuePath='content.id'
-    optionLabelPath='content.label'
-    prompt='Select Something'
-  }}
+      {{fm-field label='Last Name'
+        value=model.exampleModel.last_name
+        errors=model.exampleModel.errors.last_name
+      }}
 
-  {{fm-submit value='Submit the Form'}}
+      {{fm-field 
+        label='Choose Something' 
+        type='select'
+        content=model.selectOptions
+        optionValuePath='content.value'
+        optionLabelPath='content.label'
+        prompt='Select Something'
+        value=model.exampleModel.language
+        errors=model.exampleModel.errors.language
+      }}
 
-{{/fm-form}}
+      {{fm-submit value='Submit the Form' disabled=model.disableSubmit}}
+
+    {{/fm-form}}
+  </div>
+
+  <div class="col-sm-3 col-sm-offset-1">
+    <a href="#" {{action 'toggleErrors'}} class="btn btn-default btn-block">Toggle Errors</a>
+    <a href="#" {{action 'toggleSubmit'}} class="btn btn-default btn-block">Toggle Disable Submit</a>
+    <hr>
+    <h4>Model Values</h4>
+    <ul>
+      <li>First Name: {{model.exampleModel.first_name}}</li>
+      <li>Last Name: {{model.exampleModel.last_name}}</li>
+      <li>Choose Something: {{model.exampleModel.language}}</li>
+    </ul>
+  </div>
+
+</div>
+
+<hr>
+

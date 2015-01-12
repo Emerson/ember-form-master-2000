@@ -1,34 +1,31 @@
-<div {{bind-attr class='wrapperClass errorClass'}}>
+{{#if label}}
+  <label {{bind-attr class='labelClass'}}>{{label}}</label>
+{{/if}}
 
-  {{#if label}}
-    <label {{bind-attr class='labelClass'}}>{{label}}</label>
-  {{/if}}
+{{#if isSelect}}
 
-  {{#if isSelect}}
+  {{fm-select
+    content=content
+    optionValuePath=optionValuePath
+    optionLabelPath=optionLabelPath
+    prompt=prompt
+    value=value
+  }}
 
-    {{fm-select
-      content=content
-      optionValuePath=optionValuePath
-      optionLabelPath=optionLabelPath
-      prompt=prompt
-    }}
+{{else}}
 
-  {{else}}
-  
-    {{input
-      type=type
-      value=value
-      classNameBindings='errorClass inputClass'
-      placeholder=placeholder}}
+  {{input
+    type=type
+    value=value
+    classNameBindings='errorClass inputClass'
+    placeholder=placeholder}}
 
-  {{/if}}
+{{/if}}
 
-  {{#if errors}}
-    {{fm-errortext errors=errors}}
-  {{/if}}
+{{#if errors}}
+  {{fm-errortext errors=errors}}
+{{/if}}
 
-  {{#if helptext}}
-    {{fm-helptext helptext=helptext}}
-  {{/if}}
-
-</div>
+{{#if helptext}}
+  {{fm-helptext helptext=helptext}}
+{{/if}}

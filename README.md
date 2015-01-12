@@ -23,7 +23,7 @@ npm install --save-dev ember-form-master-2000
 ### Basic API
 
 ```handlebars
-{{#fm-form for=model action='submit'}}
+{{#fm-form action='submit'}}
 
   {{fm-field type='text' value=model.first_name errors=model.errors.first_name label='First Name'}}
 
@@ -53,3 +53,7 @@ model.set('errors', Ember.Object.create({first_name: ['Required', 'Too short']})
 
 {{fm-field type='text' value=model.first_name errors=model.errors.first_name}}
 ```
+
+### Demo App
+
+You can see a more holistic example by looking at the [Dummy app](https://github.com/Emerson/ember-form-master-2000/tree/master/tests/dummy/app) that we use to test against. The [index.hbs](https://github.com/Emerson/ember-form-master-2000/blob/master/tests/dummy/app/templates/index.hbs) template and the [application route](https://github.com/Emerson/ember-form-master-2000/blob/master/tests/dummy/app/routes/application.js) are of particular interest.
