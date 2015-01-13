@@ -6,7 +6,8 @@ export function initialize(container, application) {
     labelClass: 'control-label',
     inputClass: 'form-control',
     selectClass: 'form-control',
-    formClass: 'form-horizontal'
+    formClass: 'form-horizontal',
+    checkboxWrapperClass: 'form-group',
   };
   application.register('fmconfig:main', config, { instantiate: false });
   application.inject('component', 'fmconfig', 'fmconfig:main');

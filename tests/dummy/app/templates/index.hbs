@@ -24,6 +24,8 @@
         errors=model.exampleModel.errors.language
       }}
 
+      {{fm-checkbox checked=model.exampleModel.isAwesome label='Are you awesome?'}}
+
       {{fm-submit value='Submit the Form' disabled=model.disableSubmit}}
 
     {{/fm-form}}
@@ -32,12 +34,21 @@
   <div class="col-sm-3 col-sm-offset-1">
     <a href="#" {{action 'toggleErrors'}} class="btn btn-default btn-block">Toggle Errors</a>
     <a href="#" {{action 'toggleSubmit'}} class="btn btn-default btn-block">Toggle Disable Submit</a>
+    <a href="#" {{action 'toggleCheckbox'}} class="btn btn-default btn-block">Toggle Checkbox</a>
     <hr>
     <h4>Model Values</h4>
     <ul>
       <li>First Name: {{model.exampleModel.first_name}}</li>
       <li>Last Name: {{model.exampleModel.last_name}}</li>
       <li>Choose Something: {{model.exampleModel.language}}</li>
+      <li>
+        Are you awesome? 
+        {{#if model.exampleModel.isAwesome}}
+          Yup
+        {{else}}
+          Nope
+        {{/if}}
+      </li>
     </ul>
   </div>
 

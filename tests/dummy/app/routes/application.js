@@ -40,6 +40,14 @@ export default Ember.Route.extend({
       }else{
         this.set('currentModel.disableSubmit', true);
       }
+    },
+
+    toggleCheckbox: function() {
+      if(this.get('currentModel.exampleModel.isAwesome')) {
+        this.set('currentModel.exampleModel.isAwesome', false);
+      } else {
+        this.set('currentModel.exampleModel.isAwesome', true);
+      }
     }
 
   }

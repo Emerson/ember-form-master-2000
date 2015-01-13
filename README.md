@@ -38,6 +38,8 @@ npm install --save-dev ember-form-master-2000
     prompt='Select Something'
   }}
 
+  {{fm-checkbox checked=model.exampleModel.isAwesome label='Are you awesome?'}}
+
   {{fm-submit value='Create'}}
 
 {{/fm-form}}
