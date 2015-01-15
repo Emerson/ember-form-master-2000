@@ -10,6 +10,11 @@ export default Ember.Route.extend({
         {label: 'French', value: 'fr'},
         {label: 'English', value: 'en'},
         {label: 'German', value: 'gr'}
+      ],
+      radioOptions: [
+        {label: 'Ruby', value: 'ruby'},
+        {label: 'Javascript', value: 'js'},
+        {label: 'Cold Fusion', value: 'cf'}
       ]
     });
   },
@@ -47,6 +52,14 @@ export default Ember.Route.extend({
         this.set('currentModel.exampleModel.isAwesome', false);
       } else {
         this.set('currentModel.exampleModel.isAwesome', true);
+      }
+    },
+
+    toggleRadio: function() {
+      if(this.get('currentModel.exampleModel.bestLanguage')) {
+        this.set('currentModel.exampleModel.bestLanguage', null);
+      }else{
+        this.set('currentModel.exampleModel.bestLanguage', 'js');
       }
     }
 

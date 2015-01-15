@@ -26,6 +26,16 @@
 
       {{fm-checkbox checked=model.exampleModel.isAwesome label='Are you awesome?'}}
 
+      {{fm-radio-group
+        label='Choose the best language'
+        name='bestLanguage'
+        content=model.radioOptions
+        optionValuePath='content.value'
+        optionLabelPath='content.label'
+        value=model.exampleModel.bestLanguage
+        errors=model.exampleModel.errors.bestLanguage
+      }}
+
       {{fm-submit value='Submit the Form' disabled=model.disableSubmit}}
 
     {{/fm-form}}
@@ -35,6 +45,7 @@
     <a href="#" {{action 'toggleErrors'}} class="btn btn-default btn-block">Toggle Errors</a>
     <a href="#" {{action 'toggleSubmit'}} class="btn btn-default btn-block">Toggle Disable Submit</a>
     <a href="#" {{action 'toggleCheckbox'}} class="btn btn-default btn-block">Toggle Checkbox</a>
+    <a href="#" {{action 'toggleRadio'}} class="btn btn-default btn-block">Toggle Radio</a>
     <hr>
     <h4>Model Values</h4>
     <ul>
@@ -49,6 +60,7 @@
           Nope
         {{/if}}
       </li>
+      <li>Best Language: {{model.exampleModel.bestLanguage}}</li>
     </ul>
   </div>
 

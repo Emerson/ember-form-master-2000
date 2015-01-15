@@ -8,6 +8,8 @@ export function initialize(container, application) {
     selectClass: 'form-control',
     formClass: 'form-horizontal',
     checkboxWrapperClass: 'form-group',
+    radioGroupWrapperClass: 'form-group',
+    radioClass: 'radio'
   };
   application.register('fmconfig:main', config, { instantiate: false });
   application.inject('component', 'fmconfig', 'fmconfig:main');

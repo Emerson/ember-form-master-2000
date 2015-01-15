@@ -40,6 +40,16 @@ npm install --save-dev ember-form-master-2000
 
   {{fm-checkbox checked=model.exampleModel.isAwesome label='Are you awesome?'}}
 
+  {{fm-radio-group
+    label='Choose the best language'
+    name='bestLanguage'
+    content=model.radioOptions
+    optionValuePath='content.value'
+    optionLabelPath='content.label'
+    value=model.exampleModel.bestLanguage
+    errors=model.exampleModel.errors.bestLanguage
+  }}
+
   {{fm-submit value='Create'}}
 
 {{/fm-form}}
