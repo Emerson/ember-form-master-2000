@@ -72,7 +72,7 @@ If you need to make minor adjustments to classnames of the elements, you can eas
 
 ### Major Customizations
 
-Sometimes you'll want to _really_ customize things. In this case you can leverage the power of Ember-CLI and simply override the default templates provided by Ember-Form-Master-2000.
+Sometimes you'll want to _really_ customize things. In this case you can leverage the power of Ember-CLI and simply override the default templates provided by Ember-Form-Master-2000. These are all defined [here](https://github.com/Emerson/ember-form-master-2000/tree/master/app/templates/components/ember-form-master-2000). In simple terms, create a folder in your host application `templates/components/ember-form-master-2000/`, copy over the existing templates from this project, and modify to your liking.
 
 ### Demo App
 
