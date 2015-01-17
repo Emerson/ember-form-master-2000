@@ -3,7 +3,8 @@ import {initialize} from 'ember-form-master-2000/initializers/fm-initialize';
 import {test, moduleForComponent} from 'ember-qunit';
 
 moduleForComponent('fm-field', {}, {
-  needs: ['component:fm-select'],
+  needs: ['component:fm-select',
+          'template:components/ember-form-master-2000/fm-field'],
   setup: function(container) {
     container.inject = container.injection;
     initialize(null, container);

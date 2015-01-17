@@ -24,7 +24,11 @@
         errors=model.exampleModel.errors.language
       }}
 
-      {{fm-checkbox checked=model.exampleModel.isAwesome label='Are you awesome?'}}
+      {{fm-checkbox
+        label='Are you awesome?'
+        checked=model.exampleModel.isAwesome
+        errors=model.exampleModel.errors.isAwesome
+      }}
 
       {{fm-radio-group
         label='Choose the best language'

@@ -66,6 +66,14 @@ model.set('errors', Ember.Object.create({first_name: ['Required', 'Too short']})
 {{fm-field type='text' value=model.first_name errors=model.errors.first_name}}
 ```
 
+### Minor Customizations
+
+If you need to make minor adjustments to classnames of the elements, you can easily override the default initializer with your own. The default initializer can be found [here](https://github.com/Emerson/ember-form-master-2000/blob/master/app/initializers/ember-form-master-2000.js), which imports the [initialize method form the addon directory](https://github.com/Emerson/ember-form-master-2000/blob/master/addon/initializers/fm-initialize.js).
+
+### Major Customizations
+
+Sometimes you'll want to _really_ customize things. In this case you can leverage the power of Ember-CLI and simply override the default templates provided by Ember-Form-Master-2000.
+
 ### Demo App
 
 You can see a more holistic example by looking at the [Dummy app](https://github.com/Emerson/ember-form-master-2000/tree/master/tests/dummy/app) that we use to test against. The [index.hbs](https://github.com/Emerson/ember-form-master-2000/blob/master/tests/dummy/app/templates/index.hbs) template and the [application route](https://github.com/Emerson/ember-form-master-2000/blob/master/tests/dummy/app/routes/application.js) are of particular interest.

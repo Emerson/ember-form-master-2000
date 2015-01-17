@@ -3,6 +3,9 @@ import {initialize} from 'ember-form-master-2000/initializers/fm-initialize';
 import {test, moduleForComponent} from 'ember-qunit';
 
 moduleForComponent('fm-submit', {}, {
+  needs: [
+    'template:components/ember-form-master-2000/fm-submit'
+  ],
   setup: function(container) {
     container.inject = container.injection;
     initialize(null, container);

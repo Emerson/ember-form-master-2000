@@ -3,7 +3,11 @@ import {initialize} from 'ember-form-master-2000/initializers/fm-initialize';
 import {test, moduleForComponent} from 'ember-qunit';
 
 moduleForComponent('fm-radio-group', {}, {
-  needs: ['component:fm-radio'],
+  needs: ['component:fm-radio',
+          'component:fm-errortext',
+          'template:components/ember-form-master-2000/fm-radio',
+          'template:components/ember-form-master-2000/fm-errortext',
+          'template:components/ember-form-master-2000/fm-radio-group'],
   setup: function(container) {
     container.inject = container.injection;
     initialize(null, container);

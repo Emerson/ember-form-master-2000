@@ -1,0 +1,11 @@
+{{#if label}}
+  <label {{bind-attr class=labelClass}}>{{label}}</label>
+{{/if}}
+
+{{#each option in content}}
+
+  {{fm-radio content=option}}
+
+{{/each}}
+
+{{fm-errortext errors=errors}}

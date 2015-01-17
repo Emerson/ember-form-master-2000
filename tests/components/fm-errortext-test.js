@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import {test, moduleForComponent} from 'ember-qunit';
 
-moduleForComponent('fm-errortext');
+moduleForComponent('fm-errortext', {}, {
+  needs:['template:components/ember-form-master-2000/fm-errortext']
+});
 
 test('renders properly', function() {
   var component = this.subject();
