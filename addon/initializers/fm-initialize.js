@@ -1,4 +1,4 @@
-export function initialize(container, application) {
+export function initialize(container, application, overrides) {
   var config = {
     submitButtonClasses: ['btn', 'btn-primary'],
     errorClass: 'has-error',
@@ -11,6 +11,11 @@ export function initialize(container, application) {
     radioGroupWrapperClass: 'form-group',
     radioClass: 'radio'
   };
+  if(typeof overrides !== 'undefined') {
+    for(var attr in overrides) {
+      config[attr] = overrides[attr];
+    }
+  }
   application.register('fmconfig:main', config, { instantiate: false });
   application.inject('component', 'fmconfig', 'fmconfig:main');
 }
