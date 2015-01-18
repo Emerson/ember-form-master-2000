@@ -11,13 +11,20 @@ export default Ember.Component.extend({
     this.set('checked', this.get('parentView.value') === this.get('value'));
   }.observes('parentView.value'),
   labelText: function() {
-    return this.get(this.get('parentView.optionLabelPath'));
+    if(this.get('parentView.optionLabelPath')) {
+      return this.get(this.get('parentView.optionLabelPath'));
+    }else{
+      return null;
+    }
   }.property('parentView.optionLabelPath', 'content'),
   value: function() {
-    return this.get(this.get('parentView.optionValuePath'));
+    if(this.get('parentView.optionValuePath')) {
+      return this.get(this.get('parentView.optionValuePath'));
+    }else{
+      return null;
+    }
   }.property('parentView.optionValuePath', 'content'),
   change: function() {
     this.set('parentView.value', this.get('value'));
-    console.log('change');
   }
 });
