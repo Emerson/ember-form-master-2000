@@ -7,7 +7,7 @@
 </p>
 
 <div align="center">
-  <h4>A flexible and lightweight ember-cli addon that will <em>(eventually)</em> make forms easier to deal with.</h4>
+  <h4>A flexible and lightweight ember-cli addon that tries to make forms easier to deal with.</h4>
 </div>
 
 ----------------------------
@@ -54,6 +54,13 @@ npm install --save-dev ember-form-master-2000
 
 {{/fm-form}}
 ```
+
+### Demo
+
+You can see the basic dummy app here:
+
+  * [Dummy App](http://ember-form-master-2000.emersonlackey.com)
+  * [Tests](http://ember-form-master-2000.emersonlackey.com/tests/)
 
 ### Errors
 
