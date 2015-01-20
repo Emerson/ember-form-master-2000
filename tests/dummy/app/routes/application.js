@@ -6,6 +6,7 @@ export default Ember.Route.extend({
     return Ember.RSVP.hash({
       exampleModel: Ember.Object.create(),
       disableSubmit: false,
+      selectedLanguage: null,
       selectOptions: [
         {label: 'French', value: 'fr'},
         {label: 'English', value: 'en'},
@@ -38,6 +39,14 @@ export default Ember.Route.extend({
           bestLanguage: ['Wrong, Cold Fusion is the best language']
         };
         model.set('errors', errors);
+      }
+    },
+
+    toggleSelectValue: function() {
+      if(this.get('currentModel.exampleModel.language')) {
+        this.set('currentModel.exampleModel.language', null);
+      }else{
+        this.set('currentModel.exampleModel.language', 'fr');
       }
     },
 

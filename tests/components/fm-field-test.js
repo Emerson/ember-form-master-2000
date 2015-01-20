@@ -87,3 +87,17 @@ test('it passes select prompt options', function() {
   equal(component.$('option').length, 2, 'It rendered the prompt options');
   equal($(component.$('option')[0]).text(), 'Select something...', 'It rendered the correct prompt text');
 });
+
+test('it allows the user to manually select an option', function() {
+  var component = this.subject();
+  var mockOptions = [{value: 1, label: 'one'}];
+  component.set('type', 'select');
+  component.set('content', mockOptions);
+  component.set('prompt', 'Select something...');
+  this.$();
+  equal(component.$('option:selected').text(), 'Select something...', 'The select option is set properly by default');
+  Ember.run(function() {
+    component.set('value', 1);
+  });
+  equal(component.$('option:selected').text(), 'one', 'Updating the value of model propigated the change to the select');
+});

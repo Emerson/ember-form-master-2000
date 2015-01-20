@@ -9,7 +9,7 @@ moduleForComponent('fm-select', {}, {
   }
 });
 
-test('renders properly', function() {
+test('fm-select renders properly', function() {
   var component = this.subject();
   this.$();
   ok(component.$().is('select'), 'Renders a select');
