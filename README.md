@@ -1,5 +1,7 @@
 <div align="right">
-  <img src="https://travis-ci.org/Emerson/ember-form-master-2000.svg?branch=master" alt="Build Status">
+  <a href="https://travis-ci.org/Emerson/ember-form-master-2000" target="_blank">
+    <img src="https://travis-ci.org/Emerson/ember-form-master-2000.svg?branch=master" alt="Build Status">
+  </a>
 </div>
 
 <p align="center">
