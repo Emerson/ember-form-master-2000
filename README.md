@@ -22,6 +22,13 @@ This is an [ember-cli](http://www.ember-cli.com/) addon and can be installed usi
 npm install --save-dev ember-form-master-2000
 ```
 
+### Demo
+
+You can see the basic dummy app here:
+
+  * [Dummy App](http://ember-form-master-2000.emersonlackey.com)
+  * [Tests](http://ember-form-master-2000.emersonlackey.com/tests/)
+
 ### Basic API
 
 ```handlebars
@@ -64,13 +71,6 @@ npm install --save-dev ember-form-master-2000
 
 {{/fm-form}}
 ```
-
-### Demo
-
-You can see the basic dummy app here:
-
-  * [Dummy App](http://ember-form-master-2000.emersonlackey.com)
-  * [Tests](http://ember-form-master-2000.emersonlackey.com/tests/)
 
 ### Errors
 
