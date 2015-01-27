@@ -2,15 +2,8 @@
   <label {{bind-attr class='labelClass'}}>{{label}}</label>
 {{/if}}
 
-{{#if isBasicInput}}
-  {{input
-    type=type
-    value=value
-    classNameBindings='errorClass inputClass'
-    placeholder=placeholder}}
-{{/if}}
-
 {{#if isSelect}}
+
   {{fm-select
     content=content
     optionValuePath=optionValuePath
@@ -18,19 +11,22 @@
     prompt=prompt
     value=value
   }}
+
 {{/if}}
 
+
 {{#if isTextarea}}
-  {{textarea
+
+{{/if}}
+
+{{#if isBasicInput}}
+
+  {{input
+    type=type
     value=value
-    classNameBindings='errorClass textareaClass'
-    placeholder=placeholder
-    rows=rows
-    cols=cols
-    maxlengh=maxlengh
-    spellcheck=spellcheck
-    disabled=disabled
-  }}
+    classNameBindings='errorClass inputClass'
+    placeholder=placeholder}}
+
 {{/if}}
 
 {{#if errors}}

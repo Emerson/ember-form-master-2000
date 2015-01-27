@@ -12,14 +12,14 @@ moduleForComponent('fm-form', {}, {
 test('renders properly', function() {
   var component = this.subject();
   this.$();
-  ok(component.$().hasClass('form-horizontal'), 'Has the form-horizontal class');
+  ok(component.$().hasClass('form-vertical'), 'Has the form-vertical class');
 });
 
 test('it uses allows classNames to be passed in', function() {
   var component = this.subject();
-  // This emulates the user passing in a className {{#em-form classNames='form-vertical'}}
-  component.set('classNames', ['ember-view', 'form-vertical']);
+  // This emulates the user passing in a className {{#em-form classNames='form-horizontal'}}
+  component.set('classNames', ['ember-view', 'form-horizontal']);
   this.$();
-  ok(component.$().hasClass('form-vertical'), 'Has the form-vertical class');
-  ok(!component.$().hasClass('form-horizontal'), 'Does not have the default form-horizontal class');
+  ok(component.$().hasClass('form-horizontal'), 'Has the form-horizontal class');
+  ok(!component.$().hasClass('form-vertical'), 'Does not have the default form-vertical class');
 });

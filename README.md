@@ -40,6 +40,14 @@ npm install --save-dev ember-form-master-2000
     prompt='Select Something'
   }}
 
+  {{fm-field
+    label='Write an Essay'
+    type='textarea'
+    value=model.essay
+    errors=model.errors.essay
+    rows='6'
+  }}
+
   {{fm-checkbox checked=model.exampleModel.isAwesome label='Are you awesome?'}}
 
   {{fm-radio-group

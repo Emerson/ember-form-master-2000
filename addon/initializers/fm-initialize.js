@@ -5,8 +5,9 @@ export function initialize(container, application, overrides) {
     wrapperClass: 'form-group',
     labelClass: 'control-label',
     inputClass: 'form-control',
+    textareaClass: 'form-control',
     selectClass: 'form-control',
-    formClass: 'form-horizontal',
+    formClass: 'form-vertical',
     checkboxWrapperClass: 'form-group',
     radioGroupWrapperClass: 'form-group',
     radioClass: 'radio'

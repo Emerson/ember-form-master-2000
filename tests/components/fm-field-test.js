@@ -101,3 +101,10 @@ test('it allows the user to manually select an option', function() {
   });
   equal(component.$('option:selected').text(), 'one', 'Updating the value of model propigated the change to the select');
 });
+
+test('it renders a textarea', function() {
+  var component = this.subject();
+  component.set('type', 'textarea');
+  this.$();
+  equal(component.$('textarea').length, 1, 'fm-field renders a textarea');
+});

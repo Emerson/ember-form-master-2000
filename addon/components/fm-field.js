@@ -12,6 +12,7 @@ export default Ember.Component.extend({
     this.set('wrapperClass', this.fmconfig.wrapperClass);
     this.set('labelClass', this.fmconfig.labelClass);
     this.set('inputClass', this.fmconfig.inputClass);
+    this.set('textareaClass', this.fmconfig.textareaClass);
     this._super();
   },
   placeholder: null,
@@ -23,6 +24,12 @@ export default Ember.Component.extend({
   }.property('errors'),
   isSelect: function() {
     return this.get('type') === 'select';
+  }.property('type'),
+  isTextarea: function() {
+    return this.get('type') === 'textarea';
+  }.property('type'),
+  isBasicInput: function() {
+    return (!this.get('isSelect') && !this.get('isTextarea'));
   }.property('type'),
   classNameBindings: ['wrapperClass', 'errorClass']
 });

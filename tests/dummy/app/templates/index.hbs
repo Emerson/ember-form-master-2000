@@ -13,6 +13,14 @@
         errors=model.exampleModel.errors.last_name
       }}
 
+      {{fm-field
+        label='Write an Essay'
+        type='textarea'
+        value=model.exampleModel.essay
+        errors=model.exampleModel.errors.essay
+        rows='6'
+      }}
+
       {{fm-field 
         label='Choose Something' 
         type='select'
@@ -56,6 +64,14 @@
     <ul>
       <li>First Name: {{model.exampleModel.first_name}}</li>
       <li>Last Name: {{model.exampleModel.last_name}}</li>
+      <li>
+        Essay:
+        {{#if model.exampleModel.essay}}
+          <br>
+          <em>{{{model.exampleModel.essay}}}</em>
+          <br>
+        {{/if}}
+      </li>
       <li>Choose Something: {{model.exampleModel.language}}</li>
       <li>
         Are you awesome? 

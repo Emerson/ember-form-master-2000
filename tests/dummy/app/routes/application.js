@@ -36,7 +36,8 @@ export default Ember.Route.extend({
           last_name: ['That last name is silly'],
           language: ['Please choose a better language'],
           isAwesome: ['You must be awesome to submit this form'],
-          bestLanguage: ['Wrong, Cold Fusion is the best language']
+          bestLanguage: ['Wrong, Cold Fusion is the best language'],
+          essay: ['This essay is not very good']
         };
         model.set('errors', errors);
       }
