@@ -9,6 +9,10 @@ export default Ember.Component.extend({
     if(!this.get('optionLabelPath')) {
       this.set('optionLabelPath', 'content.label');
     }
+    var dataAttributes = Ember.keys(this).filter(function(attr) {
+      return /data-/.test(attr);
+    });
+    this.set('dataAttributes', dataAttributes);
     this.set('wrapperClass', this.fmconfig.wrapperClass);
     this.set('labelClass', this.fmconfig.labelClass);
     this.set('inputClass', this.fmconfig.inputClass);

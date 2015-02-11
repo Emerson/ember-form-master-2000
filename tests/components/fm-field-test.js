@@ -4,6 +4,7 @@ import {test, moduleForComponent} from 'ember-qunit';
 
 moduleForComponent('fm-field', {}, {
   needs: ['component:fm-select',
+          'component:fm-input',
           'template:components/ember-form-master-2000/fm-field'],
   setup: function(container) {
     container.inject = container.injection;
@@ -107,4 +108,17 @@ test('it renders a textarea', function() {
   component.set('type', 'textarea');
   this.$();
   equal(component.$('textarea').length, 1, 'fm-field renders a textarea');
+});
+
+test('allows data attributes to be attached to inputs', function() {
+  var component = this.subject();
+  component.get('dataAttributes').push('data-test');
+  component.set('data-test', 'master-2000');
+  this.$();
+  equal(component.$('input').data('test'), 'master-2000', 'The fm-field data attribute was not set properly');
+  Ember.run(function() {
+    component.set('data-test', 'master-3000');
+  });
+  // TODO: Add dynamic observers so that data-attributes update correctly
+  // equal(component.$('input').data('test'), 'master-3000', 'The fm-field data attribute was not updated properly');
 });
