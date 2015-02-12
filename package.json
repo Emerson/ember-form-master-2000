@@ -1,6 +1,6 @@
 {
   "name": "ember-form-master-2000",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "A simple and flexible Ember-CLI based form builder.",
   "directories": {
     "doc": "doc",
@@ -11,7 +11,7 @@
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "",
+  "repository": "https://github.com/Emerson/ember-form-master-2000",
   "engines": {
     "node": ">= 0.10.0"
   },
