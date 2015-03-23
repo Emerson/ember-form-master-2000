@@ -135,3 +135,10 @@ test('allows data attributes to be attached to textfields', function(assert) {
   this.render();
   assert.equal(component.$('textarea').data('test'), 'master-2000', 'The fm-field data attribute was not set properly on the textfield');
 });
+
+test('allows HTML bound attributes for labels', function(assert) {
+  var component = this.subject();
+  component.set('label', "<span class='html-label'>Test</span>");
+  this.render();
+  assert.equal(1, component.$('span.html-label').length, 'The fm-field did not properly render HTML within a label');
+});
