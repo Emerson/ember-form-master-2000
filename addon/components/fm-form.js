@@ -14,7 +14,7 @@ export default Ember.Component.extend({
   },
   classNameBindings: ['formClass'],
   tagName: 'form',
-  for: null,
+  'for': null,
   submit: function(e) {
     e.preventDefault();
     this.sendAction('action', this.get('for'));
