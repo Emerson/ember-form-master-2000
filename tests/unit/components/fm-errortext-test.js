@@ -22,3 +22,22 @@ test('renders the first error', function(assert) {
   });
   assert.equal(component.$().text(), 'This is an error', 'It renders the first error');
 });
+
+//-- https://github.com/Emerson/ember-form-master-2000/issues/8 -----------
+test('renders errors that are simple strings', function(assert) {
+  var component = this.subject();
+  this.render();
+  Ember.run(function() {
+    component.set('errors', 'a simple string');
+  });
+  assert.equal(component.$().text(), 'a simple string', 'It did not render the simple string error');
+});
+
+test('renders objects that have a message property', function(assert) {
+  var component = this.subject();
+  this.render();
+  Ember.run(function() {
+    component.set('errors', Ember.Object.create({attribute: 'email', message: 'invalid email'}));
+  });
+  assert.equal(component.$().text(), 'invalid email', 'It did not render the error object');
+});

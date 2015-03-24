@@ -5,7 +5,13 @@ export default Ember.Component.extend({
   tagName: 'span',
   classNameBindings: 'errortextClass',
   error: function() {
-    return this.get('errors.firstObject');
+    if(Ember.isArray(this.get('errors'))) {
+      return this.get('errors.firstObject');
+    } else if(this.get('errors.message')) {
+      return this.get('errors.message');
+    } else {
+      return this.get('errors');
+    }
   }.property('errors'),
   errortextClass: 'help-block'
 });
