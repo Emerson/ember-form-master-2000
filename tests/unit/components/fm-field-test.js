@@ -142,3 +142,38 @@ test('allows HTML bound attributes for labels', function(assert) {
   this.render();
   assert.equal(1, component.$('span.html-label').length, 'The fm-field did not properly render HTML within a label');
 });
+
+test('uses the label to generate a default for and id attribute for textfields', function(assert) {
+  var component = this.subject();
+  component.set('label', "Example's Here!");
+  this.render();
+  assert.equal(component.$('label').attr('for'), 'Examples-Here');
+  assert.equal(component.$('input').attr('id'), 'Examples-Here');
+});
+
+test('uses the label to generate a default for and id attribute for select elements', function(assert) {
+  var component = this.subject();
+  component.set('type', 'select');
+  component.set('label', "<b>Select's are awesome!</b>");
+  this.render();
+  assert.equal(component.$('label').attr('for'), 'Selects-are-awesome');
+  assert.equal(component.$('select').attr('id'), 'Selects-are-awesome');
+});
+
+test('uses the label to generate a default for and id attribute for textarea elements', function(assert) {
+  var component = this.subject();
+  component.set('type', 'textarea');
+  component.set('label', "<b>Téxtarea's :-)</b>");
+  this.render();
+  assert.equal(component.$('label').attr('for'), 'Téxtareas--');
+  assert.equal(component.$('textarea').attr('id'), 'Téxtareas--');
+});
+
+test('allows users to override the for/id attributes by passing a specific id', function(assert) {
+  var component = this.subject();
+  component.set('id', 'example-id');
+  component.set('label', 'My Label!');
+  this.render();
+  assert.equal(component.$('label').attr('for'), 'example-id');
+  assert.equal(component.$('input').attr('id'), 'example-id');
+});
