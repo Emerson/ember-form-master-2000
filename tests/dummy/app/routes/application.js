@@ -23,7 +23,7 @@ export default Ember.Route.extend({
   actions: {
 
     submit: function() {
-      alert('You triggered a form submit!');
+      window.alert('You triggered a form submit!');
     },
 
     toggleErrors: function() {
