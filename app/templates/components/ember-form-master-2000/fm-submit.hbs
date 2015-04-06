@@ -1,5 +1,8 @@
-<input
+<button
   {{bind-attr value=value}}
   {{bind-attr disabled=disabled}}
   {{bind-attr class=submitButtonClasses}}
   type="submit">
+    {{value}}
+    {{yield}}
+</button>
