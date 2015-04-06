@@ -3,6 +3,8 @@
   {{bind-attr disabled=disabled}}
   {{bind-attr class=submitButtonClasses}}
   type="submit">
+  {{#if value}}
     {{value}}
-    {{yield}}
+  {{/if}}
+  {{yield}}
 </button>
