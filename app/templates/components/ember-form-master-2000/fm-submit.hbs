@@ -1,5 +1,10 @@
-<input
+<button
   {{bind-attr value=value}}
   {{bind-attr disabled=disabled}}
   {{bind-attr class=submitButtonClasses}}
   type="submit">
+  {{#if value}}
+    {{value}}
+  {{/if}}
+  {{yield}}
+</button>
