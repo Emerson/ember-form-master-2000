@@ -83,6 +83,19 @@ model.set('errors', Ember.Object.create({first_name: ['Required', 'Too short']})
 {{fm-field type='text' value=model.first_name errors=model.errors.first_name}}
 ```
 
+### Validation Components
+
+```hbs
+
+{{#fm-field type='text' value=model.first_name errors=model.errors.first_name}}
+  {{fm-validator type='required' value=true}}
+  {{fm-validator type='minLength' value=5}}
+  {{fm-validator type='maxLength' value=25}}
+  {{myapp-custom-validator value='whatever'}}
+{{/fm-field}}
+
+```
+
 ### Minor Customizations
 
 If you need to make minor adjustments to classnames of the elements, you can easily override the default initializer with your own. The default initializer can be found [here](https://github.com/Emerson/ember-form-master-2000/blob/master/app/initializers/ember-form-master-2000.js), which imports the [initialize method form the addon directory](https://github.com/Emerson/ember-form-master-2000/blob/master/addon/initializers/fm-initialize.js).
