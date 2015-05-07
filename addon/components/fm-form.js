@@ -13,6 +13,7 @@ export default Ember.Component.extend({
     }
   },
   classNameBindings: ['formClass'],
+  attributeBindings: ['validate'],
   tagName: 'form',
   'for': null,
   submit: function(e) {

@@ -6,8 +6,8 @@ export default Ember.Component.extend({
     return this.fmconfig.checkboxWrapperClass;
   }.property(),
   errorClass: function() {
-    if(this.get('errors')) {
+    if(this.get('errors') && this.get('showErrors') || this.get('parentView.showErrors')) {
       return this.fmconfig.errorClass;
     }
-  }.property('errors')
+  }.property('errors', 'showErrors')
 });

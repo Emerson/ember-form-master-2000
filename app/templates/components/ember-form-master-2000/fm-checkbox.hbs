@@ -1,7 +1,7 @@
 <div class='checkbox'>
 
   <label>
-    {{input
+    {{fm-checkbox-element
       type='checkbox'
       checked=checked
       disabled=disabled
@@ -10,6 +10,8 @@
     {{label}}
   </label>
 
-  {{fm-errortext errors=errors}}
+  {{#if showErrors}}
+    {{fm-errortext errors=errors}}
+  {{/if}}
 
 </div>

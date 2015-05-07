@@ -4,10 +4,10 @@ export default Ember.Component.extend({
   layoutName: 'components/ember-form-master-2000/fm-radio-group',
   classNameBindings: ['radioGroupWrapperClass', 'errorClass'],
   errorClass: function() {
-    if(this.get('errors')) {
+    if(this.get('errors') && this.get('showErrors')) {
       return this.fmconfig.errorClass;
     }
-  }.property('errors'),
+  }.property('errors', 'showErrors'),
   radioGroupWrapperClass: function() {
     return this.fmconfig.radioGroupWrapperClass;
   }.property(),

@@ -12,6 +12,12 @@ export default Ember.Component.extend({
     var dataAttributes = Ember.keys(this).filter(function(attr) {
       return /data-/.test(attr);
     });
+    if(this.get('validate') === 'delay' || this.get('parentView.validate') === 'delay') {
+      this.set('showErrors', false);
+    }else{
+      this.set('showErrors', true);
+    }
+
     this.set('dataAttributes', dataAttributes);
     this.set('wrapperClass', this.fmconfig.wrapperClass);
     this.set('labelClass', this.fmconfig.labelClass);
@@ -23,10 +29,10 @@ export default Ember.Component.extend({
   label: null,
   classNameBindings: ['wrapperClass', 'errorClass'],
   errorClass: function() {
-    if(this.get('errors')) {
+    if(this.get('errors') && this.get('showErrors')) {
       return this.fmconfig.errorClass;
     }
-  }.property('errors'),
+  }.property('errors', 'showErrors'),
   isSelect: function() {
     return this.get('type') === 'select';
   }.property('type'),
@@ -44,6 +50,14 @@ export default Ember.Component.extend({
       return this.generateSafeId(this.get('label'));
     }
   }.property('label', 'id'),
+
+  validate: function() {
+    if(this.get('validate') === 'delay' || this.get('parentView.validate') === 'delay') {
+      this.set('showErrors', false);
+    }
+    console.log(this.get('showErrors'));
+  }.observes('parentView.validate'),
+
   generateSafeId: function(id) {
     var tmp = document.createElement("DIV");
     tmp.innerHTML = id;

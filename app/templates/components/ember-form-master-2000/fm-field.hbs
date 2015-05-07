@@ -33,8 +33,10 @@
   }}
 {{/if}}
 
-{{#if errors}}
-  {{fm-errortext errors=errors}}
+{{#if showErrors}}
+  {{#if errors}}
+    {{fm-errortext errors=errors}}
+  {{/if}}
 {{/if}}
 
 {{#if helptext}}

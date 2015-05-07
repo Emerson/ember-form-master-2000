@@ -8,5 +8,8 @@ export default Ember.Select.extend({
     }
     this.get('classNames').push(this.fmconfig.selectClass);
     this._super(this);
+  },
+  focusOut: function() {
+    this.set('parentView.showErrors', true);
   }
 });
