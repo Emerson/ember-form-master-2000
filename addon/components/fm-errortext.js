@@ -12,6 +12,6 @@ export default Ember.Component.extend({
     } else {
       return this.get('errors');
     }
-  }.property('errors'),
+  }.property('errors', 'errors.@each'),
   errortextClass: 'help-block'
 });
