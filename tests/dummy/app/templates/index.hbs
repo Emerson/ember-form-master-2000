@@ -1,7 +1,15 @@
 <div class="row">
 
   <div class="col-sm-8">
-    {{#fm-form action='submit'}}
+    {{#fm-form action='submit' model=model.exampleModel}}
+
+      {{#fm-field label='Error Example'
+        value=model.exampleModel.error_example 
+        errors=model.exampleModel.errors.error_example
+        for='error_example'}}
+          {{validate-presence}}
+          {{validate-length min=5 max=25}}
+      {{/fm-field}}
 
       {{fm-field label='First Name' 
         value=model.exampleModel.first_name 
@@ -12,6 +20,11 @@
         value=model.exampleModel.last_name
         errors=model.exampleModel.errors.last_name
       }}
+
+      {{#fm-field label='label' name='last_name'}}
+        {{validate-presence}}
+        {{validate-length min=5 max=25}}
+      {{/fm-field}}
 
       {{fm-field
         label='Write an Essay'

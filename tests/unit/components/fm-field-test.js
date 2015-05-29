@@ -9,7 +9,9 @@ moduleForComponent('fm-field', {
   needs: ['component:fm-input',
           'component:fm-select',
           'component:fm-textarea',
-          'template:components/ember-form-master-2000/fm-field'],
+          'component:fm-errortext',
+          'template:components/ember-form-master-2000/fm-field',
+          'template:components/ember-form-master-2000/fm-errortext'],
   setup: function(container) {
     this.container.inject = this.container.injection;
     initialize(null, this.container);
@@ -176,4 +178,17 @@ test('allows users to override the for/id attributes by passing a specific id', 
   this.render();
   assert.equal(component.$('label').attr('for'), 'example-id');
   assert.equal(component.$('input').attr('id'), 'example-id');
+});
+
+test('does not consider an empty array of errors as invalid', function(assert) {
+  var component = this.subject();
+  this.render();
+  Ember.run(function() {
+    component.set('errors', ['this is an error']);
+  });
+  assert.equal(component.$('.has-error').length, 1);
+  Ember.run(function() {
+    component.set('errors', []);
+  });
+  assert.equal(component.$('.has-error').length, 0);
 });

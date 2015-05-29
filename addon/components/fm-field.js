@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   layoutName: 'components/ember-form-master-2000/fm-field',
   init: function() {
+    this.set('validations', []);
     if(!this.get('optionValuePath')) {
       this.set('optionValuePath', 'content.value');
     }
@@ -23,10 +24,14 @@ export default Ember.Component.extend({
   label: null,
   classNameBindings: ['wrapperClass', 'errorClass'],
   errorClass: function() {
-    if(this.get('errors')) {
-      return this.fmconfig.errorClass;
+    console.log(this.get('errors'));
+    var errors = this.get('errors');
+    if(errors) {
+      if(Ember.isArray(errors) && errors.length > 0 || typeof errors === 'string') {
+        return this.fmconfig.errorClass;
+      }
     }
-  }.property('errors'),
+  }.property('errors', 'errors.@each'),
   isSelect: function() {
     return this.get('type') === 'select';
   }.property('type'),
@@ -51,5 +56,14 @@ export default Ember.Component.extend({
     id = id.replace(/[\.,\/#!$%\^&\*;:{}=\`'"~()]/g,"");
     id = id.replace(/\s/g, "-");
     return id;
+  },
+  registerValidation: function(callback, onEvents) {
+    var _this = this;
+    this.get('validations').pushObject(callback);
+    onEvents.forEach(function(eventType) {
+      _this.$('input').on(eventType, function(e) {
+        callback(_this.get('value'), _this.get('for'), e);
+      });
+    });
   }
 });
