@@ -22,28 +22,28 @@ export default Ember.Component.extend({
   placeholder: null,
   label: null,
   classNameBindings: ['wrapperClass', 'errorClass'],
-  errorClass: function() {
+  errorClass: Ember.computed('errors', function() {
     if(this.get('errors')) {
       return this.fmconfig.errorClass;
     }
-  }.property('errors'),
-  isSelect: function() {
+  }),
+  isSelect: Ember.computed('type', function() {
     return this.get('type') === 'select';
-  }.property('type'),
-  isTextarea: function() {
+  }),
+  isTextarea: Ember.computed('type', function() {
     return this.get('type') === 'textarea';
-  }.property('type'),
-  isBasicInput: function() {
+  }),
+  isBasicInput: Ember.computed('type', function() {
     return (!this.get('isSelect') && !this.get('isTextarea'));
-  }.property('type'),
-  forAttribute: function() {
+  }),
+  forAttribute: Ember.computed('label', 'id', function() {
     if(this.get('id')) {
       return this.generateSafeId(this.get('id'));
     }
     if(this.get('label')) {
       return this.generateSafeId(this.get('label'));
     }
-  }.property('label', 'id'),
+  }),
   generateSafeId: function(id) {
     var tmp = document.createElement("DIV");
     tmp.innerHTML = id;

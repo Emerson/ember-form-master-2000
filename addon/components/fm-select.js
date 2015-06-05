@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.Select.extend({
+export default Ember.Component.extend({
   classNames: [],
   init: function() {
     if(this.get('parentView.forAttribute')) {

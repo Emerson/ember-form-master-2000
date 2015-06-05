@@ -1,12 +1,12 @@
 {{#if label}}
-  <label {{bind-attr for='forAttribute'}} {{bind-attr class='labelClass'}}>{{{label}}}</label>
+  <label for="{{forAttribute}}" class="{{labelClass}}">{{{label}}}</label>
 {{/if}}
 
 {{#if isBasicInput}}
   {{fm-input
     type=type
     value=value
-    classNameBindings='errorClass inputClass'
+    class="errorClass inputClass"
     placeholder=placeholder}}
 {{/if}}
 
@@ -23,7 +23,7 @@
 {{#if isTextarea}}
   {{fm-textarea
     value=value
-    classNameBindings='errorClass textareaClass'
+    class='errorClass textareaClass'
     placeholder=placeholder
     rows=rows
     cols=cols

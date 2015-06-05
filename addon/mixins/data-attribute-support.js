@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Mixin.create({
 
-  setDataAttributes: function() {
+  setDataAttributes: Ember.observer('parentView.dataAttributes.[]', function() {
     var dataAttributes = this.get('parentView.dataAttributes');
     if(Ember.isArray(dataAttributes)) {
       dataAttributes.forEach((attr)=> {
@@ -10,6 +10,6 @@ export default Ember.Mixin.create({
         this.set(attr, this.get('parentView.' + attr));
       });
     }
-  }.observes('parentView.dataAttributes.[]')
+  })
 
 });

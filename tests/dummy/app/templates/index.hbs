@@ -22,17 +22,6 @@
         data-test='master-2000'
       }}
 
-      {{fm-field 
-        label='Choose Something' 
-        type='select'
-        content=model.selectOptions
-        optionValuePath='content.value'
-        optionLabelPath='content.label'
-        prompt='Select Something'
-        value=model.exampleModel.language
-        errors=model.exampleModel.errors.language
-      }}
-
       {{fm-checkbox
         label='Are you awesome?'
         checked=model.exampleModel.isAwesome
