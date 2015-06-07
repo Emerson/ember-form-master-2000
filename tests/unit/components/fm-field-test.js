@@ -26,7 +26,7 @@ test('renders properly', function(assert) {
 test('it uses allows classNames to be passed in', function(assert) {
   var component = this.subject();
   // This emulates the user passing in a className {{#em-form classNames='form-vertical'}}
-  component.set('classNames', ['ember-view', 'form-vertical']);
+  component.set('classNames', Ember.A(['ember-view', 'form-vertical']));
   this.render();
   assert.ok(component.$().hasClass('form-vertical'), 'Has the form-vertical class');
   assert.ok(!component.$().hasClass('form-horizontal'), 'Does not have the default form-horizontal class');
@@ -63,11 +63,11 @@ test('it has a default optionLabelPath and optionValuePath', function(assert) {
 
 test('it passes select options correctly', function(assert) {
   var component = this.subject();
-  var mockOptions = [
+  var mockOptions = Ember.A([
     {randomValueAttribute: 1, randomLabelAttribute: 'one'},
     {randomValueAttribute: 2, randomLabelAttribute: 'two'},
     {randomValueAttribute: 3, randomLabelAttribute: 'three'}
-  ];
+  ]);
   component.set('type', 'select');
   component.set('content', mockOptions);
   component.set('optionValuePath', 'content.randomValueAttribute');
@@ -84,7 +84,7 @@ test('it passes select options correctly', function(assert) {
 
 test('it passes select prompt options', function(assert) {
   var component = this.subject();
-  var mockOptions = [{value: 1, label: 'one'}];
+  var mockOptions = Ember.A([{value: 1, label: 'one'}]);
   component.set('type', 'select');
   component.set('content', mockOptions);
   component.set('prompt', 'Select something...');
@@ -95,7 +95,7 @@ test('it passes select prompt options', function(assert) {
 
 test('it allows the user to manually select an option', function(assert) {
   var component = this.subject();
-  var mockOptions = [{value: 1, label: 'one'}];
+  var mockOptions = Ember.A([{value: 1, label: 'one'}]);
   component.set('type', 'select');
   component.set('content', mockOptions);
   component.set('prompt', 'Select something...');

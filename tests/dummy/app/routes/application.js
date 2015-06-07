@@ -7,16 +7,16 @@ export default Ember.Route.extend({
       exampleModel: Ember.Object.create(),
       disableSubmit: false,
       selectedLanguage: null,
-      selectOptions: [
+      selectOptions: Ember.A([
         {label: 'French', value: 'fr'},
         {label: 'English', value: 'en'},
         {label: 'German', value: 'gr'}
-      ],
-      radioOptions: [
+      ]),
+      radioOptions: Ember.A([
         {label: 'Ruby', value: 'ruby'},
         {label: 'Javascript', value: 'js'},
         {label: 'Cold Fusion', value: 'cf'}
-      ]
+      ])
     });
   },
 

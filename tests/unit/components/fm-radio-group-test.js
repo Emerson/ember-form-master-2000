@@ -27,7 +27,7 @@ test('renders radio buttons for each content item provided', function(assert) {
   var component = this.subject();
   component.set('optionLabelPath', 'content.label');
   component.set('optionValuePath', 'content.value');
-  component.set('content', [{label: 'label', value: 'value'}, {label: 'two', value: 'two'}]);
+  component.set('content', Ember.A([{label: 'label', value: 'value'}, {label: 'two', value: 'two'}]));
   this.render();
   assert.equal(component.$('.radio').length, 2, 'fm-radio-group rendered two radio buttons');
 });
