@@ -20,17 +20,20 @@ moduleForComponent('fm-radio', {
 test('renders properly', function(assert) {
   var radioGroup = new this.factory('component:fm-radio-group').create();
   var component = this.subject();
-  component.set('parentView', radioGroup);
   this.render();
+  Ember.run(function() {
+    component.set('parentView', radioGroup);
+  });
+
   assert.equal(component.$('input').length, 1, 'fm-radio rendered properly');
 });
 
 test('it updates the parentView value on change', function(assert) {
   var radioGroup = new this.factory('component:fm-radio-group').create();
   var component = this.subject();
-  component.set('parentView', radioGroup);
   this.render();
   Ember.run(function() {
+    component.set('parentView', radioGroup);
     component.set('value', 'test value');
     component.$().change();
     assert.equal(radioGroup.get('value'), 'test value', 'fm-radio sets the parentView.value properly');

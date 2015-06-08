@@ -18,7 +18,7 @@ test('renders the first error', function(assert) {
   var component = this.subject();
   this.render();
   Ember.run(function() {
-    component.set('errors', ['This is an error', 'This is a second error']);
+    component.set('errors', Ember.A(['This is an error', 'This is a second error']));
   });
   assert.equal(component.$().text(), 'This is an error', 'It renders the first error');
 });

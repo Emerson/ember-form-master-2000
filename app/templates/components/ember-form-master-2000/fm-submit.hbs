@@ -1,7 +1,7 @@
 <button
-  {{bind-attr value=value}}
-  {{bind-attr disabled=disabled}}
-  {{bind-attr class=submitButtonClasses}}
+  value={{value}}
+  disabled={{disabled}}
+  class='{{submitButtonClasses}}'
   type="submit">
   {{#if value}}
     {{value}}

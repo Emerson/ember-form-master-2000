@@ -3,8 +3,8 @@
   <div class="col-sm-8">
     {{#fm-form action='submit'}}
 
-      {{fm-field label='First Name' 
-        value=model.exampleModel.first_name 
+      {{fm-field label='First Name'
+        value=model.exampleModel.first_name
         errors=model.exampleModel.errors.first_name
       }}
 
@@ -22,8 +22,8 @@
         data-test='master-2000'
       }}
 
-      {{fm-field 
-        label='Choose Something' 
+      {{fm-field
+        label='Choose Something'
         type='select'
         content=model.selectOptions
         optionValuePath='content.value'
@@ -75,7 +75,7 @@
       </li>
       <li>Choose Something: {{model.exampleModel.language}}</li>
       <li>
-        Are you awesome? 
+        Are you awesome?
         {{#if model.exampleModel.isAwesome}}
           Yup
         {{else}}
@@ -89,4 +89,3 @@
 </div>
 
 <hr>
-
