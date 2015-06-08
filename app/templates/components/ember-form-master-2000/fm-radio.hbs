@@ -1,8 +1,8 @@
 <label>
-  <input type='radio' 
-    {{bind-attr name=parentView.name}} 
-    {{bind-attr value=value}} 
-    {{bind-attr checked=checked}}>
+  <input type='radio'
+    name={{parentView.name}}
+    value={{value}}
+    checked={{checked}}>
   {{labelText}}
   {{isSelected}}
 </label>
