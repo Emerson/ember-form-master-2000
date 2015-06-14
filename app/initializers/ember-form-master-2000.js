@@ -2,7 +2,7 @@ import Ember from 'ember';
 import {initialize} from 'ember-form-master-2000/initializers/fm-initialize';
 
 if(Ember.libraries) {
-  Ember.libraries.register('Ember Form Master 2000', '0.1.0');
+  Ember.libraries.register('Ember Form Master 2000', '0.2.0');
 }
 
 export default {
