@@ -2,7 +2,7 @@
   <label class='{{labelClass}}'>{{label}}</label>
 {{/if}}
 
-{{#each option in content}}
+{{#each content as |option|}}
 
   {{fm-radio content=option}}
 
