@@ -7,9 +7,9 @@ export default Ember.Component.extend({
     return this.fmconfig.radioClass;
   }),
   checked: false,
-  updateChecked: Ember.observer('parentView.value', function() {
+  updateChecked: Ember.on('init', Ember.observer('parentView.value', function() {
     this.set('checked', this.get('parentView.value') === this.get('value'));
-  }),
+  })),
   labelText: Ember.computed('parentView.optionLabelPath', 'content', function() {
     if(this.get('parentView.optionLabelPath')) {
       return this.get(this.get('parentView.optionLabelPath'));
