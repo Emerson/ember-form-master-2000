@@ -5,6 +5,10 @@ node_js:
 
 sudo: false
 
+cache:
+  directories:
+    - node_modules
+
 env:
   - EMBER_TRY_SCENARIO=default
   - EMBER_TRY_SCENARIO=ember-release
