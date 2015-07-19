@@ -9,7 +9,7 @@ export default Ember.Component.extend({
     if(!this.get('optionLabelPath')) {
       this.set('optionLabelPath', 'content.label');
     }
-    var dataAttributes = Ember.keys(this).filter(function(attr) {
+    var dataAttributes = Object.keys(this.get('attrs') || {}).filter(function(attr) {
       return /data-/.test(attr);
     });
     this.set('dataAttributes', dataAttributes);
