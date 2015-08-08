@@ -31,3 +31,16 @@ test('renders radio buttons for each content item provided', function(assert) {
   this.render();
   assert.equal(component.$('.radio').length, 2, 'fm-radio-group rendered two radio buttons');
 });
+
+test('preselects the proper radio', function(assert) {
+  var component = this.subject();
+  component.set('optionLabelPath', 'content.label');
+  component.set('optionValuePath', 'content.value');
+  component.set('value', 'two');
+  component.set('content', Ember.A([{label: 'label', value: 'value'}, {label: 'two', value: 'two'}]));
+  this.render();
+
+  var checkedRadio = component.$(':checked');
+  assert.equal(checkedRadio.length, 1, 'fm-radio-group has an initial checked value');
+  assert.equal(checkedRadio.attr('value'), 'two', 'fm-radio-group initial checked value is correct');
+});
