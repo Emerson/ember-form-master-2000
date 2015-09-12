@@ -1,7 +1,8 @@
 import Ember from 'ember';
+import layout from '../templates/components/ember-form-master-2000/fm-submit';
 
 export default Ember.Component.extend({
-  layoutName: 'components/ember-form-master-2000/fm-submit',
+  layout: layout,
   classNameBindings: ['wrapperClass'],
   init: function() {
     this._super(this);

@@ -1,7 +1,8 @@
 import Ember from 'ember';
+import layout from '../templates/components/ember-form-master-2000/fm-radio-group';
 
 export default Ember.Component.extend({
-  layoutName: 'components/ember-form-master-2000/fm-radio-group',
+  layout: layout,
   classNameBindings: ['radioGroupWrapperClass', 'errorClass'],
   errorClass: Ember.computed('errors', function() {
     if(this.get('errors')) {

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import DataAttributesSupport from 'ember-form-master-2000/mixins/data-attribute-support';
+import DataAttributesSupport from '../mixins/data-attribute-support';
 
 export default Ember.TextField.extend(DataAttributesSupport, {
 

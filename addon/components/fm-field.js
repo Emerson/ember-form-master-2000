@@ -1,7 +1,9 @@
 import Ember from 'ember';
+import layout from '../templates/components/ember-form-master-2000/fm-field';
 
 export default Ember.Component.extend({
-  layoutName: 'components/ember-form-master-2000/fm-field',
+  layout: layout,
+  value: null,
   init: function() {
     if(!this.get('optionValuePath')) {
       this.set('optionValuePath', 'content.value');
@@ -9,7 +11,7 @@ export default Ember.Component.extend({
     if(!this.get('optionLabelPath')) {
       this.set('optionLabelPath', 'content.label');
     }
-    var dataAttributes = Object.keys(this.get('attrs') || {}).filter(function(attr) {
+    var dataAttributes = Object.keys(this.get('attrs')).filter(function(attr) {
       return /data-/.test(attr);
     });
     this.set('dataAttributes', dataAttributes);
@@ -17,7 +19,7 @@ export default Ember.Component.extend({
     this.set('labelClass', this.fmconfig.labelClass);
     this.set('inputClass', this.fmconfig.inputClass);
     this.set('textareaClass', this.fmconfig.textareaClass);
-    this._super();
+    this._super(arguments);
   },
   placeholder: null,
   label: null,
@@ -36,9 +38,9 @@ export default Ember.Component.extend({
   isBasicInput: Ember.computed('type', function() {
     return (!this.get('isSelect') && !this.get('isTextarea'));
   }),
-  forAttribute: Ember.computed('label', 'id', function() {
-    if(this.get('id')) {
-      return this.generateSafeId(this.get('id'));
+  forAttribute: Ember.computed('label', 'inputId', function() {
+    if(this.get('inputId')) {
+      return this.generateSafeId(this.get('inputId'));
     }
     if(this.get('label')) {
       return this.generateSafeId(this.get('label'));

@@ -38,12 +38,12 @@ You can see the basic dummy app here:
 
   {{fm-field type='password' value=model.password}}
 
-  {{fm-field 
-    label='Choose Something' 
+  {{fm-field
+    label='Choose Something'
     type='select'
     content=model.selectOptions
-    optionValuePath='content.id'
-    optionLabelPath='content.label'
+    optionValuePath='id'
+    optionLabelPath='label'
     prompt='Select Something'
   }}
 

@@ -1,6 +1,8 @@
 import Ember from 'ember';
+import layout from '../templates/components/ember-form-master-2000/fm-checkbox';
+
 export default Ember.Component.extend({
-  layoutName: 'components/ember-form-master-2000/fm-checkbox',
+  layout: layout,
   classNameBindings: ['checkboxWrapperClass', 'errorClass'],
   checkboxWrapperClass: Ember.computed(function() {
     return this.fmconfig.checkboxWrapperClass;
