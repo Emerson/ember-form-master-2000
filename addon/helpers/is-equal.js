@@ -4,4 +4,14 @@ function isEqualHelper(first, second) {
   return first === second;
 }
 
-export default Ember.Handlebars.makeBoundHelper(isEqualHelper);
+var forExport = null;
+
+if (Ember.Helper) {
+  forExport = Ember.Helper.helper(isEqualHelper);
+} else if (Ember.HTMLBars.makeBoundHelper) {
+  forExport = Ember.HTMLBars.makeBoundHelper(isEqualHelper);
+} else if (Ember.Handlebars.makeBoundHelper) {
+  Ember.Handlebars.makeBoundHelper(isEqualHelper)
+}
+
+export default forExport;
