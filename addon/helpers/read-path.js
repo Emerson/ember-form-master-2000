@@ -1,7 +1,11 @@
 import Ember from 'ember';
 
-function readPathHelper(object, path) {
+function oldReadPathHelper(object, path) {
   return Ember.get(object, path);
+}
+
+function readPathHelper(params) {
+  return Ember.get(params[0], params[1]);
 }
 
 var forExport = null;
@@ -11,7 +15,7 @@ if (Ember.Helper) {
 } else if (Ember.HTMLBars.makeBoundHelper) {
   forExport = Ember.HTMLBars.makeBoundHelper(readPathHelper);
 } else if (Ember.Handlebars.makeBoundHelper) {
-  Ember.Handlebars.makeBoundHelper(readPathHelper)
+  Ember.Handlebars.makeBoundHelper(oldReadPathHelper)
 }
 
 export default forExport;
