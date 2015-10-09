@@ -1,0 +1,17 @@
+import Ember from 'ember';
+
+export default Ember.Service.extend({
+  submitButtonClasses: ['btn', 'btn-primary'],
+  errorClass: 'has-error',
+  wrapperClass: 'form-group',
+  labelClass: 'control-label',
+  inputClass: 'form-control',
+  textareaClass: 'form-control',
+  selectClass: 'form-control',
+  formClass: 'form-vertical',
+  checkboxWrapperClass: 'form-group',
+  radioGroupWrapperClass: 'form-group',
+  radioClass: 'radio',
+  helptextClass: 'help-block',
+  errortextClass: 'help-block'
+});

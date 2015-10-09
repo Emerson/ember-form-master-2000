@@ -1,7 +1,13 @@
 import Ember from 'ember';
 
-function isNotHelper(first) {
-  return !first;
+function isNotHelper(params) {
+  return !params[0];
 }
 
-export default Ember.Handlebars.makeBoundHelper(isNotHelper);
+var forExport = null;
+if(typeof Ember.HTMLBars.makeBoundHelper === 'function') {
+  forExport = Ember.Helper.helper(isNotHelper);
+}else{
+  forExport = Ember.Handlebars.makeBoundHelper(isNotHelper);
+}
+export default forExport;

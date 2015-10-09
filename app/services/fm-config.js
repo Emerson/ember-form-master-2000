@@ -1,0 +1,1 @@
+export { default } from 'ember-form-master-2000/services/fm-config';

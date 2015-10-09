@@ -4,6 +4,14 @@ import layout from '../templates/components/ember-form-master-2000/fm-field';
 export default Ember.Component.extend({
   layout: layout,
   value: null,
+
+  fmConfig: Ember.inject.service('fm-config'),
+
+  textareaClass: null,
+  inputClass: null,
+  labelClass: null,
+  wrapperClass: null,
+
   init: function() {
     if(!this.get('optionValuePath')) {
       this.set('optionValuePath', 'content.value');
@@ -15,10 +23,12 @@ export default Ember.Component.extend({
       return /data-/.test(attr);
     });
     this.set('dataAttributes', dataAttributes);
-    this.set('wrapperClass', this.fmconfig.wrapperClass);
-    this.set('labelClass', this.fmconfig.labelClass);
-    this.set('inputClass', this.fmconfig.inputClass);
-    this.set('textareaClass', this.fmconfig.textareaClass);
+
+    var classes = this.get('fmConfig').getProperties('wrapperClass', 'labelClass', 'inputClass', 'textareaClass');
+    this.set('wrapperClass', classes.wrapperClass);
+    this.set('labelClass', classes.labelClass);
+    this.set('inputClass', classes.inputClass);
+    this.set('textareaClass', classes.textareaClass);
     this._super(arguments);
   },
   placeholder: null,
@@ -26,7 +36,7 @@ export default Ember.Component.extend({
   classNameBindings: ['wrapperClass', 'errorClass'],
   errorClass: Ember.computed('errors', function() {
     if(this.get('errors')) {
-      return this.fmconfig.errorClass;
+      return this.get('fmConfig.errorClass');
     }
   }),
   isSelect: Ember.computed('type', function() {

@@ -4,15 +4,9 @@ export default Ember.Component.extend({
   init: function() {
     this._super();
   },
-  willInsertElement: function() {
-    var classNames = this.get('classNames');
-    // If there are no custom classes passed into the component, then we
-    // should apply the default fmconfig classes
-    if(classNames.length === 1) {
-      this.set('formClass', this.fmconfig.formClass);
-    }
-  },
   classNameBindings: ['formClass'],
+  formClass: Ember.computed.alias('fmConfig.formClass'),
+  fmConfig: Ember.inject.service('fm-config'),
   tagName: 'form',
   'for': null,
   submit: function(e) {

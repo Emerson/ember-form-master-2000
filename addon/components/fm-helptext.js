@@ -5,5 +5,8 @@ export default Ember.Component.extend({
   layout: layout,
   tagName: 'span',
   classNameBindings: ['helptextClass'],
-  helptextClass: 'help-block',
+  fmConfig: Ember.inject.service('fm-config'),
+  helptextClass: function() {
+    return this.get('fmConfig.helptextClass');
+  }
 });
