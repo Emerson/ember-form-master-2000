@@ -1,7 +1,13 @@
 import Ember from 'ember';
 
-function isEqualHelper(first, second) {
-  return first === second;
+function isEqualHelper(params) {
+  return params[0] === params[2];
 }
 
-export default Ember.Handlebars.makeBoundHelper(isEqualHelper);
+var forExport = null;
+if(typeof Ember.HTMLBars.makeBoundHelper === 'function') {
+  forExport = Ember.Helper.helper(isEqualHelper);
+}else{
+  forExport = Ember.Handlebars.makeBoundHelper(isEqualHelper);
+}
+export default forExport;

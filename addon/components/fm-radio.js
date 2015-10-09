@@ -4,8 +4,9 @@ import layout from '../templates/components/ember-form-master-2000/fm-radio';
 export default Ember.Component.extend({
   layout: layout,
   classNameBindings: 'radioClass',
+  fmConfig: Ember.inject.service('fm-config'),
   radioClass: Ember.computed(function() {
-    return this.fmconfig.radioClass;
+    return this.get('fmConfig.radioClass');
   }),
   checked: false,
   updateChecked: Ember.observer('parentView.value', function() {

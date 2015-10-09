@@ -14,6 +14,10 @@
 
 ----------------------------
 
+### NOTE
+
+This project is in the process of moving towards Ember 2.1. There is still some work to be done, so please have patience.
+
 ### Installation
 
 This is an [ember-cli](http://www.ember-cli.com/) addon and can be installed using [npm](https://www.npmjs.org/package/ember-form-master-2000):

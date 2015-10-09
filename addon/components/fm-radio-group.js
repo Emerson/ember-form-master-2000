@@ -4,15 +4,16 @@ import layout from '../templates/components/ember-form-master-2000/fm-radio-grou
 export default Ember.Component.extend({
   layout: layout,
   classNameBindings: ['radioGroupWrapperClass', 'errorClass'],
+  fmConfig: Ember.inject.service('fm-config'),
   errorClass: Ember.computed('errors', function() {
     if(this.get('errors')) {
-      return this.fmconfig.errorClass;
+      return this.get('fmConfig.errorClass');
     }
   }),
   radioGroupWrapperClass: Ember.computed(function() {
-    return this.fmconfig.radioGroupWrapperClass;
+    return this.get('fmConfig.radioGroupWrapperClass');
   }),
   labelClass: function() {
-    return this.fmconfig.labelClass;
+    return this.get('fmConfig.labelClass');
   }
 });
