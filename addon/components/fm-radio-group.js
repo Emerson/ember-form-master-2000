@@ -12,7 +12,7 @@ export default Ember.Component.extend({
   radioGroupWrapperClass: Ember.computed(function() {
     return this.fmconfig.radioGroupWrapperClass;
   }),
-  labelClass: function() {
+  labelClass: Ember.computed(function() {
     return this.fmconfig.labelClass;
-  }
+  })
 });
