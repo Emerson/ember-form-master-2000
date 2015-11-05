@@ -35,7 +35,7 @@ export default Ember.Component.extend({
   label: null,
   classNameBindings: ['wrapperClass', 'errorClass'],
   errorClass: Ember.computed('errors', function() {
-    if(this.get('errors')) {
+    if(!Ember.isEmpty(this.get('errors'))) {
       return this.get('fmConfig.errorClass');
     }
   }),
