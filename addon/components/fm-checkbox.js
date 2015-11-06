@@ -9,7 +9,7 @@ export default Ember.Component.extend({
     return this.get('fmConfig.checkboxWrapperClass');
   }),
   errorClass: Ember.computed('errors', function() {
-    if(this.get('errors')) {
+    if(!Ember.isEmpty(this.get('errors'))) {
       return this.get('fmConfig.errorClass');
     }
   })
