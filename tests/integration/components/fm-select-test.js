@@ -1,7 +1,7 @@
  import Ember from 'ember';
  import { moduleForComponent, test } from 'ember-qunit';
  import hbs from 'htmlbars-inline-precompile';
- import {initialize} from 'ember-form-master-2000/initializers/fm-initialize';
+ import {initialize} from 'ember-form-master-2000/initializers/ember-form-master-2000';
 
  moduleForComponent('fm-select', 'Integration | Component | fm-select', {
    integration: true,
@@ -44,18 +44,27 @@
    assert.equal(this.$('option:last').attr('value'), 'goodbye');
  });
 
- test('fm-select updates the value of the parentView', function(assert) {
-   this.set('parentView', Ember.View.create({
-     value: null
-   }));
+ test('fm-select calls `action` with newly chosen value', function(assert) {
    this.set('content', Ember.A([
      {label: 'one', value: 1},
      {label: 'two', value: 2}
    ]));
-   this.render(hbs `{{fm-select content=content parentView=parentView}}`);
+   this.render(hbs `{{fm-select content=content value=value action=(action (mut value))}}`);
    this.$('select').change();
-   assert.equal(this.$('option:selected').val(), this.get('parentView.value'));
+   assert.equal(this.$('option:selected').val(), this.get('value'));
  });
+
+test('fm-select updates the value of the fm-field by default', function(assert) {
+  this.set('value', null);
+  this.set('content', Ember.A([
+    {label: 'one', value: 1},
+    {label: 'two', value: 2}
+  ]));
+  this.render(hbs `{{fm-field type='select' optionValuePath='value'
+              optionValuePath='label' content=content value=value}}`);
+  this.$('select').change();
+  assert.equal(this.$('option:selected').val(), this.get('value'));
+});
 
  test('fm-select changes the selected option when the passed in value changes', function(assert) {
    this.set('modelValue', 2);

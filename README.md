@@ -49,6 +49,8 @@ You can see the basic dummy app here:
     optionValuePath='id'
     optionLabelPath='label'
     prompt='Select Something'
+    value=model.valueToSelect
+    action=(action (mut model.valueToSelect))
   }}
 
   {{fm-field

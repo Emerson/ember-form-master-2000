@@ -1,4 +1,5 @@
 import { moduleForComponent, test } from 'ember-qunit';
+import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 // import {initialize} from 'ember-form-master-2000/initializers/fm-initialize';
 
@@ -32,10 +33,20 @@ test('renders properly', function(assert) {
 //   assert.ok(this.$('label').length === 0, 'A label was rendered when it should not have been');
 // });
 //
-// test('type="select" renders a select', function(assert) {
-//   this.render(hbs `{{fm-field type="select"}}`);
-//   assert.ok(this.$('select').length === 1, 'A select was not rendered when it should have been');
-// });
+
+test('type="select" renders a select', function(assert) {
+  this.render(hbs `{{fm-field type="select"}}`);
+  assert.ok(this.$('select').length === 1, 'A select was not rendered when it should have been');
+});
+
+test('action is passed down to select component', function(assert) {
+  //assert.expect(1);
+  this.set('assertCalled', () => assert.ok(true));
+  this.set('content', Ember.A(['something',]));
+  this.render(hbs `{{fm-field type="select" content=content action=(action assertCalled)}}`);
+  this.$('select').change();
+});
+
 //
 // test('type="textarea" renders a textarea', function(assert) {
 //   this.render(hbs `{{fm-field type="textarea"}}`);
