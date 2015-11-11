@@ -44,8 +44,7 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    change: function() {
-
+    change(){
       const selectEl = this.$()[0];
       const selectedIndex = selectEl.selectedIndex;
       const content = this.get('content');
@@ -54,20 +53,15 @@ export default Ember.Component.extend({
       const hasPrompt = !!this.get('prompt');
       const contentIndex = hasPrompt ? selectedIndex - 1 : selectedIndex;
 
-      const selection = content[contentIndex];
+      const selection = content.objectAt(contentIndex);
 
       // set the local, shadowed selection to avoid leaking
       // changes to `selection` out via 2-way binding
       this.set('_selection', selection);
 
-      // propagate the select up to the parent view
-      if(this.get('parentView') && selection) {
-        const selectedValue = Ember.get(selection, this.get('optionValuePath'));
-        this.set('parentView.value', selectedValue);
-      }
-
-      const changeCallback = this.get('action');
-      changeCallback(selection);
+      const path = this.get('optionValuePath');
+      const value = (path.length > 0)? Ember.get(selection, path) : selection;
+      this.attrs.action(value);
     }
   }
 

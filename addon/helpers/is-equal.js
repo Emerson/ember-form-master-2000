@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 function isEqualHelper(params) {
-  return params[0] === params[2];
+  return params[0] === params[1];
 }
 
 var forExport = null;

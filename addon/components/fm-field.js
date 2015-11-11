@@ -63,5 +63,15 @@ export default Ember.Component.extend({
     id = id.replace(/[\.,\/#!$%\^&\*;:{}=\`'"~()]/g,"");
     id = id.replace(/\s/g, "-");
     return id;
+  },
+
+  actions: {
+    selectAction(value){
+      if (this.attrs.action && typeof this.attrs.action === 'function'){
+        this.attrs.action(value);
+      } else {
+        this.set('value', value);
+      }
+    }
   }
 });
