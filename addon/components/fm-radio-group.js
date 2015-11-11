@@ -6,7 +6,7 @@ export default Ember.Component.extend({
   classNameBindings: ['radioGroupWrapperClass', 'errorClass'],
   fmConfig: Ember.inject.service('fm-config'),
   errorClass: Ember.computed('errors', function() {
-    if(this.get('errors')) {
+    if(!Ember.isEmpty(this.get('errors'))) {
       return this.get('fmConfig.errorClass');
     }
   }),
