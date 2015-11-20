@@ -7,8 +7,8 @@ export default Ember.Component.extend({
   fmConfig: Ember.inject.service('fm-config'),
   init: function() {
     this._super(this);
-    this.set('wrapperClass', this.get('fmConfig.wrapperClass'));
-    this.set('submitButtonClasses', this.get('fmConfig.submitButtonClasses').join(' '));
   },
+  submitButtonClass: Ember.computed.reads('fmConfig.submitButtonClass'),
+  wrapperClass: Ember.computed.reads('fmConfig.wrapperClass'),
   tagName: 'div'
 });

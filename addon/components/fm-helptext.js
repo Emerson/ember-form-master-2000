@@ -6,7 +6,5 @@ export default Ember.Component.extend({
   tagName: 'span',
   classNameBindings: ['helptextClass'],
   fmConfig: Ember.inject.service('fm-config'),
-  helptextClass: function() {
-    return this.get('fmConfig.helptextClass');
-  }
+  helptextClass: Ember.computed.reads('fmConfig.helptextClass')
 });
