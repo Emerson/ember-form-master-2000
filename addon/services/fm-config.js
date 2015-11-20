@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
-  submitButtonClasses: ['btn', 'btn-primary'],
+  submitButtonClass: 'btn btn-primary',
   errorClass: 'has-error',
   wrapperClass: 'form-group',
   labelClass: 'control-label',
