@@ -29,8 +29,8 @@ export default Ember.Component.extend({
   placeholder: null,
   label: null,
   classNameBindings: ['wrapperClass', 'errorClass'],
-  errorClass: Ember.computed('errors', 'fmConfig.errorClass', function() {
-    if(!Ember.isEmpty(this.get('errors'))) {
+  errorClass: Ember.computed('showErrors', 'fmConfig.errorClass', function() {
+    if (this.get('showErrors')) {
       return this.get('fmConfig.errorClass');
     }
   }),
@@ -67,6 +67,15 @@ export default Ember.Component.extend({
       } else {
         this.set('value', value);
       }
+    },
+
+    userInteraction() {
+      this.set('shouldShowErrors', true);
     }
-  }
+  },
+
+  shouldShowErrors: false,
+  showErrors: Ember.computed('shouldShowErrors', 'errors', function() {
+    return this.get('shouldShowErrors') && !Ember.isEmpty(this.get('errors'));
+  })
 });

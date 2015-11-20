@@ -96,3 +96,84 @@ test('selection option label is updated when property changes', function(assert)
   this.set('content.0.label', 'bar');
   assert.equal(this.$('option').text().trim(), 'bar');
 });
+
+test('errors are not shown after user interaction but not before', function(assert) {
+  this.set('errors', ['error message']);
+  this.render(hbs `{{fm-field errors=errors}}`);
+  assert.ok(
+    this.$('.help-block').length === 0,
+    'error message is not shown before user interaction'
+  );
+  assert.notOk(
+    this.$('div').hasClass('has-error'),
+    'errorClass is not there before user interaction'
+  );
+  this.$('input').trigger('focusout');
+  assert.ok(
+    this.$('.help-block').text().trim(), 'error message',
+    'error message is shown after user interaction'
+  );
+  assert.ok(
+    this.$('div').hasClass('has-error'),
+    'errorClass is added after user interaction'
+  );
+  this.set('errors', []);
+  assert.notOk(
+    this.$('div').hasClass('has-error'),
+    'errorClass is removed when errors empty got empty'
+  );
+});
+
+test('errors are not shown after user interaction but not before (textarea)', function(assert) {
+  this.set('errors', ['error message']);
+  this.render(hbs `{{fm-field type='textarea' errors=errors}}`);
+  assert.ok(
+    this.$('.help-block').length === 0,
+    'error message is not shown before user interaction'
+  );
+  assert.notOk(
+    this.$('div').hasClass('has-error'),
+    'errorClass is not there before user interaction'
+  );
+  this.$('textarea').trigger('focusout');
+  assert.ok(
+    this.$('.help-block').text().trim(), 'error message',
+    'error message is shown after user interaction'
+  );
+  assert.ok(
+    this.$('div').hasClass('has-error'),
+    'errorClass is added after user interaction'
+  );
+  this.set('errors', []);
+  assert.notOk(
+    this.$('div').hasClass('has-error'),
+    'errorClass is removed when errors empty got empty'
+  );
+});
+
+test('errors are not shown after user interaction but not before (select)', function(assert) {
+  this.set('errors', ['error message']);
+  this.render(hbs `{{fm-field type='select' errors=errors}}`);
+  assert.ok(
+    this.$('.help-block').length === 0,
+    'error message is not shown before user interaction'
+  );
+  assert.notOk(
+    this.$('div').hasClass('has-error'),
+    'errorClass is not there before user interaction'
+  );
+  this.$('select').trigger('focusout');
+  assert.ok(
+    this.$('.help-block').text().trim(), 'error message',
+    'error message is shown after user interaction'
+  );
+  assert.ok(
+    this.$('div').hasClass('has-error'),
+    'errorClass is added after user interaction'
+  );
+  this.set('errors', []);
+  assert.notOk(
+    this.$('div').hasClass('has-error'),
+    'errorClass is removed when errors empty got empty'
+  );
+});

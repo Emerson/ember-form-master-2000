@@ -11,6 +11,11 @@ export default Ember.Component.extend({
   'for': null,
   submit: function(e) {
     e.preventDefault();
+    this.get('childViews').forEach((chieldView) => {
+        if (chieldView.get('shouldShowErrors') === false) {
+        chieldView.set('shouldShowErrors', true);
+      }
+    });
     this.sendAction('action', this.get('for'));
   }
 });

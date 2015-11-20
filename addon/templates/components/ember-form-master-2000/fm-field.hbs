@@ -8,7 +8,9 @@
     value=value
     classNameBindings='errorClass inputClass'
     maxlength=maxlength
-    placeholder=placeholder}}
+    placeholder=placeholder
+    onUserInteraction='userInteraction'
+  }}
 {{/if}}
 
 {{#if isSelect}}
@@ -19,6 +21,7 @@
     prompt=prompt
     value=value
     action=(action 'selectAction')
+    onUserInteraction='userInteraction'
   }}
 {{/if}}
 
@@ -32,10 +35,11 @@
     maxlength=maxlength
     spellcheck=spellcheck
     disabled=disabled
+    onUserInteraction='userInteraction'
   }}
 {{/if}}
 
-{{#if errors}}
+{{#if showErrors}}
   {{fm-errortext errors=errors}}
 {{/if}}
 

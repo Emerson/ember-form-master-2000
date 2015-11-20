@@ -10,6 +10,8 @@
     {{label}}
   </label>
 
-  {{fm-errortext errors=errors}}
+  {{#if showErrors}}
+    {{fm-errortext errors=errors}}
+  {{/if}}
 
 </div>
