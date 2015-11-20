@@ -6,6 +6,7 @@ export default Ember.Service.extend({
   wrapperClass: 'form-group',
   labelClass: 'control-label',
   inputClass: 'form-control',
+  inputWrapperClass: '',
   textareaClass: 'form-control',
   selectClass: 'form-control',
   formClass: 'form-vertical',

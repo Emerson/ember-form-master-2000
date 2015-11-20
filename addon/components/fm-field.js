@@ -11,6 +11,7 @@ export default Ember.Component.extend({
   labelClass: Ember.computed.reads('fmConfig.labelClass'),
   textareaClass: Ember.computed.reads('fmConfig.textareaClass'),
   wrapperClass: Ember.computed.reads('fmConfig.wrapperClass'),
+  inputWrapperClass: Ember.computed.reads('fmConfig.inputWrapperClass'),
 
   init: function() {
     if(!this.get('optionValuePath')) {

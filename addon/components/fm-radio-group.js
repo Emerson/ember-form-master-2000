@@ -22,5 +22,7 @@ export default Ember.Component.extend({
     userInteraction() {
       this.set('shouldShowErrors', true);
     }
-  }
+  },
+
+  inputWrapperClass: Ember.computed.reads('fmConfig.inputWrapperClass')
 });
