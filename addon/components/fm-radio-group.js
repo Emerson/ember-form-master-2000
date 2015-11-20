@@ -5,15 +5,11 @@ export default Ember.Component.extend({
   layout: layout,
   classNameBindings: ['radioGroupWrapperClass', 'errorClass'],
   fmConfig: Ember.inject.service('fm-config'),
-  errorClass: Ember.computed('errors', function() {
+  errorClass: Ember.computed('errors', 'fmConfig.errorClass', function() {
     if(!Ember.isEmpty(this.get('errors'))) {
       return this.get('fmConfig.errorClass');
     }
   }),
-  radioGroupWrapperClass: Ember.computed(function() {
-    return this.get('fmConfig.radioGroupWrapperClass');
-  }),
-  labelClass: function() {
-    return this.get('fmConfig.labelClass');
-  }
+  radioGroupWrapperClass: Ember.computed.reads('fmConfig.radioGroupWrapperClass'),
+  labelClass: Ember.computed.reads('fmConfig.labelClass')
 });

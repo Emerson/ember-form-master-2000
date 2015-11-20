@@ -10,6 +10,8 @@ export default Ember.Component.extend({
   optionLabelPath: 'label',
   action: Ember.K,
   fmConfig: Ember.inject.service('fm-config'),
+  classNameBindings: ['selectClass'],
+  selectClass: Ember.computed.reads('fmConfig.selectClass'),
 
   // shadow the passed-in `selection` to avoid
   // leaking changes to it via a 2-way binding
@@ -29,8 +31,6 @@ export default Ember.Component.extend({
     if(this.get('value')) {
       this.set('selection', this.get('value'));
     }
-    this.get('classNames').push(this.get('fmConfig.selectClass'));
-
   },
 
   change: function() {

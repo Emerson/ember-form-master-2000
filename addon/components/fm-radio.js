@@ -3,11 +3,9 @@ import layout from '../templates/components/ember-form-master-2000/fm-radio';
 
 export default Ember.Component.extend({
   layout: layout,
-  classNameBindings: 'radioClass',
+  classNameBindings: ['radioClass'],
   fmConfig: Ember.inject.service('fm-config'),
-  radioClass: Ember.computed(function() {
-    return this.get('fmConfig.radioClass');
-  }),
+  radioClass: Ember.computed.reads('fmConfig.radioClass'),
   checked: false,
   updateChecked: Ember.observer('parentView.value', function() {
     this.set('checked', this.get('parentView.value') === this.get('value'));

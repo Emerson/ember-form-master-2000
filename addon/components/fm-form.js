@@ -5,7 +5,7 @@ export default Ember.Component.extend({
     this._super();
   },
   classNameBindings: ['formClass'],
-  formClass: Ember.computed.alias('fmConfig.formClass'),
+  formClass: Ember.computed.reads('fmConfig.formClass'),
   fmConfig: Ember.inject.service('fm-config'),
   tagName: 'form',
   'for': null,

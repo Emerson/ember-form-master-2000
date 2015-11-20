@@ -7,10 +7,10 @@ export default Ember.Component.extend({
 
   fmConfig: Ember.inject.service('fm-config'),
 
-  textareaClass: null,
-  inputClass: null,
-  labelClass: null,
-  wrapperClass: null,
+  inputClass: Ember.computed.reads('fmConfig.inputClass'),
+  labelClass: Ember.computed.reads('fmConfig.labelClass'),
+  textareaClass: Ember.computed.reads('fmConfig.textareaClass'),
+  wrapperClass: Ember.computed.reads('fmConfig.wrapperClass'),
 
   init: function() {
     if(!this.get('optionValuePath')) {
@@ -24,17 +24,12 @@ export default Ember.Component.extend({
     });
     this.set('dataAttributes', dataAttributes);
 
-    var classes = this.get('fmConfig').getProperties('wrapperClass', 'labelClass', 'inputClass', 'textareaClass');
-    this.set('wrapperClass', classes.wrapperClass);
-    this.set('labelClass', classes.labelClass);
-    this.set('inputClass', classes.inputClass);
-    this.set('textareaClass', classes.textareaClass);
     this._super(arguments);
   },
   placeholder: null,
   label: null,
   classNameBindings: ['wrapperClass', 'errorClass'],
-  errorClass: Ember.computed('errors', function() {
+  errorClass: Ember.computed('errors', 'fmConfig.errorClass', function() {
     if(!Ember.isEmpty(this.get('errors'))) {
       return this.get('fmConfig.errorClass');
     }
