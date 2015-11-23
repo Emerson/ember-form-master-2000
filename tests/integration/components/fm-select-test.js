@@ -84,3 +84,46 @@ test('fm-select updates the value of the fm-field by default', function(assert) 
    this.render(hbs `{{fm-select prompt="Testing"}}`);
    assert.ok(this.$('option:disabled').length === 1, 'A prompt option was not rendered as expected');
  });
+
+test('fm-select observes changes of label and value in content array', function(assert) {
+  this.set('content', Ember.A([{value: 'foo', label: 'foo'}]));
+  this.render(hbs `{{fm-select content=content}}`);
+  assert.equal(this.$('option').text().trim(), 'foo', 'The initial label is correct');
+  assert.equal(this.$('option').attr('value'), 'foo', 'The initial value is correct');
+  this.set('content.0.label', 'bar');
+  assert.equal(this.$('option').text().trim(), 'bar', 'Label is updated after change of content array');
+  this.set('content.0.value', 'bar');
+  assert.equal(this.$('option').attr('value'), 'bar', 'Value is updated after change of content array');
+});
+
+test('fm-select updates options if an element is added to content array', function(assert) {
+  assert.expect(3);
+  this.set('content', Ember.A());
+  this.render(hbs `{{fm-select content=content}}`);
+
+  Ember.run.begin();
+  Ember.run.schedule('sync', () => {
+    this.get('content').pushObject({value: 'qux', label: 'qux'});
+  });
+  Ember.run.schedule('afterRender', () => {
+    assert.equal(this.$('option').length, 1, 'Option is added after content array changes');
+    assert.equal(this.$('option').text().trim(), 'qux', 'Label of new content array element is added');
+    assert.equal(this.$('option').attr('value'), 'qux', 'Value of new content array element is added');
+  });
+  Ember.run.end();
+});
+
+test('fm-select updates options if an element is removed from content array', function(assert) {
+  this.set('content', Ember.A([{label: 'foo', value: 'foo'}, {label: 'bar', value: 'bar'}]));
+  this.render(hbs `{{fm-select content=content}}`);
+
+  Ember.run.begin();
+  Ember.run.schedule('sync', () => {
+    this.get('content').removeAt(0);
+  });
+  Ember.run.schedule('afterRender', () => {
+    assert.equal(this.$('option').length, 1, 'Option is removed after element of content array is removed');
+    assert.equal(this.$('option').text().trim(), 'bar', 'Correct element is removed');
+  });
+  Ember.run.end();
+});
