@@ -67,8 +67,8 @@ You can see the basic dummy app here:
     label='Choose the best language'
     name='bestLanguage'
     content=model.radioOptions
-    optionValuePath='content.value'
-    optionLabelPath='content.label'
+    optionValuePath='value'
+    optionLabelPath='label'
     value=model.exampleModel.bestLanguage
     errors=model.exampleModel.errors.bestLanguage
   }}
