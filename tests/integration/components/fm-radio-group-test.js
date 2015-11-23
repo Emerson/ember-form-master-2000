@@ -25,6 +25,22 @@ test('renders radio buttons for each content item provided', function(assert) {
   assert.equal(this.$('input').attr('value'), 'value', 'Value is set propery');
 });
 
+test('checks the radio button which value property in content array matches value', function(assert) {
+  this.set('value', 'foo');
+  this.set('content', Ember.A([{label: 'label', value: 'value'}, {label: 'FOO', value: 'foo'}]));
+  this.render(hbs `{{fm-radio-group value=value content=content optionLabelPath='label' optionValuePath='value'}}`);
+  assert.notOk(this.$('input')[0].checked);
+  assert.ok(this.$('input')[1].checked);
+});
+
+test('updates value if one radio button is clicked', function(assert) {
+  this.set('value', null);
+  this.set('content', Ember.A([{label: 'label', value: 'value'}, {label: 'two', value: 'two'}]));
+  this.render(hbs `{{fm-radio-group value=value content=content optionLabelPath='label' optionValuePath='value'}}`);
+  this.$('input')[0].click();
+  assert.equal(this.get('value'), 'value');
+});
+
 test('Observes changes of content arrays label and value', function(assert) {
   this.set('content', Ember.A([{label: 'foo', value: 'foo'}]));
   this.render(hbs `{{fm-radio-group content=content optionLabelPath='label' optionValuePath='value'}}`);
