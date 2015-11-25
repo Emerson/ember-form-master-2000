@@ -127,3 +127,25 @@ test('fm-select updates options if an element is removed from content array', fu
   });
   Ember.run.end();
 });
+
+test('sends action onUserAction on focus out event', function(assert) {
+  assert.expect(1);
+  this.set('externalAction', () => {
+    assert.ok(true);
+  });
+  this.render(hbs`{{fm-select onUserInteraction=(action externalAction)}}`);
+  this.$('select').trigger('focusout');
+});
+
+test('sends action onUserAction on change event', function(assert) {
+  assert.expect(1);
+  this.set('externalAction', () => {
+    assert.ok(true);
+  });
+  this.set('content', Ember.A([
+    {label: 'one', value: 1},
+    {label: 'two', value: 2}
+  ]));
+  this.render(hbs`{{fm-select onUserInteraction=(action externalAction) content=content action=(action (mut value))}}`);
+  this.$('select').change();
+});

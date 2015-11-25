@@ -6,9 +6,28 @@ export default Ember.Component.extend({
   classNameBindings: ['checkboxWrapperClass', 'errorClass'],
   fmConfig: Ember.inject.service('fm-config'),
   checkboxWrapperClass: Ember.computed.reads('fmConfig.checkboxWrapperClass'),
-  errorClass: Ember.computed('errors', 'fmConfig.errorClass', function() {
-    if(!Ember.isEmpty(this.get('errors'))) {
+  errorClass: Ember.computed('showErrors', 'fmConfig.errorClass', function() {
+    if(this.get('showErrors')) {
       return this.get('fmConfig.errorClass');
     }
-  })
+  }),
+
+  shouldShowErrors: false,
+  showErrors: Ember.computed('shouldShowErrors', 'errors', function() {
+    return this.get('shouldShowErrors') && !Ember.isEmpty(this.get('errors'));
+  }),
+
+  change() {
+    this.send('userInteraction');
+  },
+
+  focusOut() {
+    this.send('userInteraction');
+  },
+
+  actions: {
+    userInteraction() {
+      this.set('shouldShowErrors', true);
+    }
+  }
 });

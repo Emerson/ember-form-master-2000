@@ -1,15 +1,15 @@
 // import Ember from 'ember';
-// import { moduleForComponent, test } from 'ember-qunit';
-// import hbs from 'htmlbars-inline-precompile';
+import { moduleForComponent, test } from 'ember-qunit';
+import hbs from 'htmlbars-inline-precompile';
 // import {initialize} from 'ember-form-master-2000/initializers/fm-initialize';
 //
-// moduleForComponent('fm-radio', 'Integration | Component | fm-radio', {
-//   integration: true,
+moduleForComponent('fm-radio', 'Integration | Component | fm-radio', {
+  integration: true,
 //   setup: function() {
 //     this.container.inject = this.container.injection;
 //     initialize(null, this.container);
 //   }
-// });
+});
 //
 // test('renders properly', function(assert) {
 //   this.set('parentView', Ember.View.create({
@@ -36,3 +36,24 @@
 //     assert.equal(this.get('parentView.value'), 'something else', 'The parentView value was updated');
 //   });
 // });
+
+test('action onUserAction is send on focus out event', function(assert) {
+  assert.expect(1);
+  this.set('externalAction', () => {
+    assert.ok(true);
+  });
+  this.set('content', {label: 'label', value: 'value'});
+  this.render(hbs`{{fm-radio onUserInteraction=(action externalAction) content=content}}`);
+  this.$('input').trigger('focusout');
+});
+
+test('action onUserAction is send on change event', function(assert) {
+  assert.expect(1);
+  this.set('externalAction', () => {
+    assert.ok(true);
+  });
+  this.set('content', {label: 'label', value: 'value'});
+  this.render(hbs`{{fm-radio onUserInteraction=(action externalAction) content=content}}`);
+  this.$('input').change();
+});
+

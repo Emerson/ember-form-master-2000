@@ -1,14 +1,14 @@
-// import { moduleForComponent, test } from 'ember-qunit';
-// import hbs from 'htmlbars-inline-precompile';
+import { moduleForComponent, test } from 'ember-qunit';
+import hbs from 'htmlbars-inline-precompile';
 // import {initialize} from 'ember-form-master-2000/initializers/fm-initialize';
 //
-// moduleForComponent('fm-form', 'Integration | Component | fm-form', {
-//   integration: true,
+moduleForComponent('fm-form', 'Integration | Component | fm-form', {
+  integration: true,
 //   setup: function() {
 //     this.container.inject = this.container.injection;
 //     initialize(null, this.container);
 //   }
-// });
+});
 //
 // test('renders properly', function(assert) {
 //   this.render(hbs `{{#fm-form}}inside{{/fm-form}}`);
@@ -22,3 +22,15 @@
 //   assert.ok(this.$('form').hasClass('form-horizontal'), 'Has the form-horizontal class');
 //   assert.ok(!this.$('form').hasClass('form-vertical'), 'Does not have the default form-vertical class');
 // });
+
+test('form shows errors on submit', function(assert) {
+  this.set('errors', ['error message']);
+  this.render(hbs `
+    {{#fm-form}}
+      {{fm-field errors=errors}}
+    {{/fm-form}}
+  `);
+  assert.notOk(this.$('.form-group').hasClass('has-error'));
+  this.$('form').submit();
+  assert.ok(this.$('.form-group').hasClass('has-error'));
+});

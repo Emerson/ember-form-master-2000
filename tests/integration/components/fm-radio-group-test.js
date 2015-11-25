@@ -10,7 +10,7 @@ moduleForComponent('fm-radio-group', 'Integration | Component | fm-radio-group',
 //     initialize(null, this.container);
 //   }
 });
-//
+
 // test('renders properly', function(assert) {
 //   this.render(hbs `{{fm-radio-group}}`);
 //   assert.ok(this.$('.form-group').length = 1, 'fm-radio-group has the form-group class');
@@ -81,4 +81,28 @@ test('Option is removed if element is removed from content array', function(asse
     assert.equal(this.$('input').attr('value'), 'bar', 'Correct option is removed');
   });
   Ember.run.end();
+});
+
+test('errors are shown after user interaction but not before', function(assert) {
+  this.set('errors', ['error message']);
+  this.set('content', [{value: 'foo', label: 'foo'}]);
+  this.render(hbs `{{fm-radio-group errors=errors content=content}}`);
+  assert.ok(
+    this.$('.help-block').length === 0,
+    'error message is not shown before user interaction'
+  );
+  assert.notOk(
+    this.$('div').hasClass('has-error'),
+    'errorClass is not present before user interaction'
+  );
+
+  this.$('input').trigger('focusout');
+  assert.equal(
+    this.$('.help-block').text().trim(), 'error message',
+    'error message is shown after user interaction'
+  );
+  assert.ok(
+    this.$('div').hasClass('has-error'),
+    'errorClass is present after user interaction'
+  );
 });

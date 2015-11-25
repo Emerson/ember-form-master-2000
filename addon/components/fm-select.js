@@ -35,6 +35,7 @@ export default Ember.Component.extend({
 
   change: function() {
     this.send('change');
+    this.sendAction('onUserInteraction');
     // console.log('changing');
   },
 
@@ -63,6 +64,9 @@ export default Ember.Component.extend({
       const value = (path.length > 0)? Ember.get(selection, path) : selection;
       this.attrs.action(value);
     }
-  }
+  },
 
+  focusOut() {
+    this.sendAction('onUserInteraction');
+  }
 });

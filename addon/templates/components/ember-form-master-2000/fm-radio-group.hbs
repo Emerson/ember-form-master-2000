@@ -4,8 +4,10 @@
 
 {{#each content as |option|}}
 
-  {{fm-radio content=option}}
+  {{fm-radio content=option onUserInteraction='userInteraction' optionLabelPath=optionLabelPath optionValuePath=optionValuePath}}
 
 {{/each}}
 
-{{fm-errortext errors=errors}}
+{{#if showErrors}}
+  {{fm-errortext errors=errors}}
+{{/if}}
