@@ -88,3 +88,11 @@ test('action is passed down to select component', function(assert) {
 //   assert.equal(this.$('label').attr('for'), 'example-id');
 //   assert.equal(this.$('input').attr('id'), 'example-id');
 // });
+
+test('selection option label is updated when property changes', function(assert) {
+  this.set('content', [{label: 'foo', value: 'foo'}]);
+  this.render(hbs `{{fm-field type='select' content=content optionLabelPath='label'}}`);
+  assert.equal(this.$('option').text().trim(), 'foo');
+  this.set('content.0.label', 'bar');
+  assert.equal(this.$('option').text().trim(), 'bar');
+});
