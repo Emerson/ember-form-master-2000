@@ -20,6 +20,6 @@ export default Ember.Component.extend({
   focusOut() {
     this.sendAction('onUserInteraction');
   },
-  optionLabelPath: Ember.computed.readOnly('parentView.optionLabelPath'),
-  optionValuePath: Ember.computed.readOnly('parentView.optionValuePath')
+  optionLabelPath: 'label',
+  optionValuePath: 'value'
 });

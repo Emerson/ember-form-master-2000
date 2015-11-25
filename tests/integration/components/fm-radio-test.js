@@ -42,7 +42,8 @@ test('action onUserAction is send on focus out event', function(assert) {
   this.set('externalAction', () => {
     assert.ok(true);
   });
-  this.render(hbs`{{fm-radio onUserInteraction=(action externalAction)}}`);
+  this.set('content', {label: 'label', value: 'value'});
+  this.render(hbs`{{fm-radio onUserInteraction=(action externalAction) content=content}}`);
   this.$('input').trigger('focusout');
 });
 
@@ -51,7 +52,8 @@ test('action onUserAction is send on change event', function(assert) {
   this.set('externalAction', () => {
     assert.ok(true);
   });
-  this.render(hbs`{{fm-radio onUserInteraction=(action externalAction)}}`);
+  this.set('content', {label: 'label', value: 'value'});
+  this.render(hbs`{{fm-radio onUserInteraction=(action externalAction) content=content}}`);
   this.$('input').change();
 });
 
