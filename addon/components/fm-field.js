@@ -73,8 +73,9 @@ export default Ember.Component.extend({
       this.set('shouldShowErrors', true);
     }
   },
-
-  shouldShowErrors: false,
+  shouldShowErrors: Ember.computed('fmConfig.showErrorsByDefault', function() {
+    return this.get('fmConfig.showErrorsByDefault');
+  }),
   showErrors: Ember.computed('shouldShowErrors', 'errors', function() {
     return this.get('shouldShowErrors') && !Ember.isEmpty(this.get('errors'));
   })
