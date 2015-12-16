@@ -9,7 +9,7 @@ export default Ember.Component.extend({
     var errors = this.get('errors');
     var error = null;
     if(Ember.isArray(errors) && errors.length > 0) {
-      error = errors[0];
+      error = errors[0].message;
     }
     if(errors && typeof errors === 'object' && errors.message) {
       error = errors.message;
