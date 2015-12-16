@@ -4,11 +4,9 @@
   </option>
 {{/if}}
 
-{{optionValuePath}} / {{optionLabelPath}}
-
 {{#each content key="@identity" as |item|}}
-  <option value="{{get item optionValuePath}}"
-          selected={{is-equal (get item optionValuePath) value}}>
+  <option value="{{if optionValuePath (get item optionValuePath) item}}"
+          selected={{is-equal (if optionValuePath (get item optionValuePath) item) value}}>
     {{get item optionLabelPath}}
   </option>
 {{/each}}
