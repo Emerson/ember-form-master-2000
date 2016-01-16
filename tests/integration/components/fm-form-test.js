@@ -1,13 +1,16 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import fmConfig from 'ember-form-master-2000/services/fm-config';
 // import {initialize} from 'ember-form-master-2000/initializers/fm-initialize';
 //
 moduleForComponent('fm-form', 'Integration | Component | fm-form', {
   integration: true,
-//   setup: function() {
+   setup: function() {
+     this.register('service:fm-config', fmConfig);
+     this.inject.service('fm-config', { as: 'config' });
 //     this.container.inject = this.container.injection;
 //     initialize(null, this.container);
-//   }
+   }
 });
 //
 // test('renders properly', function(assert) {
@@ -24,6 +27,7 @@ moduleForComponent('fm-form', 'Integration | Component | fm-form', {
 // });
 
 test('form shows errors on submit', function(assert) {
+  this.set('config.showErrorsByDefault', false);
   this.set('errors', ['error message']);
   this.render(hbs `
     {{#fm-form}}
