@@ -44,6 +44,19 @@
    assert.equal(this.$('option:last').attr('value'), 'goodbye');
  });
 
+ test('entire object is set as value when optionValuePath is empty string', function(assert) {
+   const obj1 = Ember.Object.create({text: 'hi', itemValue: 'hello'});
+   const obj2 = Ember.Object.create({text: 'bye', itemValue: 'goodbye'});
+   this.set('content', Ember.A([obj1, obj2]));
+   this.set('optionLabelPath', 'text');
+   this.set('optionValuePath', '');
+   this.render(hbs `{{fm-select content=content optionLabelPath=optionLabelPath optionValuePath=optionValuePath}}`);
+   assert.equal(this.$('option:first').text().trim(), 'hi');
+   assert.equal(this.$('option:last').text().trim(), 'bye');
+   assert.equal(this.$('option:first').attr('value'), obj1.toString());
+   assert.equal(this.$('option:last').attr('value'), obj2.toString());
+ });
+
  test('fm-select calls `action` with newly chosen value', function(assert) {
    this.set('content', Ember.A([
      {label: 'one', value: 1},
