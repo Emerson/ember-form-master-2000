@@ -25,7 +25,7 @@ moduleForComponent('fm-checkbox', 'Integration | Component | fm-checkbox', {
 //   assert.equal(this.$('label').text().trim(), 'This is the label', 'the fm-checkbox label matches');
 // });
 
-test('errors are shown after user interaction but not before', function(assert) {
+test('errors are shown after user interaction but not before if fmConfig.showErrorsByDefault is false', function(assert) {
   this.set('errors', ['error message']);
   this.render(hbs `{{fm-checkbox errors=errors}}`);
   assert.ok(

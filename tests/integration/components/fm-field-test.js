@@ -1,13 +1,16 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
+import fmConfig from 'ember-form-master-2000/services/fm-config';
 // import {initialize} from 'ember-form-master-2000/initializers/fm-initialize';
 
 moduleForComponent('fm-field', 'Integration | Component | fm-field', {
   integration: true,
   setup: function() {
-    this.container.inject = this.container.injection;
+    // this.container.inject = this.container.injection;
     // initialize(null, this.container);
+    this.register('service:fm-config', fmConfig);
+    this.inject.service('fm-config', { as: 'config'});
   }
 });
 
@@ -97,7 +100,8 @@ test('selection option label is updated when property changes', function(assert)
   assert.equal(this.$('option').text().trim(), 'bar');
 });
 
-test('errors are not shown after user interaction but not before', function(assert) {
+test('errors are shown after user interaction but not before', function(assert) {
+  this.set('config.showErrorsByDefault', false);
   this.set('errors', ['error message']);
   this.render(hbs `{{fm-field errors=errors}}`);
   assert.ok(
@@ -124,7 +128,8 @@ test('errors are not shown after user interaction but not before', function(asse
   );
 });
 
-test('errors are not shown after user interaction but not before (textarea)', function(assert) {
+test('errors are shown after user interaction but not before (textarea)', function(assert) {
+  this.set('config.showErrorsByDefault', false);
   this.set('errors', ['error message']);
   this.render(hbs `{{fm-field type='textarea' errors=errors}}`);
   assert.ok(
@@ -151,7 +156,8 @@ test('errors are not shown after user interaction but not before (textarea)', fu
   );
 });
 
-test('errors are not shown after user interaction but not before (select)', function(assert) {
+test('errors are shown after user interaction but not before (select)', function(assert) {
+  this.set('config.showErrorsByDefault', false);
   this.set('errors', ['error message']);
   this.render(hbs `{{fm-field type='select' errors=errors}}`);
   assert.ok(
