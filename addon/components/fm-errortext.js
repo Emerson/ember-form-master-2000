@@ -1,14 +1,16 @@
 import Ember from 'ember';
 import layout from '../templates/components/ember-form-master-2000/fm-errortext';
 
+const {computed, isArray} = Ember;
+
 export default Ember.Component.extend({
   layout: layout,
   tagName: 'span',
   classNameBindings: 'errortextClass',
-  error: Ember.computed('errors', function() {
-    var errors = this.get('errors');
+  error: computed('errors', function() {
+    const errors = this.get('errors');
     var error = null;
-    if(Ember.isArray(errors) && errors.length > 0) {
+    if(isArray(errors) && errors.length > 0) {
       error = errors[0];
     }
     if(errors && typeof errors === 'object' && errors.message) {

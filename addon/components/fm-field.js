@@ -1,49 +1,58 @@
 import Ember from 'ember';
 import layout from '../templates/components/ember-form-master-2000/fm-field';
 
+const {computed, inject} = Ember;
+const {reads} = computed;
+
 export default Ember.Component.extend({
-  layout: layout,
+  layout,
   value: null,
 
-  fmConfig: Ember.inject.service('fm-config'),
+  fmConfig: inject.service('fm-config'),
 
-  inputClass: Ember.computed.reads('fmConfig.inputClass'),
-  labelClass: Ember.computed.reads('fmConfig.labelClass'),
-  textareaClass: Ember.computed.reads('fmConfig.textareaClass'),
-  wrapperClass: Ember.computed.reads('fmConfig.wrapperClass'),
+  inputClass: reads('fmConfig.inputClass'),
+  labelClass: reads('fmConfig.labelClass'),
+  textareaClass: reads('fmConfig.textareaClass'),
+  wrapperClass: reads('fmConfig.wrapperClass'),
 
-  init: function() {
+  init() {
     if(!this.get('optionValuePath')) {
       this.set('optionValuePath', 'content.value');
     }
     if(!this.get('optionLabelPath')) {
       this.set('optionLabelPath', 'content.label');
     }
-    var dataAttributes = Object.keys(this.get('attrs')).filter(function(attr) {
-      return /data-/.test(attr);
-    });
+    const dataAttributes = Object.keys(this.get('attrs'))
+      .filter(attr => /data-/.test(attr));
+
     this.set('dataAttributes', dataAttributes);
 
     this._super(arguments);
   },
+
   placeholder: null,
   label: null,
   classNameBindings: ['wrapperClass', 'errorClass'],
-  errorClass: Ember.computed('showErrors', 'fmConfig.errorClass', function() {
+
+  errorClass: computed('showErrors', 'fmConfig.errorClass', function() {
     if (this.get('showErrors')) {
       return this.get('fmConfig.errorClass');
     }
   }),
-  isSelect: Ember.computed('type', function() {
+
+  isSelect: computed('type', function() {
     return this.get('type') === 'select';
   }),
-  isTextarea: Ember.computed('type', function() {
+
+  isTextarea: computed('type', function() {
     return this.get('type') === 'textarea';
   }),
-  isBasicInput: Ember.computed('type', function() {
+
+  isBasicInput: computed('type', function() {
     return (!this.get('isSelect') && !this.get('isTextarea'));
   }),
-  forAttribute: Ember.computed('label', 'inputId', function() {
+
+  forAttribute: computed('label', 'inputId', function() {
     if(this.get('inputId')) {
       return this.generateSafeId(this.get('inputId'));
     }
@@ -51,8 +60,9 @@ export default Ember.Component.extend({
       return this.generateSafeId(this.get('label'));
     }
   }),
-  generateSafeId: function(id) {
-    var tmp = document.createElement("DIV");
+
+  generateSafeId(id) {
+    const tmp = document.createElement("DIV");
     tmp.innerHTML = id;
     id = tmp.textContent || tmp.innerText || "";
     id = id.replace(/[\.,\/#!$%\^&\*;:{}=\`'"~()]/g,"");
@@ -73,10 +83,10 @@ export default Ember.Component.extend({
       this.set('shouldShowErrors', true);
     }
   },
-  shouldShowErrors: Ember.computed('fmConfig.showErrorsByDefault', function() {
+  shouldShowErrors: computed('fmConfig.showErrorsByDefault', function() {
     return this.get('fmConfig.showErrorsByDefault');
   }),
-  showErrors: Ember.computed('shouldShowErrors', 'errors', function() {
-    return this.get('shouldShowErrors') && !Ember.isEmpty(this.get('errors'));
+  showErrors: computed('shouldShowErrors', 'errors', function() {
+    return this.get('shouldShowErrors') && !isEmpty(this.get('errors'));
   })
 });

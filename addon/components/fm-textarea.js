@@ -6,9 +6,10 @@ export default Ember.TextArea.extend(DataAttributesSupport, {
     this.sendAction('onUserInteraction');
   },
 
-  init: function() {
-    if(this.get('parentView.forAttribute')) {
-      this.set('elementId', this.get('parentView.forAttribute'));
+  init() {
+    const forAttr = this.get('parentView.forAttribute');
+    if(!!forAttr) {
+      this.set('elementId', forAttr);
     }
     this._super(arguments);
     this.setDataAttributes();

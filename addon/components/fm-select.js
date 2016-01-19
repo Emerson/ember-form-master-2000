@@ -17,7 +17,7 @@ export default Ember.Component.extend({
   // leaking changes to it via a 2-way binding
   _selection: Ember.computed.reads('selection'),
 
-  init: function() {
+  init() {
     this._super(arguments);
 
     if(this.get('parentView.forAttribute')) {
@@ -33,13 +33,13 @@ export default Ember.Component.extend({
     }
   },
 
-  change: function() {
+  change() {
     this.send('change');
     this.sendAction('onUserInteraction');
     // console.log('changing');
   },
 
-  didInsertElement: function() {
+  didInsertElement() {
     if(this.get('parentView.forAttribute')) {
     }
   },
