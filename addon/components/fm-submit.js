@@ -8,6 +8,7 @@ export default Ember.Component.extend({
   init: function() {
     this._super(this);
   },
+  inputWrapperClass: Ember.computed.reads('fmConfig.inputWrapperClass'),
   submitButtonClass: Ember.computed.reads('fmConfig.submitButtonClass'),
   wrapperClass: Ember.computed.reads('fmConfig.wrapperClass'),
   tagName: 'div'

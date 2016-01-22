@@ -1,10 +1,12 @@
-<button
-  value={{value}}
-  disabled={{disabled}}
-  class='{{submitButtonClass}}'
-  type="submit">
-  {{#if value}}
-    {{value}}
-  {{/if}}
-  {{yield}}
-</button>
+<div class={{inputWrapperClass}}>
+  <button
+    value={{value}}
+    disabled={{disabled}}
+    class='{{submitButtonClass}}'
+    type="submit">
+    {{#if value}}
+      {{value}}
+    {{/if}}
+    {{yield}}
+  </button>
+</div>

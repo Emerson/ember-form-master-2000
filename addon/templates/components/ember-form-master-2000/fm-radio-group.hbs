@@ -2,12 +2,14 @@
   <label class='{{labelClass}}'>{{label}}</label>
 {{/if}}
 
-{{#each content as |option|}}
+<div class={{inputWrapperClass}}>
+  {{#each content as |option|}}
 
-  {{fm-radio content=option onUserInteraction='userInteraction' optionLabelPath=optionLabelPath optionValuePath=optionValuePath}}
+    {{fm-radio content=option onUserInteraction='userInteraction' optionLabelPath=optionLabelPath optionValuePath=optionValuePath}}
 
-{{/each}}
+  {{/each}}
 
-{{#if showErrors}}
-  {{fm-errortext errors=errors}}
-{{/if}}
+  {{#if showErrors}}
+    {{fm-errortext errors=errors}}
+  {{/if}}
+</div>
