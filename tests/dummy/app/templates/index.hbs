@@ -6,11 +6,13 @@
       {{fm-field label='First Name'
         value=model.exampleModel.first_name
         errors=model.exampleModel.errors.first_name
+        placeholder='Foo'
       }}
 
       {{fm-field label='Last Name'
         value=model.exampleModel.last_name
         errors=model.exampleModel.errors.last_name
+        placeholder='Bar'
       }}
 
       {{fm-field
@@ -19,6 +21,7 @@
         value=model.exampleModel.essay
         errors=model.exampleModel.errors.essay
         rows='6'
+        helptext='Make sure its good!'
         data-test='master-2000'
       }}
 
@@ -34,13 +37,15 @@
         errors=model.exampleModel.errors.language
       }}
 
-      {{fm-checkbox
+      {{fm-field
+        widget='checkbox'
         label='Are you awesome?'
-        checked=model.exampleModel.isAwesome
+        value=model.exampleModel.isAwesome
         errors=model.exampleModel.errors.isAwesome
       }}
 
-      {{fm-radio-group
+      {{fm-field
+        widget='radio-group'
         label='Choose the best language'
         name='bestLanguage'
         content=model.radioOptions

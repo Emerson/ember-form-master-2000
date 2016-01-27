@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
+  widgetBasePath: 'fm-widgets/',
+  displayBasePath: 'fm-displays/',
   submitButtonClass: 'btn btn-primary',
   errorClass: 'has-error',
   wrapperClass: 'form-group',
@@ -10,7 +12,6 @@ export default Ember.Service.extend({
   selectClass: 'form-control',
   formClass: 'form-vertical',
   checkboxWrapperClass: 'form-group',
-  radioGroupWrapperClass: 'form-group',
   radioClass: 'radio',
   helptextClass: 'help-block',
   errortextClass: 'help-block',

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/ember-form-master-2000/fm-submit';
+import layout from '../templates/components/fm-submit';
 
 const {inject, computed} = Ember;
 const {reads} = computed;

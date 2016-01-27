@@ -43,10 +43,10 @@ test('type="select" renders a select', function(assert) {
 });
 
 test('action is passed down to select component', function(assert) {
-  //assert.expect(1);
+  assert.expect(1);
   this.set('assertCalled', () => assert.ok(true));
   this.set('content', Ember.A(['something',]));
-  this.render(hbs `{{fm-field type="select" content=content action=(action assertCalled)}}`);
+  this.render(hbs `{{fm-field type='select' content=content action=(action assertCalled)}}`);
   this.$('select').change();
 });
 
@@ -102,7 +102,7 @@ test('selection option label is updated when property changes', function(assert)
 
 test('errors are shown after user interaction but not before', function(assert) {
   this.set('config.showErrorsByDefault', false);
-  this.set('errors', ['error message']);
+  this.set('errors', Ember.A(['error message']));
   this.render(hbs `{{fm-field errors=errors}}`);
   assert.ok(
     this.$('.help-block').length === 0,
@@ -130,7 +130,7 @@ test('errors are shown after user interaction but not before', function(assert) 
 
 test('errors are shown after user interaction but not before (textarea)', function(assert) {
   this.set('config.showErrorsByDefault', false);
-  this.set('errors', ['error message']);
+  this.set('errors', Ember.A(['error message']));
   this.render(hbs `{{fm-field type='textarea' errors=errors}}`);
   assert.ok(
     this.$('.help-block').length === 0,
@@ -158,7 +158,7 @@ test('errors are shown after user interaction but not before (textarea)', functi
 
 test('errors are shown after user interaction but not before (select)', function(assert) {
   this.set('config.showErrorsByDefault', false);
-  this.set('errors', ['error message']);
+  this.set('errors', Ember.A(['error message']));
   this.render(hbs `{{fm-field type='select' errors=errors}}`);
   assert.ok(
     this.$('.help-block').length === 0,
@@ -181,5 +181,58 @@ test('errors are shown after user interaction but not before (select)', function
   assert.notOk(
     this.$('div').hasClass('has-error'),
     'errorClass is removed when errors empty got empty'
+  );
+});
+
+test('errors are shown after user interaction but not before (checkbox)', function(assert) {
+  this.set('config.showErrorsByDefault', false);
+  this.set('errors', Ember.A(['error message']));
+  this.render(hbs `{{fm-field widget='checkbox' errors=errors}}`);
+  assert.ok(
+    this.$('.help-block').length === 0,
+    'error message is not shown before user interaction'
+  );
+  assert.notOk(
+    this.$('div').hasClass('has-error'),
+    'there is no errorClass before user interaction'
+  );
+  this.$('input').trigger('focusout');
+  assert.equal(
+    this.$('.help-block').text().trim(), 'error message',
+    'error message is shown after user interaction'
+  );
+  assert.ok(
+    this.$('div').hasClass('has-error'),
+    'errorClass is added after user interaction'
+  );
+  this.set('errors', []);
+  assert.notOk(
+    this.$('div').hasClass('has-error'),
+    'errorClass is removed when errors array got empty'
+  );
+});
+
+test('errors are shown after user interaction but not before (radio-group)', function(assert) {
+  this.set('config.showErrorsByDefault', false);
+  this.set('errors', Ember.A(['error message']));
+  this.set('content', [{value: 'foo', label: 'foo'}]);
+  this.render(hbs `{{fm-field widget='radio-group' errors=errors content=content}}`);
+  assert.ok(
+    this.$('.help-block').length === 0,
+    'error message is not shown before user interaction'
+  );
+  assert.notOk(
+    this.$('div').hasClass('has-error'),
+    'errorClass is not present before user interaction'
+  );
+
+  this.$('input').trigger('focusout');
+  assert.equal(
+    this.$('.help-block').text().trim(), 'error message',
+    'error message is shown after user interaction'
+  );
+  assert.ok(
+    this.$('div').hasClass('has-error'),
+    'errorClass is present after user interaction'
   );
 });

@@ -32,12 +32,12 @@ export default Ember.Route.extend({
         model.set('errors', null);
       }else{
         var errors = {
-          first_name: ['That first name is wrong'],
-          last_name: ['That last name is silly'],
-          language: ['Please choose a better language'],
-          isAwesome: ['You must be awesome to submit this form'],
-          bestLanguage: ['Wrong, Cold Fusion is the best language'],
-          essay: ['This essay is not very good']
+          first_name: Ember.A(['That first name is wrong']),
+          last_name: Ember.A(['That last name is silly']),
+          language: Ember.A(['Please choose a better language']),
+          isAwesome: Ember.A(['You must be awesome to submit this form']),
+          bestLanguage: Ember.A(['Wrong, Cold Fusion is the best language']),
+          essay: Ember.A(['This essay is not very good'])
         };
         model.set('errors', errors);
       }

@@ -1,27 +1,71 @@
 import Ember from 'ember';
-import layout from '../templates/components/ember-form-master-2000/fm-field';
+import layout from '../templates/components/fm-field';
 
 const {computed, inject} = Ember;
-const {reads} = computed;
+const {alias} = computed;
 
+const WIDGET_ATTR_ALIASES = [
+  'placeholder', 'maxlength', 'content', 'optionValuePath', 'name', 'tabindex',
+  'optionLabelPath', 'prompt', 'rows', 'cols', 'spellcheck', 'disabled', 'targetValue'
+];
+
+const WidgetAttrs = Ember.Object.extend({
+  field: null,
+
+  /**
+   * Aliases properties on the `fm-field` component which should be
+   * passed into the field's widget as `widgetAttrs`.
+   *
+   * With Ember 2.3 adoption this should be phased out so that users
+   * pass `widgetAttrs` in directly using the `hash` helper.
+   *
+   * @method init
+   * @return {void}
+   **/
+  init(){
+    this._super();
+    WIDGET_ATTR_ALIASES.forEach(field => {
+      Ember.defineProperty(this, field, alias('field.' + field));
+    });
+  },
+});
+
+/**
+ * @class FmField
+ *
+ * `fm-field` controls the functionality of the form field.  It should not
+ * do anything relating to the style or appearance of the field.  That is the
+ * responsibility of the `display` component.
+ **/
 export default Ember.Component.extend({
   layout,
+  tagName: '',
+
+  display: computed('widget', function(){
+    const widget = this.get('widget');
+    if (widget === 'checkbox'){
+      return 'checkbox';
+    } else if (widget === 'radio'){
+      return 'radio';
+    } else if (widget === 'radio-group'){
+      return 'radio-group';
+    } else {
+      return 'default';
+    }
+  }),
+
+  displayName: computed(function() {
+    return this.get('fmConfig.displayBasePath') + this.get('display');
+  }),
+
+  placeholder: null,
+  label: null,
+  helptext: null,
   value: null,
 
   fmConfig: inject.service('fm-config'),
 
-  inputClass: reads('fmConfig.inputClass'),
-  labelClass: reads('fmConfig.labelClass'),
-  textareaClass: reads('fmConfig.textareaClass'),
-  wrapperClass: reads('fmConfig.wrapperClass'),
-
   init() {
-    if(!this.get('optionValuePath')) {
-      this.set('optionValuePath', 'content.value');
-    }
-    if(!this.get('optionLabelPath')) {
-      this.set('optionLabelPath', 'content.label');
-    }
     const dataAttributes = Object.keys(this.get('attrs'))
       .filter(attr => /data-/.test(attr));
 
@@ -30,26 +74,19 @@ export default Ember.Component.extend({
     this._super(arguments);
   },
 
-  placeholder: null,
-  label: null,
-  classNameBindings: ['wrapperClass', 'errorClass'],
-
-  errorClass: computed('showErrors', 'fmConfig.errorClass', function() {
-    if (this.get('showErrors')) {
-      return this.get('fmConfig.errorClass');
-    }
+  widgetAttrs: computed(function(){
+    // hack to support legacy apis
+    return WidgetAttrs.create({ field: this });
   }),
 
-  isSelect: computed('type', function() {
-    return this.get('type') === 'select';
+  widget: computed('type', function(){
+    // backwards compatibility for legacy `type` property
+    const type = this.get('type');
+    return  !!type ? type : 'input';
   }),
 
-  isTextarea: computed('type', function() {
-    return this.get('type') === 'textarea';
-  }),
-
-  isBasicInput: computed('type', function() {
-    return (!this.get('isSelect') && !this.get('isTextarea'));
+  widgetName: computed('widget', function(){
+    return this.get('fmConfig.widgetBasePath') + this.get('widget');
   }),
 
   forAttribute: computed('label', 'inputId', function() {
@@ -70,23 +107,20 @@ export default Ember.Component.extend({
     return id;
   },
 
-  actions: {
-    selectAction(value){
-      if (this.attrs.action && typeof this.attrs.action === 'function'){
-        this.attrs.action(value);
-      } else {
-        this.set('value', value);
-      }
-    },
-
-    userInteraction() {
-      this.set('shouldShowErrors', true);
-    }
-  },
   shouldShowErrors: computed('fmConfig.showErrorsByDefault', function() {
     return this.get('fmConfig.showErrorsByDefault');
   }),
-  showErrors: computed('shouldShowErrors', 'errors', function() {
-    return this.get('shouldShowErrors') && !isEmpty(this.get('errors'));
-  })
+
+  visibleErrors: computed('shouldShowErrors', 'errors.[]', function(){
+    return !!this.get('shouldShowErrors') ? this.get('errors') : [];
+  }),
+
+  actions: {
+
+    userInteraction() {
+      this.set('shouldShowErrors', true);
+      this.sendAction('onUserInteraction');
+    }
+
+  }
 });
