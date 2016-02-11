@@ -19,10 +19,12 @@ export default Ember.Component.extend({
     if(!this.get('optionLabelPath')) {
       this.set('optionLabelPath', 'content.label');
     }
-    var dataAttributes = Object.keys(this.get('attrs')).filter(function(attr) {
-      return /data-/.test(attr);
-    });
-    this.set('dataAttributes', dataAttributes);
+    if(!Ember.isEmpty(this.get('attrs'))) {
+      var dataAttributes = Object.keys(this.get('attrs')).filter(function(attr) {
+        return /data-/.test(attr);
+      });
+      this.set('dataAttributes', dataAttributes);
+    }
 
     this._super(arguments);
   },
@@ -52,12 +54,10 @@ export default Ember.Component.extend({
     }
   }),
   generateSafeId: function(id) {
-    var tmp = document.createElement("DIV");
-    tmp.innerHTML = id;
-    id = tmp.textContent || tmp.innerText || "";
-    id = id.replace(/[\.,\/#!$%\^&\*;:{}=\`'"~()]/g,"");
-    id = id.replace(/\s/g, "-");
-    return id;
+    // only allow ASCII letters and digits, '_', '-', '.'
+    // as recommended in MDN
+    // https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id
+    return id.replace(/\s/g, '-').replace(/[^\w-.]/g, '');
   },
 
   actions: {
