@@ -183,3 +183,54 @@ test('errors are shown after user interaction but not before (select)', function
     'errorClass is removed when errors empty got empty'
   );
 });
+
+test('inputId property is assigned as id to input and for on label and drops non valid characters', function(assert) {
+  const id = 'az_AZ-01.aZ';
+  this.set('inputId', id);
+  this.set('label', 'some content');
+  this.render(hbs `{{fm-field inputId=inputId label=label}}`);
+  assert.equal(
+    this.$('input').attr('id'),
+    id,
+    'inputId set as id of input element'
+  );
+  assert.equal(
+    this.$('label').attr('for'),
+    id,
+    'inputId set as for attr of label element'
+  );
+});
+
+test('label is used as id if inputId is not set', function(assert) {
+  const id = 'az_AZ-01.aZ';
+  this.set('label', id);
+  this.render(hbs `{{fm-field label=label}}`);
+  assert.equal(
+    this.$('input').attr('id'),
+    id,
+    'normalized label text used as id of input element'
+  );
+  assert.equal(
+    this.$('label').attr('for'),
+    id,
+    'normalized label text used as for attr of label element'
+  );
+});
+
+
+test('label text used as id is normalized', function(assert) {
+  const label = 'A custom label?';
+  const id = 'A-custom-label';
+  this.set('label', label);
+  this.render(hbs `{{fm-field label=label}}`);
+  assert.equal(
+    this.$('input').attr('id'),
+    id,
+    'normalized label text used as id of input element'
+  );
+  assert.equal(
+    this.$('label').attr('for'),
+    id,
+    'normalized label text used as for attr of label element'
+  );
+});
