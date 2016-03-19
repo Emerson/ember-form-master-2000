@@ -8,6 +8,8 @@ export default Ember.TextArea.extend(DataAttributesSupport, {
   focusOut() {
     this.sendAction('onUserInteraction');
   },
+  rows: oneWay('widgetAttrs.rows'),
+  cols: oneWay('widgetAttrs.cols'),
 
   init() {
     const forAttr = this.get('parentView.forAttribute');
