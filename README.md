@@ -40,20 +40,35 @@ Ember.  The library comes out of the box with the standard form components
 you would expect and it is easy to add more custom components as
 needed.
 
-FM-2000 primary interaciton point is the `fm-field` component.  This is
-used to render a field to the page.  Even when you are making custom
+FM2000's primary entry point is the `fm-field` component.  This is
+used to render a form field to the page.  Even when you are making custom
 components you will still use `fm-field` to render them.
 
 Every time a field is rendered, it renders a `display` and a `widget`.
 `displays` are responible for the layout and css formatting of your form
-field.  `widgets` are responsible for encapulsating the actual component
-that is manipulated.  To learn more about creating custom `displays` and
-`widgets` see the **Extending Form Master** below.
+field.  For example, a using different `display`s you could opt to
+render a field using horizontal form style or a stacked form style.
+`widgets` are responsible for encapulsating the actual component
+that is manipulated.  There are built in widgets for things like
+`input` and `textarea` but you could add a custom date picker widget or
+a fancy autocomplete widget.  To learn more about creating custom `displays` 
+and `widgets` see the **Extending Form Master** below.
+
+#### A Brief Not on What FM2000 is Not
+
+FM2000 is all about rendering interactive forms in a standardized
+way with a concise and extensible syntax.  FM2000 is *not* about doing
+form validation or managing CRUD logic.
 
 ### Built-In Components
 
-The following is the basic API for Ember 2.3+.  For Ember 2.0-2.2, just
-specifiy `widgetAttrs` directly on the the component.
+The following is the basic API for Ember 2.3+.  The `hash` helper that
+is used below is not present in Ember 2.0-2.2. We are currently still supporting
+setting the widgetAttrs values for the default widgets directly on the
+`fm-field` component.  You can look at aso for those versions just
+specifiy `widgetAttrs` directly on the the component.  The supported
+attributes for this are listed in the `WIDGET_ATTR_ALIASES` constant in
+`addon/components/fm-field.js`.
 
 ```handlebars
 {{#fm-form action='submit'}}
@@ -212,7 +227,7 @@ This widget will be included wherever you place the `yield` statement.
 The `inputClasses` attribute is passed to the `yield` statement to
 specify classes that should be applied to the widget itself.
 
-You can now use this dplsay anywhere in your application by simply specifying
+You can now use this display anywhere in your application by simply specifying
 the layout when creating an `fm-field`:
 
 ```
@@ -234,7 +249,10 @@ The best place to start for creating a display is to look at
 
 ### Errors
 
-Displaying validation errors is a core requirement for any form library. To keep things simple, you must explicitly tell fields where to look for errors. When provided an array of errors, `fm-field` will display the first error.
+Displaying validation errors is a core requirement for any form library.
+To keep things simple, you must explicitly tell fm-fields what errors
+should be displayed.  When provided an array of errors,
+`fm-field` will display the first error.
 
 ```
 var model = Ember.Object.create();

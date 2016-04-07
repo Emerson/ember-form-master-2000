@@ -5,6 +5,9 @@ const {oneWay} = Ember.computed;
 
 export default Ember.TextField.extend(DataAttributesSupport, {
   placeholder: oneWay('widgetAttrs.placeholder'),
+  type: Ember.computed('widgetAttrs.type', function(){
+    return this.get('widgetAttrs.type') || 'text';
+  }),
 
   focusOut() {
     this.sendAction('onUserInteraction');
