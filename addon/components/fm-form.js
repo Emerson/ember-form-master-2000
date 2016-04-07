@@ -1,19 +1,23 @@
 import Ember from 'ember';
 
+const {inject, computed} = Ember;
+const {reads} = computed;
+
 export default Ember.Component.extend({
-  init: function() {
+  init() {
     this._super();
   },
   classNameBindings: ['formClass'],
-  formClass: Ember.computed.reads('fmConfig.formClass'),
-  fmConfig: Ember.inject.service('fm-config'),
+  formClass: reads('fmConfig.formClass'),
+  fmConfig: inject.service('fm-config'),
   tagName: 'form',
   'for': null,
-  submit: function(e) {
+
+  submit(e) {
     e.preventDefault();
-    this.get('childViews').forEach((chieldView) => {
-        if (chieldView.get('shouldShowErrors') === false) {
-        chieldView.set('shouldShowErrors', true);
+    this.get('childViews').forEach(childView => {
+      if (childView.get('shouldShowErrors') === false) {
+        childView.set('shouldShowErrors', true);
       }
     });
     this.sendAction('action', this.get('for'));

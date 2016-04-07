@@ -1,49 +1,91 @@
 import Ember from 'ember';
-import layout from '../templates/components/ember-form-master-2000/fm-field';
+import layout from '../templates/components/fm-field';
 
+const {computed, inject} = Ember;
+const {alias} = computed;
+
+const WIDGET_ATTR_ALIASES = [
+  'placeholder', 'maxlength', 'content', 'optionValuePath', 'name', 'tabindex',
+  'optionLabelPath', 'prompt', 'rows', 'cols', 'spellcheck', 'disabled', 'targetValue'
+];
+
+const WidgetAttrs = Ember.Object.extend({
+  field: null,
+
+  /**
+   * Aliases properties on the `fm-field` component which should be
+   * passed into the field's widget as `widgetAttrs`.
+   *
+   * With Ember 2.3 adoption this should be phased out so that users
+   * pass `widgetAttrs` in directly using the `hash` helper.
+   *
+   * @method init
+   * @return {void}
+   **/
+  init(){
+    this._super();
+    WIDGET_ATTR_ALIASES.forEach(field => {
+      Ember.defineProperty(this, field, alias('field.' + field));
+    });
+  },
+});
+
+/**
+ * @class FmField
+ *
+ * `fm-field` controls the functionality of the form field.  It should not
+ * do anything relating to the style or appearance of the field.  That is the
+ * responsibility of the `display` component.
+ **/
 export default Ember.Component.extend({
-  layout: layout,
+  layout,
+  tagName: '',
+
+  display: computed('widget', function(){
+    const widget = this.get('widget');
+    if (widget === 'checkbox'){
+      return 'checkbox';
+    } else if (widget === 'radio'){
+      return 'radio';
+    } else if (widget === 'radio-group'){
+      return 'radio-group';
+    } else {
+      return 'default';
+    }
+  }),
+
+  displayName: computed(function() {
+    return this.get('fmConfig.displayBasePath') + this.get('display');
+  }),
+
+  placeholder: null,
+  label: null,
+  helptext: null,
   value: null,
 
-  fmConfig: Ember.inject.service('fm-config'),
+  fmConfig: inject.service('fm-config'),
 
-  inputClass: Ember.computed.reads('fmConfig.inputClass'),
-  labelClass: Ember.computed.reads('fmConfig.labelClass'),
-  textareaClass: Ember.computed.reads('fmConfig.textareaClass'),
-  wrapperClass: Ember.computed.reads('fmConfig.wrapperClass'),
+  init() {
+    const dataAttributes = Object.keys(this.get('attrs'))
+      .filter(attr => /data-/.test(attr));
 
-  init: function() {
-    if(!this.get('optionValuePath')) {
-      this.set('optionValuePath', 'content.value');
-    }
-    if(!this.get('optionLabelPath')) {
-      this.set('optionLabelPath', 'content.label');
-    }
-    var dataAttributes = Object.keys(this.get('attrs')).filter(function(attr) {
-      return /data-/.test(attr);
-    });
     this.set('dataAttributes', dataAttributes);
 
     this._super(arguments);
   },
-  placeholder: null,
-  label: null,
-  classNameBindings: ['wrapperClass', 'errorClass'],
-  errorClass: Ember.computed('showErrors', 'fmConfig.errorClass', function() {
-    if (this.get('showErrors')) {
-      return this.get('fmConfig.errorClass');
-    }
+
+  widgetAttrs: computed(function(){
+    // hack to support legacy apis
+    return WidgetAttrs.create({ field: this });
   }),
-  isSelect: Ember.computed('type', function() {
-    return this.get('type') === 'select';
+
+  widget: 'input',
+
+  widgetName: computed('widget', function(){
+    return this.get('fmConfig.widgetBasePath') + this.get('widget');
   }),
-  isTextarea: Ember.computed('type', function() {
-    return this.get('type') === 'textarea';
-  }),
-  isBasicInput: Ember.computed('type', function() {
-    return (!this.get('isSelect') && !this.get('isTextarea'));
-  }),
-  forAttribute: Ember.computed('label', 'inputId', function() {
+
+  forAttribute: computed('label', 'inputId', function() {
     if(this.get('inputId')) {
       return this.generateSafeId(this.get('inputId'));
     }
@@ -51,8 +93,9 @@ export default Ember.Component.extend({
       return this.generateSafeId(this.get('label'));
     }
   }),
-  generateSafeId: function(id) {
-    var tmp = document.createElement("DIV");
+
+  generateSafeId(id) {
+    const tmp = document.createElement("DIV");
     tmp.innerHTML = id;
     id = tmp.textContent || tmp.innerText || "";
     id = id.replace(/[\.,\/#!$%\^&\*;:{}=\`'"~()]/g,"");
@@ -60,23 +103,20 @@ export default Ember.Component.extend({
     return id;
   },
 
+  shouldShowErrors: computed('fmConfig.showErrorsByDefault', function() {
+    return this.get('fmConfig.showErrorsByDefault');
+  }),
+
+  visibleErrors: computed('shouldShowErrors', 'errors.[]', function(){
+    return !!this.get('shouldShowErrors') ? this.get('errors') : [];
+  }),
+
   actions: {
-    selectAction(value){
-      if (this.attrs.action && typeof this.attrs.action === 'function'){
-        this.attrs.action(value);
-      } else {
-        this.set('value', value);
-      }
-    },
 
     userInteraction() {
       this.set('shouldShowErrors', true);
+      this.sendAction('onUserInteraction');
     }
-  },
-  shouldShowErrors: Ember.computed('fmConfig.showErrorsByDefault', function() {
-    return this.get('fmConfig.showErrorsByDefault');
-  }),
-  showErrors: Ember.computed('shouldShowErrors', 'errors', function() {
-    return this.get('shouldShowErrors') && !Ember.isEmpty(this.get('errors'));
-  })
+
+  }
 });

@@ -1,0 +1,12 @@
+{{#if widgetAttrs.prompt}}
+  <option disabled selected={{is-not value}}>
+    {{widgetAttrs.prompt}}
+  </option>
+{{/if}}
+
+{{#each widgetAttrs.content as |item|}}
+  <option value="{{if widgetAttrs.optionValuePath (get item widgetAttrs.optionValuePath) item}}"
+          selected={{is-equal (if widgetAttrs.optionValuePath (get item widgetAttrs.optionValuePath) item) value}}>
+    {{get item widgetAttrs.optionLabelPath}}
+  </option>
+{{/each}}

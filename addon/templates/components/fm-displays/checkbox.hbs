@@ -1,0 +1,14 @@
+<div class="{{styles.checkboxWrapperClass}} {{if visibleErrors.length styles.errorClass}} {{formGroupClass}}">
+  <div class="checkbox">
+    <label>
+      {{yield}}
+      {{label}}
+    </label>
+
+    {{#if visibleErrors.length}}
+      <span class="{{styles.errortextClass}}">
+        {{visibleErrors.firstObject}}
+      </span>
+    {{/if}}
+  </div>
+</div>

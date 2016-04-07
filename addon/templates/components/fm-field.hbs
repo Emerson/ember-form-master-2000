@@ -1,0 +1,18 @@
+{{#component displayName
+  label=label
+  helptext=helptext
+  forAttribute=forAttribute
+  visibleErrors=visibleErrors
+  formGroupClass=class
+  as |inputClasses|
+}}
+
+  {{component widgetName
+    value=value
+    action=action
+    onUserInteraction=(action 'userInteraction')
+    classNames=inputClasses
+    widgetAttrs=widgetAttrs
+  }}
+
+{{/component}}
