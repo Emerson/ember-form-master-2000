@@ -46,7 +46,7 @@ components you will still use `fm-field` to render them.
 
 Every time a field is rendered, it renders a `display` and a `widget`.
 `displays` are responible for the layout and css formatting of your form
-field.  For example, a using different `display`s you could opt to
+field.  For example, using different `display`s you could opt to
 render a field using horizontal form style or a stacked form style.
 `widgets` are responsible for encapulsating the actual component
 that is manipulated.  There are built in widgets for things like
@@ -54,18 +54,20 @@ that is manipulated.  There are built in widgets for things like
 a fancy autocomplete widget.  To learn more about creating custom `displays` 
 and `widgets` see the **Extending Form Master** below.
 
-#### A Brief Not on What FM2000 is Not
+#### Validation
 
-FM2000 is all about rendering interactive forms in a standardized
+Currently FM2000 is all about rendering interactive forms in a standardized
 way with a concise and extensible syntax.  FM2000 is *not* about doing
-form validation or managing CRUD logic.
+form validation or managing CRUD logic.  We may consider adding this
+functionality in the future but it will be as a separate layer from the
+existing components which are purely responsible for form display.
 
 ### Built-In Components
 
 The following is the basic API for Ember 2.3+.  The `hash` helper that
 is used below is not present in Ember 2.0-2.2. We are currently still supporting
 setting the widgetAttrs values for the default widgets directly on the
-`fm-field` component.  You can look at aso for those versions just
+`fm-field` component.  For those versions just
 specifiy `widgetAttrs` directly on the the component.  The supported
 attributes for this are listed in the `WIDGET_ATTR_ALIASES` constant in
 `addon/components/fm-field.js`.
@@ -73,42 +75,49 @@ attributes for this are listed in the `WIDGET_ATTR_ALIASES` constant in
 ```handlebars
 {{#fm-form action='submit'}}
 
-  {{fm-field
-    type='text'
-    value=model.first_name
-    errors=model.errors.first_name
-    label='First Name'}}
+  {{fm-field label='First Name'
+    value=model.exampleModel.first_name
+    errors=model.exampleModel.errors.first_name
+    placeholder='Foo'
+  }}
 
-  {{fm-field type='password' value=model.password}}
+  {{fm-field label='Last Name'
+    value=model.exampleModel.last_name
+    errors=model.exampleModel.errors.last_name
+    placeholder='Bar'
+  }}
+
+  {{fm-field
+    label='Write an Essay'
+    type='textarea'
+    value=model.exampleModel.essay
+    errors=model.exampleModel.errors.essay
+    rows='6'
+    helptext='Make sure its good!'
+    data-test='master-2000'
+  }}
 
   {{fm-field
     label='Choose Something'
     type='select'
-    widgetAttrs=(hash
-      content=model.selectOptions
-      optionValuePath='id'
-      optionLabelPath='label'
-      prompt='Select Something'
-    )
-    value=model.valueToSelect
+    content=model.selectOptions
+    optionValuePath='value'
+    optionLabelPath='label'
+    prompt='Select Something'
+    value=model.exampleModel.language
+    action=(action (mut model.exampleModel.language))
+    errors=model.exampleModel.errors.language
   }}
 
   {{fm-field
-    type='textarea'
-    label='Write an Essay'
-    value=model.essay
-    errors=model.errors.essay
-    widgetAttrs=(hash
-      rows='6'
-    )
-  }}
-
-  {{fm-checkbox
-    checked=model.exampleModel.isAwesome
+    widget='checkbox'
     label='Are you awesome?'
+    value=model.exampleModel.isAwesome
+    errors=model.exampleModel.errors.isAwesome
   }}
 
-  {{fm-radio-group
+  {{fm-field
+    widget='radio-group'
     label='Choose the best language'
     name='bestLanguage'
     content=model.radioOptions
@@ -118,7 +127,7 @@ attributes for this are listed in the `WIDGET_ATTR_ALIASES` constant in
     errors=model.exampleModel.errors.bestLanguage
   }}
 
-  {{fm-submit value='Create'}}
+  {{fm-submit value='Submit the Form' disabled=model.disableSubmit}}
 
 {{/fm-form}}
 ```
@@ -240,7 +249,7 @@ the layout when creating an `fm-field`:
 ```
 
 Note how we defer to `styles` property for class names where possible.
-This ties in the `fmConfig` service which provides easy configuration of
+This ties in the `fm-config` service which provides easy configuration of
 form classes on a global basis.
 
 The best place to start for creating a display is to look at
@@ -259,6 +268,16 @@ model.set('errors', Ember.Object.create({first_name: ['Required', 'Too short']})
 
 {{fm-field type='text' value=model.first_name errors=model.errors.first_name}}
 ```
+
+
+By default, `fm-field` displays any error that is included in the
+`errors` property.  If you do not want errors to be displayed until a
+`fm-field` has been manipulated for the first time, set the
+`showErrorsByDefault` property in the `fm-config` service to `false`.
+With this change, `fm-field` will only display errors when it has been
+notified by its widget that the widget has received user interaction.
+If you are using the `fm-form` wrapper component and `fm-submit` then
+clicking the `fm-submit` button will also cause errors to display.
 
 ### Minor Customizations
 
