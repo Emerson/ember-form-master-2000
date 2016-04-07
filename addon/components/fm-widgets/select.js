@@ -52,7 +52,6 @@ export default Ember.Component.extend({
       const value = (path.length > 0)? get(selection, path) : selection;
       // support using two way binding or data down/actions up
       if (typeof this.attrs.action === 'function'){
-        console.log('calling action');
         this.attrs.action(value);
       } else {
         this.attrs.value.update(value);

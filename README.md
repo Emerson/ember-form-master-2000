@@ -91,7 +91,6 @@ attributes for this are listed in the `WIDGET_ATTR_ALIASES` constant in
       prompt='Select Something'
     )
     value=model.valueToSelect
-    action=(action (mut model.valueToSelect))
   }}
 
   {{fm-field
