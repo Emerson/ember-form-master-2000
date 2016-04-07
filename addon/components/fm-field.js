@@ -79,11 +79,7 @@ export default Ember.Component.extend({
     return WidgetAttrs.create({ field: this });
   }),
 
-  widget: computed('type', function(){
-    // backwards compatibility for legacy `type` property
-    const type = this.get('type');
-    return  !!type ? type : 'input';
-  }),
+  widget: 'input',
 
   widgetName: computed('widget', function(){
     return this.get('fmConfig.widgetBasePath') + this.get('widget');
