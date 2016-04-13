@@ -158,3 +158,10 @@ test('sends action onUserAction on change event', function(assert) {
   this.render(hbs`{{fm-widgets/select value=value widgetAttrs=widgetAttrs onUserInteraction=(action externalAction)}}`);
   this.$('select').change();
 });
+
+test('supports undefined content in widgetAttrs', function(assert){
+  this.render(hbs`{{fm-widgets/select value=value widgetAttrs=(hash content=content optionValueLabel='label' optionValuePath='value')}}`);
+  assert.equal(this.$('option').length, 0);
+  this.set('content', [{label: 'one', value: 1}]);
+  assert.equal(this.$('option').length, 1);
+});

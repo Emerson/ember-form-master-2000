@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import layout from '../../templates/components/fm-widgets/select';
 
-const {get, getWithDefault, computed, inject} = Ember;
+const {set, get, getWithDefault, computed, inject} = Ember;
 const {reads} = computed;
 
 export default Ember.Component.extend({
@@ -22,7 +22,7 @@ export default Ember.Component.extend({
     }
 
     if(!wAttrs.content) {
-      wAttrs.set('content', []);
+      set(wAttrs, 'content', []);
     }
   },
 
