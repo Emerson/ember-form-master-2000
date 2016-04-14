@@ -281,7 +281,7 @@ clicking the `fm-submit` button will also cause errors to display.
 
 ### Minor Customizations
 
-If you need to make minor adjustments to classnames of the elements, you can easily override the default initializer with your own. The default initializer can be found [here](https://github.com/Emerson/ember-form-master-2000/blob/master/app/initializers/ember-form-master-2000.js), which imports the [initialize method form the addon directory](https://github.com/Emerson/ember-form-master-2000/blob/master/addon/initializers/fm-initialize.js).
+If you need to make minor adjustments to classnames of the elements, you can easily override the default initializer with your own. The default initializer can be found [here](https://github.com/Emerson/ember-form-master-2000/blob/master/app/initializers/ember-form-master-2000.js), which imports the [default configuration from the addon directory](https://github.com/Emerson/ember-form-master-2000/blob/master/addon/services/fm-config.js).
 
 ### Demo App
 
