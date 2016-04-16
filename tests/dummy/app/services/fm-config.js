@@ -6,8 +6,8 @@ export default FormMaster2000ConfigService.extend({
   // https://github.com/Emerson/ember-form-master-2000/blob/master/addon/services/fm-config.js
 
   // e.g. semantic-ui style overrides
-  formClass: 'ui form',
-  wrapperClass: 'field',
-  errorClass: 'error'
+  // formClass: 'ui form',
+  // wrapperClass: 'field',
+  // errorClass: 'error'
 
 });
