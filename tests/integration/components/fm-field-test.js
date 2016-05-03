@@ -128,6 +128,15 @@ test('errors are shown after user interaction but not before', function(assert) 
   );
 });
 
+test('has-error class should only be applied when errors are present', function(assert) {
+  this.set('errors', Ember.A([]));
+  this.render(hbs `{{fm-field widget='textarea' errors=errors}}`);
+  assert.ok(
+    this.$('.has-error').length === 0,
+    'error class is not applied unless errors are present'
+  );
+});
+
 test('errors are shown after user interaction but not before (textarea)', function(assert) {
   this.set('config.showErrorsByDefault', false);
   this.set('errors', Ember.A(['error message']));
