@@ -5,7 +5,12 @@ const {inject, computed} = Ember;
 export default Ember.Component.extend({
   tagName: '',
   styles: inject.service('fm-config'),
-  inputClasses: computed('styles.errorClass', 'styles.inputClass', function(){
-    return ['styles.errorClass', 'styles.inputClass'].map(x => this.get(x));
+  inputClasses: computed('styles.errorClass', 'styles.inputClass', 'visibleErrors', function(){
+    let classNames = ['styles.inputClass'];
+    let visibleErrors = this.get('visibleErrors');
+    if(visibleErrors && visibleErrors.length > 0) {
+      classNames.push('styles.errorClass');
+    }
+    return classNames.map(x => this.get(x));
   })
 });
