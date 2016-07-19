@@ -13,8 +13,8 @@ export default Ember.TextField.extend(DataAttributesSupport, {
     this.sendAction('onUserInteraction');
   },
 
-  keyUp() {
-    this.sendAction('onKeyUp');
+  keyUp(e) {
+    this.sendAction('onKeyUp', e, this);
   },
 
   init() {

@@ -113,8 +113,8 @@ export default Ember.Component.extend({
 
   actions: {
 
-    onKeyUp() {
-      this.sendAction('onKeyUp');
+    onKeyUp(e, instance) {
+      this.sendAction('onKeyUp', e, instance);
     },
 
     userInteraction() {

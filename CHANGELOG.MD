@@ -1,5 +1,9 @@
 # ember-form-master-2000 Change Log
 
+### 3.0.3
+
+- [Fix] onKeyUp fix
+
 ### 3.0.2
 
 - [Feature] Add onKeyUp action
