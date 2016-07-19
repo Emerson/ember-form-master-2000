@@ -113,6 +113,10 @@ export default Ember.Component.extend({
 
   actions: {
 
+    onKeyUp() {
+      this.sendAction('onKeyUp');
+    },
+
     userInteraction() {
       this.set('shouldShowErrors', true);
       this.sendAction('onUserInteraction');

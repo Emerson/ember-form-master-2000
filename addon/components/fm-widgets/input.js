@@ -13,6 +13,10 @@ export default Ember.TextField.extend(DataAttributesSupport, {
     this.sendAction('onUserInteraction');
   },
 
+  keyUp() {
+    this.sendAction('onKeyUp');
+  },
+
   init() {
     const forAttr = this.get('parentView.forAttribute');
     if(!!forAttr) {

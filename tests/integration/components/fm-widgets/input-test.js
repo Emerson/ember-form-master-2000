@@ -13,3 +13,12 @@ test('action onUserAction is send on focus out event', function(assert) {
   this.render(hbs`{{fm-widgets/input onUserInteraction=(action externalAction)}}`);
   this.$('input').trigger('focusout');
 });
+
+test('action onKeyUp is sent on key key', function(assert) {
+  assert.expect(1);
+  this.set('externalAction', ()=> {
+    assert.ok(true);
+  });
+  this.render(hbs`{{fm-widgets/input onKeyUp=(action externalAction)}}`);
+  this.$('input').trigger('keyup');
+});
