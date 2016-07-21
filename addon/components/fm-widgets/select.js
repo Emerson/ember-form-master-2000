@@ -11,12 +11,15 @@ export default Ember.Component.extend({
   tagName: 'select',
 
   classNameBindings: ['selectClass'],
+  attributeBindings: ['isDisabled:disabled'],
+
   selectClass: reads('fmConfig.selectClass'),
+
+  isDisabled: Ember.computed.oneWay('widgetAttrs.disabled'),
 
   init() {
     this._super(arguments);
     const wAttrs = this.get('widgetAttrs');
-
     if(this.get('parentView.forAttribute')) {
       this.set('elementId', this.get('parentView.forAttribute'));
     }

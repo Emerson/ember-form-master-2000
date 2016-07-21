@@ -9,6 +9,8 @@ export default Ember.TextField.extend(DataAttributesSupport, {
     return this.get('widgetAttrs.type') || 'text';
   }),
 
+  disabled: Ember.computed.oneWay('widgetAttrs.disabled'),
+
   focusOut() {
     this.sendAction('onUserInteraction');
   },

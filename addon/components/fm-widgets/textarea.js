@@ -10,6 +10,7 @@ export default Ember.TextArea.extend(DataAttributesSupport, {
   },
   rows: oneWay('widgetAttrs.rows'),
   cols: oneWay('widgetAttrs.cols'),
+  disabled: oneWay('widgetAttrs.disabled'),
 
   init() {
     const forAttr = this.get('parentView.forAttribute');

@@ -17,7 +17,7 @@
 
       {{fm-field
         label='Write an Essay'
-        type='textarea'
+        widget='textarea'
         value=model.exampleModel.essay
         errors=model.exampleModel.errors.essay
         rows='6'
@@ -27,7 +27,7 @@
 
       {{fm-field
         label='Choose Something'
-        type='select'
+        widget='select'
         content=model.selectOptions
         optionValuePath='value'
         optionLabelPath='label'
