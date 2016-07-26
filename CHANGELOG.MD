@@ -1,5 +1,9 @@
 # ember-form-master-2000 Change Log
 
+### 3.0.5
+
+- [Fix] `name` attribute support for inputs
+
 ### 3.0.4
 
 - [Fix] Disabled attribute for input, textarea, and select
