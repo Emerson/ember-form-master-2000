@@ -4,11 +4,16 @@ import layout from '../../templates/components/fm-widgets/checkbox';
 export default Ember.Component.extend({
   layout,
 
-  change() {
-    this.sendAction('onUserInteraction');
+  change(e) {
+    this.sendAction('onUserInteraction', e, this);
   },
 
-  focusOut() {
-    this.sendAction('onUserInteraction');
+  focusOut(e) {
+    this.sendAction('onUserInteraction', e, this);
+    this.sendAction('onBlur', e, this);
   },
+
+  focusIn(e) {
+    this.sendAction('onFocus', e, this);
+  }
 });

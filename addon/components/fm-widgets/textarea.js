@@ -5,9 +5,6 @@ const {oneWay} = Ember.computed;
 
 export default Ember.TextArea.extend(DataAttributesSupport, {
   placeholder: oneWay('widgetAttrs.placeholder'),
-  focusOut() {
-    this.sendAction('onUserInteraction');
-  },
   rows: oneWay('widgetAttrs.rows'),
   cols: oneWay('widgetAttrs.cols'),
   disabled: oneWay('widgetAttrs.disabled'),
@@ -19,6 +16,19 @@ export default Ember.TextArea.extend(DataAttributesSupport, {
     }
     this._super(arguments);
     this.setDataAttributes();
-  }
+  },
+
+  focusOut(e) {
+    this.sendAction('onUserInteraction', e, this);
+    this.sendAction('onBlur', e, this);
+  },
+
+  keyUp(e) {
+    this.sendAction('onKeyUp', e, this);
+  },
+
+  focusIn(e) {
+    this.sendAction('onFocus', e, this);
+  },
 
 });

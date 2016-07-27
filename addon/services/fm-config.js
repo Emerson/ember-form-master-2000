@@ -12,6 +12,7 @@ export default Ember.Service.extend({
   selectClass: 'form-control',
   formClass: 'form-vertical',
   checkboxWrapperClass: 'form-group',
+  focusClass: 'is-focused',
   radioClass: 'radio',
   helptextClass: 'help-block',
   errortextClass: 'help-block',

@@ -3,6 +3,7 @@
   helptext=helptext
   forAttribute=forAttribute
   visibleErrors=visibleErrors
+  isFocused=isFocused
   formGroupClass=class
   as |inputClasses|
 }}
@@ -12,6 +13,8 @@
     action=action
     onUserInteraction=(action 'userInteraction')
     onKeyUp=(action 'onKeyUp')
+    onFocus=(action 'onFocus')
+    onBlur=(action 'onBlur')
     classNames=inputClasses
     widgetAttrs=widgetAttrs
   }}

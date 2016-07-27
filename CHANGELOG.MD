@@ -1,5 +1,9 @@
 # ember-form-master-2000 Change Log
 
+### 3.0.6
+
+- [Fix] `onBlur` and `onFocus` actions for most fields. Added `is-focused` class to field when focused
+
 ### 3.0.5
 
 - [Fix] `name` attribute support for inputs

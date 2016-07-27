@@ -1,4 +1,4 @@
-<div class="{{styles.wrapperClass}} {{if visibleErrors.length styles.errorClass}} {{formGroupClass}}">
+<div class="{{styles.wrapperClass}} {{if isFocused styles.focusClass}} {{if visibleErrors.length styles.errorClass}} {{formGroupClass}}">
   {{#if label}}
     <label for="{{forAttribute}}" class="{{styles.labelClass}}">{{{label}}}</label>
   {{/if}}

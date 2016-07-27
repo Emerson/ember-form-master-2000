@@ -40,6 +40,7 @@ const WidgetAttrs = Ember.Object.extend({
 export default Ember.Component.extend({
   layout,
   tagName: '',
+  isFocused: false,
 
   display: computed('widget', function(){
     const widget = this.get('widget');
@@ -115,6 +116,16 @@ export default Ember.Component.extend({
 
     onKeyUp(e, instance) {
       this.sendAction('onKeyUp', e, instance);
+    },
+
+    onBlur(e, instance) {
+      this.set('isFocused', false);
+      this.sendAction('onBlur', e, instance);
+    },
+
+    onFocus(e, instance) {
+      this.set('isFocused', true);
+      this.sendAction('onFocus', e, instance);
     },
 
     userInteraction() {

@@ -34,8 +34,13 @@ export default Ember.Component.extend({
     this.sendAction('onUserInteraction');
   },
 
-  focusOut() {
-    this.sendAction('onUserInteraction');
+  focusOut(e) {
+    this.sendAction('onUserInteraction', e, this);
+    this.sendAction('onBlur', e, this);
+  },
+
+  focusIn(e) {
+    this.sendAction('onFocus', e, this);
   },
 
   actions: {

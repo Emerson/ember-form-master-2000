@@ -1,4 +1,4 @@
-<div class="{{styles.checkboxWrapperClass}} {{if visibleErrors.length styles.errorClass}} {{formGroupClass}}">
+<div class="{{styles.checkboxWrapperClass}} {{if isFocused styles.focusClass}} {{if visibleErrors.length styles.errorClass}} {{formGroupClass}}">
   <div class="checkbox">
     <label>
       {{yield}}

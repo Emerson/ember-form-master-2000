@@ -12,12 +12,17 @@ export default Ember.TextField.extend(DataAttributesSupport, {
     return this.get('widgetAttrs.type') || 'text';
   }),
 
-  focusOut() {
-    this.sendAction('onUserInteraction');
+  focusOut(e) {
+    this.sendAction('onUserInteraction', e, this);
+    this.sendAction('onBlur', e, this);
   },
 
   keyUp(e) {
     this.sendAction('onKeyUp', e, this);
+  },
+
+  focusIn(e) {
+    this.sendAction('onFocus', e, this);
   },
 
   init() {
