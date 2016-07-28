@@ -16,6 +16,7 @@ export default Ember.Service.extend({
   radioClass: 'radio',
   helptextClass: 'help-block',
   errortextClass: 'help-block',
+  isValidClass: 'is-valid',
 
   /*
   *   If true, always show validation errors. If false, wait until some sort of

@@ -41,6 +41,7 @@ export default Ember.Component.extend({
   layout,
   tagName: '',
   isFocused: false,
+  isValid: false,
 
   display: computed('widget', function(){
     const widget = this.get('widget');

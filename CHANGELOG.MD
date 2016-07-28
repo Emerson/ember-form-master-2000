@@ -1,5 +1,9 @@
 # ember-form-master-2000 Change Log
 
+### 3.0.8
+
+- [Feature] Added ability to pass in `isValid`, which applies the `isValidClass` from our `fm-config` service
+
 ### 3.0.7
 
 - [Feature] Added option to yield fields and append content
