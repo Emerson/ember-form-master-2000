@@ -20,9 +20,9 @@ export default Ember.Component.extend({
   init() {
     this._super(arguments);
     const wAttrs = this.get('widgetAttrs');
-    if(!!this.attrs.forAttribute) {
-      this.set('elementId', this.attrs.forAttribute);
-    }
+    //if(!!this.attrs.forAttribute) {
+      //this.set('elementId', this.attrs.forAttribute);
+    //}
 
     if(!wAttrs.content) {
       set(wAttrs, 'content', []);

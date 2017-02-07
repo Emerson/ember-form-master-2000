@@ -87,15 +87,6 @@ export default Ember.Component.extend({
     return this.get('fmConfig.widgetBasePath') + this.get('widget');
   }),
 
-  forAttribute: computed('label', 'inputId', function() {
-    if(this.get('inputId')) {
-      return this.generateSafeId(this.get('inputId'));
-    }
-    if(this.get('label')) {
-      return this.generateSafeId(this.get('label'));
-    }
-  }),
-
   generateSafeId(id) {
     const tmp = document.createElement("DIV");
     tmp.innerHTML = id;
@@ -131,7 +122,13 @@ export default Ember.Component.extend({
 
     userInteraction() {
       this.set('shouldShowErrors', true);
-      this.sendAction('onUserInteraction');
+      if (this.attrs.onUserInteraction){
+        this.attrs.onUserInteraction();
+      }
+    },
+
+    registerWidgetId(id){
+      this.set('forAttribute', id);
     }
 
   }

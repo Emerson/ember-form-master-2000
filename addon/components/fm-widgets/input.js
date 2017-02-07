@@ -25,12 +25,7 @@ export default Ember.TextField.extend(DataAttributesSupport, {
     this.sendAction('onFocus', e, this);
   },
 
-  init() {
-    if(!!this.attrs.forAttribute) {
-      this.set('elementId', this.attrs.forAttribute);
-    }
-    this._super(arguments);
-    //this.setDataAttributes();
+  afterRender(){
+    this.attrs.registerWidgetId(this.elementId);
   }
-
 });

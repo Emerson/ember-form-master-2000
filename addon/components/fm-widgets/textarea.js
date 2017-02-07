@@ -9,12 +9,8 @@ export default Ember.TextArea.extend(DataAttributesSupport, {
   cols: oneWay('widgetAttrs.cols'),
   disabled: oneWay('widgetAttrs.disabled'),
 
-  init() {
-    if(!!this.attrs.forAttribute) {
-      this.set('elementId', this.attrs.forAttribute);
-    }
-    this._super(arguments);
-    //this.setDataAttributes();
+  afterRender(){
+    this.attrs.registerWidgetId(this.elementId);
   },
 
   focusOut(e) {
