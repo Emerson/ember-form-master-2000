@@ -46,7 +46,7 @@ test('action is passed down to select component', function(assert) {
   assert.expect(1);
   this.set('assertCalled', () => assert.ok(true));
   this.set('content', Ember.A(['something',]));
-  this.render(hbs `{{fm-field widget='select' content=content action=(action assertCalled)}}`);
+  this.render(hbs`{{fm-field widget='select' content=content action=(action assertCalled)}}`);
   this.$('select').change();
 });
 

@@ -1,5 +1,9 @@
 # ember-form-master-2000 Change Log
 
+### 3.1.0
+
+- [UPGRADE] Upgrade to Ember 2.9.1 and fix issues.
+
 ### 3.0.8
 
 - [Feature] Added ability to pass in `isValid`, which applies the `isValidClass` from our `fm-config` service

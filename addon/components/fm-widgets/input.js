@@ -26,12 +26,11 @@ export default Ember.TextField.extend(DataAttributesSupport, {
   },
 
   init() {
-    const forAttr = this.get('parentView.forAttribute');
-    if(!!forAttr) {
-      this.set('elementId', forAttr);
+    if(!!this.attrs.forAttribute) {
+      this.set('elementId', this.attrs.forAttribute);
     }
     this._super(arguments);
-    this.setDataAttributes();
+    //this.setDataAttributes();
   }
 
 });
