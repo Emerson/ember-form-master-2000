@@ -122,7 +122,7 @@ export default Ember.Component.extend({
 
     userInteraction() {
       this.set('shouldShowErrors', true);
-      if (this.attrs.onUserInteraction){
+      if (this.attrs.onUserInteraction && typeof this.attrs.onUserInteraction === 'function'){
         this.attrs.onUserInteraction();
       }
     },

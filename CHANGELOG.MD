@@ -1,5 +1,10 @@
 # ember-form-master-2000 Change Log
 
+### 3.2.0
+
+- [UPGRADE] Now on Ember 2.11.
+- Using new `(action 'syntax')`
+
 ### 3.1.0
 
 - [UPGRADE] Upgrade to Ember 2.9.1 and fix issues.
