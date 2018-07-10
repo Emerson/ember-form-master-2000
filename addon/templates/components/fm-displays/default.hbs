@@ -1,6 +1,14 @@
-<div class="{{styles.wrapperClass}} {{if isFocused styles.focusClass}} {{if visibleErrors.length styles.errorClass}} {{if isValid styles.isValidClass}} {{formGroupClass}}">
+<div data-test={{dataTest}}
+     class="{{styles.wrapperClass}}
+            {{if isFocused styles.focusClass}}
+            {{if visibleErrors.length styles.errorClass}}
+            {{if isValid styles.isValidClass}}
+            {{formGroupClass}}">
   {{#if label}}
-    <label for="{{forAttribute}}" class="{{styles.labelClass}}">{{{label}}}</label>
+    <label for="{{forAttribute}}"
+           class="{{styles.labelClass}}">
+      {{{label}}}
+    </label>
   {{/if}}
 
   {{yield inputClasses}}

@@ -76,6 +76,10 @@ export default Ember.Component.extend({
     this._super(arguments);
   },
 
+  dataTest: computed(function() {
+    return this.get('data-test');
+  }),
+
   widgetAttrs: computed(function(){
     // hack to support legacy apis
     return WidgetAttrs.create({ field: this });
