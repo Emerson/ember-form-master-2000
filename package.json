@@ -1,6 +1,6 @@
 {
   "name": "ember-form-master-2000",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "A simple and flexible Ember-CLI based form builder.",
   "directories": {
     "doc": "doc",

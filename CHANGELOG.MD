@@ -1,5 +1,9 @@
 # ember-form-master-2000 Change Log
 
+### 3.2.1
+
+- Data attributes for tests are working again (more work needed for other types of data attributes)
+
 ### 3.2.0
 
 - [UPGRADE] Now on Ember 2.11.
