@@ -13,5 +13,9 @@ export default Ember.Component.extend({
   },
   submitButtonClass: reads('fmConfig.submitButtonClass'),
   wrapperClass: reads('fmConfig.wrapperClass'),
-  tagName: 'div'
+  tagName: 'div',
+
+  dataTest: computed(function() {
+    return this.get('data-test');
+  })
 });

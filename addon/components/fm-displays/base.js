@@ -13,4 +13,5 @@ export default Ember.Component.extend({
     }
     return classNames.map(x => this.get(x));
   })
+
 });

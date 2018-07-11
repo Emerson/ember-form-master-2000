@@ -1,7 +1,7 @@
 <div class="row">
 
   <div class="col-sm-8">
-    {{#fm-form action='submit'}}
+    {{#fm-form data-test="form" action='submit'}}
 
       {{fm-field label='First Name'
         value=model.exampleModel.first_name
@@ -9,13 +9,16 @@
         placeholder='Foo'
         widgetAttrs=(hash
           name='first_name'
+          data-test='firstName'
         )
+        data-test='input'
       }}
 
       {{fm-field label='Last Name'
         value=model.exampleModel.last_name
         errors=model.exampleModel.errors.last_name
         placeholder='Bar'
+        data-test='input2'
       }}
 
       {{fm-field
@@ -25,7 +28,7 @@
         errors=model.exampleModel.errors.essay
         rows='6'
         helptext='Make sure its good!'
-        data-test='master-2000'
+        data-test='textarea'
       }}
 
       {{fm-field
@@ -38,6 +41,7 @@
         value=model.exampleModel.language
         action=(action (mut model.exampleModel.language))
         errors=model.exampleModel.errors.language
+        data-test='select'
       }}
 
       {{fm-field
@@ -45,6 +49,7 @@
         label='Are you awesome?'
         value=model.exampleModel.isAwesome
         errors=model.exampleModel.errors.isAwesome
+        data-test='checkbox'
       }}
 
       {{fm-field
@@ -56,9 +61,14 @@
         optionLabelPath='label'
         value=model.exampleModel.bestLanguage
         errors=model.exampleModel.errors.bestLanguage
+        data-test='radioGroup'
       }}
 
-      {{fm-submit value='Submit the Form' disabled=model.disableSubmit}}
+      {{fm-submit
+        value='Submit the Form'
+        disabled=model.disableSubmit
+        data-test="submit"
+      }}
 
     {{/fm-form}}
   </div>
