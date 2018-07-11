@@ -1,9 +1,7 @@
 import Ember from 'ember';
-import DataAttributesSupport from '../../mixins/data-attribute-support';
-
 const {oneWay} = Ember.computed;
 
-export default Ember.TextField.extend(DataAttributesSupport, {
+export default Ember.TextField.extend({
   placeholder: oneWay('widgetAttrs.placeholder'),
   name: oneWay('widgetAttrs.name'),
   disabled: Ember.computed.oneWay('widgetAttrs.disabled'),

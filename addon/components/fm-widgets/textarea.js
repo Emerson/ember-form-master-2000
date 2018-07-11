@@ -1,9 +1,7 @@
 import Ember from 'ember';
-import DataAttributesSupport from '../../mixins/data-attribute-support';
-
 const {oneWay} = Ember.computed;
 
-export default Ember.TextArea.extend(DataAttributesSupport, {
+export default Ember.TextArea.extend({
   placeholder: oneWay('widgetAttrs.placeholder'),
   rows: oneWay('widgetAttrs.rows'),
   cols: oneWay('widgetAttrs.cols'),
@@ -24,6 +22,6 @@ export default Ember.TextArea.extend(DataAttributesSupport, {
 
   focusIn(e) {
     this.sendAction('onFocus', e, this);
-  },
+  }
 
 });

@@ -67,14 +67,9 @@ export default Ember.Component.extend({
 
   fmConfig: inject.service('fm-config'),
 
-  init() {
-    const dataAttributes = Object.keys(this.get('attrs'))
-      .filter(attr => /data-/.test(attr));
-
-    this.set('dataAttributes', dataAttributes);
-
-    this._super(arguments);
-  },
+  dataTest: computed(function() {
+    return this.get('data-test');
+  }),
 
   widgetAttrs: computed(function(){
     // hack to support legacy apis
