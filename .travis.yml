@@ -28,4 +28,4 @@ install:
   - npm install
 
 script:
-  - ember try $EMBER_TRY_SCENARIO test
+  - npm run test
