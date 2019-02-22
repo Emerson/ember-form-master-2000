@@ -1,18 +1,21 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
+import { A } from '@ember/array';
+import { hash } from 'rsvp';
+import EmberObject from '@ember/object'
 
-export default Ember.Route.extend({
+export default Route.extend({
 
   model: function() {
-    return Ember.RSVP.hash({
-      exampleModel: Ember.Object.create(),
+    return hash({
+      exampleModel: EmberObject.create(),
       disableSubmit: false,
       selectedLanguage: null,
-      selectOptions: Ember.A([
+      selectOptions: A([
         {label: 'French', value: 'fr'},
         {label: 'English', value: 'en'},
         {label: 'German', value: 'gr'}
       ]),
-      radioOptions: Ember.A([
+      radioOptions: A([
         {label: 'Ruby', value: 'ruby'},
         {label: 'Javascript', value: 'js'},
         {label: 'Cold Fusion', value: 'cf'}
@@ -32,12 +35,12 @@ export default Ember.Route.extend({
         model.set('errors', null);
       }else{
         var errors = {
-          first_name: Ember.A(['That first name is wrong']),
-          last_name: Ember.A(['That last name is silly']),
-          language: Ember.A(['Please choose a better language']),
-          isAwesome: Ember.A(['You must be awesome to submit this form']),
-          bestLanguage: Ember.A(['Wrong, Cold Fusion is the best language']),
-          essay: Ember.A(['This essay is not very good'])
+          first_name: A(['That first name is wrong']),
+          last_name: A(['That last name is silly']),
+          language: A(['Please choose a better language']),
+          isAwesome: A(['You must be awesome to submit this form']),
+          bestLanguage: A(['Wrong, Cold Fusion is the best language']),
+          essay: A(['This essay is not very good'])
         };
         model.set('errors', errors);
       }

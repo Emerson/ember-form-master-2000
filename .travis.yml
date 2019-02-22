@@ -1,7 +1,7 @@
 ---
 language: node_js
 node_js:
-  - "8.11.3"
+  - "10.15.1"
 
 sudo: false
 
@@ -21,14 +21,11 @@ matrix:
     - env: EMBER_TRY_SCENARIO=ember-canary
 
 before_install:
-  - export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
   - "npm config set spin false"
-  - "npm install -g npm@^2"
+  - "npm install -g npm@latest"
 
 install:
-  - npm install -g bower q
   - npm install
-  - bower install
 
 script:
-  - ember try $EMBER_TRY_SCENARIO test
+  - npm run test

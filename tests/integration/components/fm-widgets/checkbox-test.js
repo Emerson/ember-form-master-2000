@@ -1,18 +1,15 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-// import {initialize} from 'ember-form-master-2000/initializers/fm-initialize';
 
-moduleForComponent('fm-widgets/checkbox', 'Integration | Component | fm-widgets checkbox', {
-  integration: true,
-  setup: function() {
-    this.container.inject = this.container.injection;
-    // initialize(null, this.container);
-  }
-});
+module('Integration | Component | fm-widgets:checkbox', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('change event is treated as userInteraction', function(assert) {
-  assert.expect(1);
-  this.set('assertCalled', () => assert.ok(true));
-  this.render(hbs `{{fm-widgets/checkbox onUserInteraction=assertCalled}}`);
-  this.$('input').change();
+  test('change event is treated as userInteraction', async function(assert) {
+    assert.expect(1);
+    this.set('assertCalled', () => assert.ok(true));
+    await render(hbs `{{fm-widgets/checkbox onUserInteraction=assertCalled}}`);
+    this.$('input').change();
+  });
 });

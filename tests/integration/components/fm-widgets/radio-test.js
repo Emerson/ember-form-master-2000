@@ -1,21 +1,22 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('fm-radio', 'Integration | Component | fm-radio', {
-  integration: true,
-});
+module('Integration | Component | fm-widget:radio', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('action onUserAction is sent on focus out event', function(assert) {
-  assert.expect(1);
-  this.set('externalAction', () => assert.ok(true));
-  this.render(hbs`{{fm-widgets/radio onUserInteraction=(action externalAction)}}`);
-  this.$('input').trigger('focusout');
-});
+  test('action onUserAction is sent on focus out event', async function(assert) {
+    assert.expect(1);
+    this.set('externalAction', () => assert.ok(true));
+    await render(hbs`{{fm-widgets/radio onUserInteraction=(action externalAction)}}`);
+    this.$('input').trigger('focusout');
+  });
 
-test('action onUserAction is sent on change event', function(assert) {
-  assert.expect(1);
-  this.set('externalAction', () => assert.ok(true));
-  this.render(hbs`{{fm-widgets/radio onUserInteraction=(action externalAction)}}`);
-  this.$('input').change();
+  test('action onUserAction is sent on change event', async function(assert) {
+    assert.expect(1);
+    this.set('externalAction', () => assert.ok(true));
+    await render(hbs`{{fm-widgets/radio onUserInteraction=(action externalAction)}}`);
+    this.$('input').change();
+  });
 });
-

@@ -1,12 +1,15 @@
-import Ember from 'ember';
-const {oneWay} = Ember.computed;
+/* eslint-disable ember/closure-actions, ember/no-attrs-in-components */
 
-export default Ember.TextField.extend({
+import { computed } from '@ember/object';
+import TextField from '@ember/component/text-field';
+const { oneWay } = computed;
+
+export default TextField.extend({
   placeholder: oneWay('widgetAttrs.placeholder'),
   name: oneWay('widgetAttrs.name'),
-  disabled: Ember.computed.oneWay('widgetAttrs.disabled'),
+  disabled: oneWay('widgetAttrs.disabled'),
 
-  type: Ember.computed('widgetAttrs.type', function(){
+  type: computed('widgetAttrs.type', function(){
     return this.get('widgetAttrs.type') || 'text';
   }),
 

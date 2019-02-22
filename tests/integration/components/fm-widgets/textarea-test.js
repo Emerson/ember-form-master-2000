@@ -1,15 +1,17 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('fm-textarea', 'Integration | Component | fm-widgets textarea', {
-  integration: true
-});
+module('Integration | Component | fm-widget:textarea', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('action onUserAction is send on focus out event', function(assert) {
-  assert.expect(1);
-  this.set('externalAction', () => {
-    assert.ok(true);
+  test('action onUserAction is send on focus out event', async function(assert) {
+    assert.expect(1);
+    this.set('externalAction', () => {
+      assert.ok(true);
+    });
+    await render(hbs`{{fm-widgets/textarea onUserInteraction=(action externalAction)}}`);
+    this.$('textarea').trigger('focusout');
   });
-  this.render(hbs`{{fm-widgets/textarea onUserInteraction=(action externalAction)}}`);
-  this.$('textarea').trigger('focusout');
 });

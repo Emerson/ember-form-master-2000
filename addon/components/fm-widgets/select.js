@@ -1,12 +1,15 @@
-import Ember from 'ember';
+/* eslint-disable ember/closure-actions, ember/no-attrs-in-components */
+
 import layout from '../../templates/components/fm-widgets/select';
 
-const {set, get, getWithDefault, computed, inject} = Ember;
-const {reads} = computed;
+import Component from '@ember/component';
+import { set, get, getWithDefault, computed } from '@ember/object';
+import { inject } from '@ember/service';
+const { reads, oneWay } = computed;
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout: layout,
-  fmConfig: inject.service('fm-config'),
+  fmConfig: inject('fm-config'),
 
   tagName: 'select',
 
@@ -15,7 +18,7 @@ export default Ember.Component.extend({
 
   selectClass: reads('fmConfig.selectClass'),
 
-  isDisabled: Ember.computed.oneWay('widgetAttrs.disabled'),
+  isDisabled: oneWay('widgetAttrs.disabled'),
 
   init() {
     this._super(arguments);

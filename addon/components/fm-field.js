@@ -1,31 +1,33 @@
-import Ember from 'ember';
+/* eslint-disable no-useless-escape, ember/closure-actions, ember/no-attrs-in-components */
 import layout from '../templates/components/fm-field';
-
-const {computed, inject} = Ember;
-const {alias} = computed;
+import EmberObject from '@ember/object';
+import Component from '@ember/component';
+import { inject } from '@ember/service';
+import { computed, defineProperty } from '@ember/object';
+const { alias } = computed;
 
 const WIDGET_ATTR_ALIASES = [
   'placeholder', 'maxlength', 'content', 'optionValuePath', 'name', 'tabindex',
   'optionLabelPath', 'prompt', 'rows', 'cols', 'spellcheck', 'disabled', 'targetValue'
 ];
 
-const WidgetAttrs = Ember.Object.extend({
+const WidgetAttrs = EmberObject.extend({
   field: null,
 
-  /**
-   * Aliases properties on the `fm-field` component which should be
-   * passed into the field's widget as `widgetAttrs`.
-   *
-   * With Ember 2.3 adoption this should be phased out so that users
-   * pass `widgetAttrs` in directly using the `hash` helper.
-   *
-   * @method init
-   * @return {void}
-   **/
+  /*
+    Aliases properties on the `fm-field` component which should be
+    passed into the field's widget as `widgetAttrs`.
+
+    With Ember 2.3 adoption this should be phased out so that users
+    pass `widgetAttrs` in directly using the `hash` helper.
+
+    @method init
+    @return {void}
+  */
   init(){
     this._super();
     WIDGET_ATTR_ALIASES.forEach(field => {
-      Ember.defineProperty(this, field, alias('field.' + field));
+      defineProperty(this, field, alias('field.' + field));
     });
   },
 });
@@ -37,7 +39,7 @@ const WidgetAttrs = Ember.Object.extend({
  * do anything relating to the style or appearance of the field.  That is the
  * responsibility of the `display` component.
  **/
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   tagName: '',
   isFocused: false,
@@ -65,7 +67,7 @@ export default Ember.Component.extend({
   helptext: null,
   value: null,
 
-  fmConfig: inject.service('fm-config'),
+  fmConfig: inject('fm-config'),
 
   dataTest: computed(function() {
     return this.get('data-test');
@@ -95,8 +97,8 @@ export default Ember.Component.extend({
     return this.get('fmConfig.showErrorsByDefault');
   }),
 
-  visibleErrors: computed('shouldShowErrors', 'errors.[]', function(){
-    return !!this.get('shouldShowErrors') ? this.get('errors') : [];
+  visibleErrors: computed('shouldShowErrors', 'errors.[]', function() {
+    return this.get('shouldShowErrors') ? this.get('errors') : [];
   }),
 
   actions: {
