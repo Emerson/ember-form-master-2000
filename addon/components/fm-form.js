@@ -1,15 +1,16 @@
-import Ember from 'ember';
+/* eslint-disable ember/closure-actions */
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { inject } from '@ember/service';
+const { reads } = computed;
 
-const {inject, computed} = Ember;
-const {reads} = computed;
-
-export default Ember.Component.extend({
+export default Component.extend({
   init() {
     this._super();
   },
   classNameBindings: ['formClass'],
   formClass: reads('fmConfig.formClass'),
-  fmConfig: inject.service('fm-config'),
+  fmConfig: inject('fm-config'),
   tagName: 'form',
   'for': null,
 

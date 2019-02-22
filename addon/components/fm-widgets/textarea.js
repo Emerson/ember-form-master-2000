@@ -1,7 +1,10 @@
-import Ember from 'ember';
-const {oneWay} = Ember.computed;
+/* eslint-disable ember/closure-actions, ember/no-attrs-in-components */
 
-export default Ember.TextArea.extend({
+import TextArea from '@ember/component/text-area';
+import { computed } from '@ember/object';
+const { oneWay } = computed;
+
+export default TextArea.extend({
   placeholder: oneWay('widgetAttrs.placeholder'),
   rows: oneWay('widgetAttrs.rows'),
   cols: oneWay('widgetAttrs.cols'),

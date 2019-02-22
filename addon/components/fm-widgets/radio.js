@@ -1,9 +1,9 @@
-import Ember from 'ember';
+/* eslint-disable ember/closure-actions */
 import layout from '../../templates/components/fm-widgets/radio';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 
-const {computed} = Ember;
-
-export default Ember.Component.extend({
+export default Component.extend({
   layout: layout,
 
   checked: computed('value', 'widgetAttrs.targetValue', function() {

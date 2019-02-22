@@ -1,11 +1,11 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { inject } from '@ember/service';
+import Component from '@ember/component';
 
-const {inject, computed} = Ember;
-
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: '',
-  styles: inject.service('fm-config'),
-  inputClasses: computed('styles.errorClass', 'styles.inputClass', 'visibleErrors', function(){
+  styles: inject('fm-config'),
+  inputClasses: computed('styles.{errorClass,inputClass}', 'visibleErrors', function(){
     let classNames = ['styles.inputClass'];
     let visibleErrors = this.get('visibleErrors');
     if(visibleErrors && visibleErrors.length > 0) {

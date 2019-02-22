@@ -1,7 +1,9 @@
-import Ember from 'ember';
-import layout from '../../templates/components/fm-widgets/checkbox';
+/* eslint-disable ember/closure-actions */
 
-export default Ember.Component.extend({
+import layout from '../../templates/components/fm-widgets/checkbox';
+import Component from '@ember/component';
+
+export default Component.extend({
   layout,
 
   change(e) {

@@ -1,13 +1,13 @@
-import Ember from 'ember';
 import layout from '../templates/components/fm-submit';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { inject } from '@ember/service';
+const { reads } = computed;
 
-const {inject, computed} = Ember;
-const {reads} = computed;
-
-export default Ember.Component.extend({
+export default Component.extend({
   layout: layout,
   classNameBindings: ['wrapperClass'],
-  fmConfig: inject.service('fm-config'),
+  fmConfig: inject('fm-config'),
   init() {
     this._super(this);
   },
