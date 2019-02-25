@@ -5,13 +5,18 @@ import Component from '@ember/component';
 export default Component.extend({
   tagName: '',
   styles: inject('fm-config'),
-  inputClasses: computed('styles.{errorClass,inputClass}', 'visibleErrors', function(){
-    let classNames = ['styles.inputClass'];
+  inputClasses: computed('styles.{errorClass,inputClass}', 'visibleErrors', function() {
+    let classNames = [];
+    if (this.get('formControlClass')) {
+      classNames.push('formControlClass')
+    } else {
+      classNames.push('styles.inputClass')
+    }
     let visibleErrors = this.get('visibleErrors');
     if(visibleErrors && visibleErrors.length > 0) {
       classNames.push('styles.errorClass');
     }
-    return classNames.map(x => this.get(x));
+    return classNames.map(classPropertyName => this.get(classPropertyName));
   })
 
 });

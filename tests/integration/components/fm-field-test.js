@@ -18,6 +18,12 @@ module('Integration | Component | fm-field', function(hooks) {
     assert.ok(this.$('input').length > 0, 'A form element was not rendered');
   });
 
+  test('allows users to pass in custom per field formControlClass', async function(assert) {
+    await render(hbs `{{fm-field formControlClass='custom-control-class'}}`);
+    assert.ok(this.$('.form-control').length === 0);
+    assert.ok(this.$('.custom-control-class').length === 1);
+  });
+
   test('widget="select" renders a select', async function(assert) {
     await render(hbs `{{fm-field widget="select"}}`);
     assert.ok(this.$('select').length === 1, 'A select was not rendered when it should have been');
