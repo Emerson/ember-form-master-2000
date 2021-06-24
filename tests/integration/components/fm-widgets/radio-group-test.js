@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { A } from '@ember/array';
-import { run } from '@ember/runloop';
+import { later } from '@ember/runloop';
 import EmberObject from '@ember/object';
 
 function mockWidgetAttrs(options=[['one', 1], ['two', 2]]){
@@ -56,16 +56,12 @@ module('Integration | Component | fm-widget:radio-group', function(hooks) {
     this.set('widgetAttrs', mockWidgetAttrs([]));
     await render(hbs `{{fm-widgets/radio-group widgetAttrs=widgetAttrs}}`);
 
-    run.begin();
-    run.schedule('sync', () => {
-      this.get('widgetAttrs.content').pushObject({label: 'foo', value: 'foo'});
-    });
-    run.schedule('afterRender', () => {
+    this.get('widgetAttrs.content').pushObject({label: 'foo', value: 'foo'});
+    later(()=> {
       assert.equal(this.$('input').length, 1, 'Option is added');
       assert.equal(this.$('input').attr('value'), 'foo', 'Value of new option is correct');
       assert.equal(this.$('label').text().trim(), 'foo', 'Label of new option is correct');
-    });
-    run.end();
+    }, 100);
   });
 
   test('Option is removed if element is removed from content array', async function(assert) {
@@ -73,14 +69,10 @@ module('Integration | Component | fm-widget:radio-group', function(hooks) {
     this.set('widgetAttrs', mockWidgetAttrs());
     await render(hbs `{{fm-widgets/radio-group widgetAttrs=widgetAttrs}}`);
 
-    run.begin();
-    run.schedule('sync', () => {
-      this.get('widgetAttrs.content').removeAt(0);
-    });
-    run.schedule('afterRender', () => {
+    this.get('widgetAttrs.content').removeAt(0);
+    later(()=> {
       assert.equal(this.$('input').length, 1, 'Option is removed');
       assert.equal(this.$('input').attr('value'), '2', 'Correct option is removed');
-    });
-    run.end();
+    }, 100);
   });
 });

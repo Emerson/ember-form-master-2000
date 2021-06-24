@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { A } from '@ember/array';
-import { run } from '@ember/runloop';
+import { run,later } from '@ember/runloop';
 import EmberObject from '@ember/object';
 
 function mockWidgetAttrs(options=[['one', 1], ['two', 2]]){
@@ -107,31 +107,24 @@ module('Integration | Component | fm-widget:select', function(hooks) {
    this.set('widgetAttrs', mockWidgetAttrs([]));
    await render(hbs `{{fm-widgets/select widgetAttrs=widgetAttrs}}`);
 
-   run.begin();
-   run.schedule('sync', () => {
-     this.get('widgetAttrs.content').pushObject({value: 'qux', label: 'qux'});
-   });
-   run.schedule('afterRender', () => {
-     assert.equal(this.$('option').length, 1, 'Option is added after content array changes');
-     assert.equal(this.$('option').text().trim(), 'qux', 'Label of new content array element is added');
-     assert.equal(this.$('option').attr('value'), 'qux', 'Value of new content array element is added');
-   });
-   run.end();
+   this.get('widgetAttrs.content').pushObject({value: 'qux', label: 'qux'});
+
+   later(()=> {
+      assert.equal(this.$('option').length, 1, 'Option is added after content array changes');
+      assert.equal(this.$('option').text().trim(), 'qux', 'Label of new content array element is added');
+      assert.equal(this.$('option').attr('value'), 'qux', 'Value of new content array element is added');
+    }, 100);
   });
 
   test('fm-widgets/select updates options if an element is removed from content array', async function(assert) {
    this.set('widgetAttrs', mockWidgetAttrs([['foo', 'foo'], ['bar', 'bar']]));
    await render(hbs `{{fm-widgets/select widgetAttrs=widgetAttrs}}`);
+   this.get('widgetAttrs.content').removeAt(0);
 
-   run.begin();
-   run.schedule('sync', () => {
-     this.get('widgetAttrs.content').removeAt(0);
-   });
-   run.schedule('afterRender', () => {
-     assert.equal(this.$('option').length, 1, 'Option is removed after element of content array is removed');
-     assert.equal(this.$('option').text().trim(), 'bar', 'Correct element is removed');
-   });
-   run.end();
+   later(()=> {
+    assert.equal(this.$('option').length, 1, 'Option is removed after element of content array is removed');
+    assert.equal(this.$('option').text().trim(), 'bar', 'Correct element is removed');
+  }, 100);
   });
 
   test('sends action onUserAction on focus out event', async function(assert) {
