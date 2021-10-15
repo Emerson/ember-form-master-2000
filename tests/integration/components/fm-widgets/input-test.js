@@ -7,16 +7,12 @@ module('Integration | Component | fm-widgets:input', function(hooks) {
   setupRenderingTest(hooks);
 
   test('action onUserAction is send on focus out event', async function(assert) {
-    await render(hbs `{{fm-widgets/input onUserInteraction=(action externalAction)}}`);
-    this.pauseTest()
-    // assert.expect(1);
     this.set('externalAction', () => {
       assert.ok(true);
     });
-    
-     
+    await render(hbs `{{fm-widgets/input onUserInteraction=(action externalAction)}}`);
+    assert.expect(1);
     this.$('input').trigger('focusout');
-    //await triggerEvent('input', 'focusout');
   });
 
   test('action onKeyUp is sent on key key', async function(assert) {

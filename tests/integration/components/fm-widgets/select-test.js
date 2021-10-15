@@ -20,7 +20,6 @@ module('Integration | Component | fm-widget:select', function (hooks) {
   test('fm-widgets/select renders properly', async function (assert) {
     this.set('widgetAttrs', mockWidgetAttrs());
     await render(hbs`{{fm-widgets/select widgetAttrs=widgetAttrs}}`);
-    await this.pauseTest()
     assert.ok(findAll('select').length, 'Renders a select');
     assert.ok(findAll('.form-control').length === 1, 'Has the class of form-control');
   });
@@ -69,8 +68,8 @@ module('Integration | Component | fm-widget:select', function (hooks) {
       optionLabelPath: 'label'
     }));
     await render(hbs`{{fm-field type='select' widgetAttrs=widgetAttrs value=value}}`);
-    await triggerEvent('select', 'change');
-    assert.dom('option:checked').hasValue(this.value);
+    this.$('select').change();
+    assert.equal(this.$('option:selected').val(), this.get('value'));
   });
 
   test('fm-widgets/select changes the selected option when the passed in value changes', async function (assert) {
@@ -138,7 +137,7 @@ module('Integration | Component | fm-widget:select', function (hooks) {
       assert.ok(true);
     });
     await render(hbs`{{fm-widgets/select widgetAttrs=widgetAttrs onUserInteraction=(action externalAction)}}`);
-    await triggerEvent('select', 'focusout');
+    this.$('select').trigger('focusout');
   });
 
   test('sends action onUserAction on change event', async function (assert) {
