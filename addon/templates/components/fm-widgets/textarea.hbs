@@ -4,13 +4,7 @@
 
 {{#if isSelect}}
 
-  {{fm-select
-    content=content
-    optionValuePath=optionValuePath
-    optionLabelPath=optionLabelPath
-    prompt=prompt
-    value=value
-  }}
+  <FmSelect @content={{content}} @optionValuePath={{optionValuePath}} @optionLabelPath={{optionLabelPath}} @prompt={{prompt}} @value={{value}} />
 
 {{/if}}
 
@@ -21,18 +15,14 @@
 
 {{#if isBasicInput}}
 
-  {{input
-    type=type
-    value=value
-    classNameBindings='errorClass inputClass'
-    placeholder=placeholder}}
+  <Input @type={{type}} @value={{value}} @classNameBindings="errorClass inputClass" placeholder={{placeholder}} />
 
 {{/if}}
 
 {{#if errors}}
-  {{fm-errortext errors=errors}}
+  <FmErrortext @errors={{errors}} />
 {{/if}}
 
 {{#if helptext}}
-  {{fm-helptext helptext=helptext}}
+  <FmHelptext @helptext={{helptext}} />
 {{/if}}

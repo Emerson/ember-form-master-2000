@@ -1,10 +1,3 @@
 {{#each widgetAttrs.content as |option|}}
-  {{fm-field
-    widget='radio'
-    display='radio'
-    value=value
-    targetValue=(get option widgetAttrs.optionValuePath)
-    label=(get option widgetAttrs.optionLabelPath)
-    onUserInteraction=(action 'radioButtonInteraction')
-  }}
+  <FmField @widget="radio" @display="radio" @value={{value}} @targetValue={{get option widgetAttrs.optionValuePath}} @label={{get option widgetAttrs.optionLabelPath}} @onUserInteraction={{action "radioButtonInteraction"}} />
 {{/each}}

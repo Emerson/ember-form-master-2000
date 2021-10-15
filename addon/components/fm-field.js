@@ -46,7 +46,7 @@ export default Component.extend({
   isValid: false,
 
   display: computed('widget', function(){
-    const widget = this.get('widget');
+    const widget = this.widget;
     if (widget === 'checkbox'){
       return 'checkbox';
     } else if (widget === 'radio'){
@@ -59,7 +59,7 @@ export default Component.extend({
   }),
 
   displayName: computed(function() {
-    return this.get('fmConfig.displayBasePath') + this.get('display');
+    return this.get('fmConfig.displayBasePath') + this.display;
   }),
 
   placeholder: null,
@@ -70,7 +70,7 @@ export default Component.extend({
   fmConfig: inject('fm-config'),
 
   dataTest: computed(function() {
-    return this.get('data-test');
+    return this['data-test'];
   }),
 
   widgetAttrs: computed(function(){
@@ -81,7 +81,7 @@ export default Component.extend({
   widget: 'input',
 
   widgetName: computed('widget', function(){
-    return this.get('fmConfig.widgetBasePath') + this.get('widget');
+    return this.get('fmConfig.widgetBasePath') + this.widget;
   }),
 
   generateSafeId(id) {
@@ -98,7 +98,7 @@ export default Component.extend({
   }),
 
   visibleErrors: computed('shouldShowErrors', 'errors.[]', function() {
-    return this.get('shouldShowErrors') ? this.get('errors') : [];
+    return this.shouldShowErrors ? this.errors : [];
   }),
 
   actions: {

@@ -16,11 +16,11 @@ export default Component.extend({
 
   submit(e) {
     e.preventDefault();
-    this.get('childViews').forEach(childView => {
+    this.childViews.forEach(childView => {
       if (childView.get('shouldShowErrors') === false) {
         childView.set('shouldShowErrors', true);
       }
     });
-    this.sendAction('action', this.get('for'));
+    this.sendAction('action', this['for']);
   }
 });

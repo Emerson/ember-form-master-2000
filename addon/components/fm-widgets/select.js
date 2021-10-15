@@ -22,7 +22,7 @@ export default Component.extend({
 
   init() {
     this._super(arguments);
-    const wAttrs = this.get('widgetAttrs');
+    const wAttrs = this.widgetAttrs;
     //if(!!this.attrs.forAttribute) {
       //this.set('elementId', this.attrs.forAttribute);
     //}

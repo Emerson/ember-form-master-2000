@@ -7,12 +7,12 @@ export default Component.extend({
   styles: inject('fm-config'),
   inputClasses: computed('styles.{errorClass,inputClass}', 'visibleErrors', function() {
     let classNames = [];
-    if (this.get('formControlClass')) {
+    if (this.formControlClass) {
       classNames.push('formControlClass')
     } else {
       classNames.push('styles.inputClass')
     }
-    let visibleErrors = this.get('visibleErrors');
+    let visibleErrors = this.visibleErrors;
     if(visibleErrors && visibleErrors.length > 0) {
       classNames.push('styles.errorClass');
     }

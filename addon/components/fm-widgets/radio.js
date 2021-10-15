@@ -7,7 +7,7 @@ export default Component.extend({
   layout: layout,
 
   checked: computed('value', 'widgetAttrs.targetValue', function() {
-    return !!this.get('value') && this.get('value') === this.get('widgetAttrs.targetValue');
+    return !!this.value && this.value === this.get('widgetAttrs.targetValue');
   }),
 
   didReceiveAttrs(){

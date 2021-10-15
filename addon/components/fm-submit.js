@@ -16,6 +16,6 @@ export default Component.extend({
   tagName: 'div',
 
   dataTest: computed(function() {
-    return this.get('data-test');
+    return this['data-test'];
   })
 });

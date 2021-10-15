@@ -30,7 +30,7 @@ export default Route.extend({
     },
 
     toggleErrors: function() {
-      var model = this.get('currentModel').exampleModel;
+      var model = this.currentModel.exampleModel;
       if(model.get('errors')) {
         model.set('errors', null);
       }else{
