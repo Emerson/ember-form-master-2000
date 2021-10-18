@@ -78,9 +78,14 @@ export default Component.extend({
     return this.get('data-test');
   }),
 
-  widgetAttrs: computed(function(){
-    // hack to support legacy apis
-    return WidgetAttrs.create({ field: this });
+  widgetAttrs: computed({
+    get() {
+      // hack to support legacy apis
+      return WidgetAttrs.create({ field: this });
+    },
+    set(key, value){
+      return this._widgetAttrs = value
+    }
   }),
 
   widget: 'input',
