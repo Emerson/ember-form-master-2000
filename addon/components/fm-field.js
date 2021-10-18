@@ -45,16 +45,21 @@ export default Component.extend({
   isFocused: false,
   isValid: false,
 
-  display: computed('widget', function(){
-    const widget = this.get('widget');
-    if (widget === 'checkbox'){
-      return 'checkbox';
-    } else if (widget === 'radio'){
-      return 'radio';
-    } else if (widget === 'radio-group'){
-      return 'radio-group';
-    } else {
-      return 'default';
+  display: computed('widget', {
+    get() {
+      const widget = this.get('widget');
+      if (widget === 'checkbox'){
+        return 'checkbox';
+      } else if (widget === 'radio'){
+        return 'radio';
+      } else if (widget === 'radio-group'){
+        return 'radio-group';
+      } else {
+        return 'default';
+      }
+    },
+    set(key, value) {
+      return this._display = value
     }
   }),
 
@@ -93,8 +98,13 @@ export default Component.extend({
     return id;
   },
 
-  shouldShowErrors: computed('fmConfig.showErrorsByDefault', function() {
-    return this.get('fmConfig.showErrorsByDefault');
+  shouldShowErrors: computed('fmConfig.showErrorsByDefault', {
+    get() {
+      return this.get('fmConfig.showErrorsByDefault');
+    },
+    set(key,value) {
+      return this._shouldShowErrors = value;
+    }
   }),
 
   visibleErrors: computed('shouldShowErrors', 'errors.[]', function() {
