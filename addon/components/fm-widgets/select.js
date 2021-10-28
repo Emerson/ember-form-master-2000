@@ -3,7 +3,7 @@
 import layout from '../../templates/components/fm-widgets/select';
 
 import Component from '@ember/component';
-import { set, get, getWithDefault, computed } from '@ember/object';
+import { get, getWithDefault, computed } from '@ember/object';
 import { inject } from '@ember/service';
 const { reads, oneWay } = computed;
 
@@ -19,18 +19,6 @@ export default Component.extend({
   selectClass: reads('fmConfig.selectClass'),
 
   isDisabled: oneWay('widgetAttrs.disabled'),
-
-  init() {
-    this._super(arguments);
-    const wAttrs = this.get('widgetAttrs');
-    //if(!!this.attrs.forAttribute) {
-      //this.set('elementId', this.attrs.forAttribute);
-    //}
-
-    if(!wAttrs.content) {
-      set(wAttrs, 'content', []);
-    }
-  },
 
   change() {
     const selectEl = this.$()[0];

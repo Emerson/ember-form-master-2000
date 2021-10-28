@@ -9,8 +9,6 @@ window.deprecationWorkflow.config = {
     { handler: "silence", matchId: "this-property-fallback" },
     { handler: "silence", matchId: "ember-metal.get-with-default" },
     { handler: "silence", matchId: "ember-component.send-action" },
-    { handler: "log", matchId: "computed-property.override" },
     { handler: "silence", matchId: "ember.built-in-components.legacy-arguments" },
-    { handler: "silence", matchId: "setting-on-hash" },
   ]
 };
