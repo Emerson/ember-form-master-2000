@@ -7,15 +7,15 @@ export default Component.extend({
   layout,
 
   change(e) {
-    this.sendAction('onUserInteraction', e, this);
+    this.onUserInteraction(e, this);
   },
 
   focusOut(e) {
-    this.sendAction('onUserInteraction', e, this);
-    this.sendAction('onBlur', e, this);
+    this.onUserInteraction(e, this);
+    this.onBlur(e, this);
   },
 
   focusIn(e) {
-    this.sendAction('onFocus', e, this);
+    this.onFocus(e, this);
   }
 });

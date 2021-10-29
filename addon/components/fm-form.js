@@ -21,6 +21,6 @@ export default Component.extend({
         childView.set('shouldShowErrors', true);
       }
     });
-    this.sendAction('action', this.get('for'));
+    this.action(this.for);
   }
 });

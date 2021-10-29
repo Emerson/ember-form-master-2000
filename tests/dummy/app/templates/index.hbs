@@ -1,7 +1,7 @@
 <div class="row">
 
   <div class="col-sm-8">
-    {{#fm-form action='submit'}}
+    {{#fm-form action=(action send 'submit')}}
 
       {{fm-field label='First Name'
         value=model.exampleModel.first_name

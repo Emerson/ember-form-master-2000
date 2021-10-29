@@ -7,7 +7,9 @@ export default Component.extend({
   layout,
   actions: {
     radioButtonInteraction(){
-      this.sendAction('onUserInteraction');
+      if (this.onUserInteraction) {
+        this.onUserInteraction();
+      }
     }
   }
 });
