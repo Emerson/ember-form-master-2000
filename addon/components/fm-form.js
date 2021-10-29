@@ -21,6 +21,8 @@ export default Component.extend({
         childView.set('shouldShowErrors', true);
       }
     });
-    this.action(this.for);
+    if (this.action) {
+      this.action(this.get('for'));
+    }
   }
 });

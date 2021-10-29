@@ -118,24 +118,20 @@ export default Component.extend({
 
   actions: {
 
-    onKeyUp(e, instance) {
-      this.sendAction('onKeyUp', e, instance);
-    },
+    onKeyUp() {},
 
-    onBlur(e, instance) {
+    onBlur() {
       this.set('isFocused', false);
-      this.sendAction('onBlur', e, instance);
     },
 
-    onFocus(e, instance) {
+    onFocus() {
       this.set('isFocused', true);
-      this.sendAction('onFocus', e, instance);
     },
 
     userInteraction() {
       this.set('shouldShowErrors', true);
-      if (this.attrs.onUserInteraction && typeof this.attrs.onUserInteraction === 'function'){
-        this.attrs.onUserInteraction();
+      if (this.onUserInteraction && typeof this.onUserInteraction === 'function'){
+        this.onUserInteraction();
       }
     },
 
