@@ -1,38 +1,38 @@
-{{#if label}}
-  <label class='{{labelClass}}'>{{label}}</label>
+{{#if this.label}}
+  <label class='{{this.labelClass}}'>{{this.label}}</label>
 {{/if}}
 
-{{#if isSelect}}
+{{#if this.isSelect}}
 
   {{fm-select
-    content=content
-    optionValuePath=optionValuePath
-    optionLabelPath=optionLabelPath
-    prompt=prompt
-    value=value
+    content=this.content
+    optionValuePath=this.optionValuePath
+    optionLabelPath=this.optionLabelPath
+    prompt=this.prompt
+    value=this.value
   }}
 
 {{/if}}
 
 
-{{#if isTextarea}}
+{{#if this.isTextarea}}
 
 {{/if}}
 
-{{#if isBasicInput}}
+{{#if this.isBasicInput}}
 
   {{input
-    type=type
-    value=value
+    type=this.type
+    value=this.value
     classNameBindings='errorClass inputClass'
-    placeholder=placeholder}}
+    placeholder=this.placeholder}}
 
 {{/if}}
 
-{{#if errors}}
-  {{fm-errortext errors=errors}}
+{{#if this.errors}}
+  {{fm-errortext errors=this.errors}}
 {{/if}}
 
-{{#if helptext}}
-  {{fm-helptext helptext=helptext}}
+{{#if this.helptext}}
+  {{fm-helptext helptext=this.helptext}}
 {{/if}}
