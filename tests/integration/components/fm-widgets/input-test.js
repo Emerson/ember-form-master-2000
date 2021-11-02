@@ -11,7 +11,7 @@ module('Integration | Component | fm-widgets:input', function(hooks) {
     this.set('externalAction', () => {
       assert.ok(true);
     });
-     await render(hbs`{{fm-widgets/input onUserInteraction=(action externalAction)}}`);
+     await render(hbs`{{fm-widgets/input onUserInteraction=(action this.externalAction)}}`);
     this.$('input').trigger('focusout');
   });
 
@@ -20,7 +20,7 @@ module('Integration | Component | fm-widgets:input', function(hooks) {
     this.set('externalAction', ()=> {
       assert.ok(true);
     });
-    await render(hbs`{{fm-widgets/input onKeyUp=(action externalAction)}}`);
+    await render(hbs`{{fm-widgets/input onKeyUp=(action this.externalAction)}}`);
     this.$('input').trigger('keyup');
   });
 });

@@ -11,7 +11,7 @@ module('Integration | Component | fm-widget:textarea', function(hooks) {
     this.set('externalAction', () => {
       assert.ok(true);
     });
-    await render(hbs`{{fm-widgets/textarea onUserInteraction=(action externalAction)}}`);
+    await render(hbs`{{fm-widgets/textarea onUserInteraction=(action this.externalAction)}}`);
     this.$('textarea').trigger('focusout');
   });
 });
