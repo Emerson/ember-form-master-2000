@@ -33,13 +33,13 @@ module('Integration | Component | fm-field', function(hooks) {
     assert.expect(1);
     this.set('assertCalled', () => assert.ok(true));
     this.set('content', A(['something',]));
-    await render(hbs`{{fm-field widget='select' content=content action=(action assertCalled)}}`);
+    await render(hbs`{{fm-field widget='select' content=this.content action=(action this.assertCalled)}}`);
     this.$('select').change();
   });
 
   test('selection option label is updated when property changes', async function(assert) {
     this.set('content', [{label: 'foo', value: 'foo'}]);
-    await render(hbs `{{fm-field widget='select' content=content optionLabelPath='label'}}`);
+    await render(hbs `{{fm-field widget='select' content=this.content optionLabelPath='label'}}`);
     assert.equal(this.$('option').text().trim(), 'foo');
     this.set('content.0.label', 'bar');
     assert.equal(this.$('option').text().trim(), 'bar');
@@ -50,7 +50,7 @@ module('Integration | Component | fm-field', function(hooks) {
     config.set('showErrorsByDefault', false);
 
     this.set('errors', A(['error message']));
-    await render(hbs `{{fm-field errors=errors}}`);
+    await render(hbs `{{fm-field errors=this.errors}}`);
     assert.ok(
       this.$('.help-block').length === 0,
       'error message is not shown before user interaction'
@@ -81,7 +81,7 @@ module('Integration | Component | fm-field', function(hooks) {
 
   test('has-error class should only be applied when errors are present', async function(assert) {
     this.set('errors', A([]));
-    await render(hbs `{{fm-field widget='textarea' errors=errors}}`);
+    await render(hbs `{{fm-field widget='textarea' errors=this.errors}}`);
     assert.ok(
       this.$('.has-error').length === 0,
       'error class is not applied unless errors are present'
@@ -92,7 +92,7 @@ module('Integration | Component | fm-field', function(hooks) {
     let config = this.owner.lookup('service:fm-config');
     config.set('showErrorsByDefault', false);
     this.set('errors', A(['error message']));
-    await render(hbs `{{fm-field widget='textarea' errors=errors}}`);
+    await render(hbs `{{fm-field widget='textarea' errors=this.errors}}`);
     assert.ok(
       this.$('.help-block').length === 0,
       'error message is not shown before user interaction'
@@ -125,7 +125,7 @@ module('Integration | Component | fm-field', function(hooks) {
     let config = this.owner.lookup('service:fm-config');
     config.set('showErrorsByDefault', false);
     this.set('errors', A(['error message']));
-    await render(hbs `{{fm-field widget='select' errors=errors}}`);
+    await render(hbs `{{fm-field widget='select' errors=this.errors}}`);
     assert.ok(
       this.$('.help-block').length === 0,
       'error message is not shown before user interaction'
@@ -158,7 +158,7 @@ module('Integration | Component | fm-field', function(hooks) {
     let config = this.owner.lookup('service:fm-config');
     config.set('showErrorsByDefault', false);
     this.set('errors', A(['error message']));
-    await render(hbs `{{fm-field widget='checkbox' errors=errors}}`);
+    await render(hbs `{{fm-field widget='checkbox' errors=this.errors}}`);
     assert.ok(
       this.$('.help-block').length === 0,
       'error message is not shown before user interaction'
@@ -192,7 +192,7 @@ module('Integration | Component | fm-field', function(hooks) {
     config.set('showErrorsByDefault', false);
     this.set('errors', A(['error message']));
     this.set('content', [{value: 'foo', label: 'foo'}]);
-    await render(hbs `{{fm-field widget='radio-group' errors=errors content=content}}`);
+    await render(hbs `{{fm-field widget='radio-group' errors=this.errors content=this.content}}`);
     assert.ok(
       this.$('.help-block').length === 0,
       'error message is not shown before user interaction'

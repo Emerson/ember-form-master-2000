@@ -1,11 +1,11 @@
 <button
-  data-test={{dataTest}}
-  value={{value}}
-  disabled={{disabled}}
-  class='{{submitButtonClass}}'
+  data-test={{this.dataTest}}
+  value={{this.value}}
+  disabled={{this.disabled}}
+  class='{{this.submitButtonClass}}'
   type="submit">
-  {{#if value}}
-    {{value}}
+  {{#if this.value}}
+    {{this.value}}
   {{/if}}
   {{yield}}
 </button>

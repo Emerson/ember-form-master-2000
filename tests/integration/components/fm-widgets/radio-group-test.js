@@ -19,7 +19,7 @@ module('Integration | Component | fm-widget:radio-group', function (hooks) {
 
   test('renders radio buttons for each content item provided', async function (assert) {
     this.set('widgetAttrs', mockWidgetAttrs());
-    await render(hbs`{{fm-widgets/radio-group widgetAttrs=widgetAttrs}}`);
+    await render(hbs`{{fm-widgets/radio-group widgetAttrs=this.widgetAttrs}}`);
     assert.equal(this.$('input').length, 2, 'It rendered two radio buttons');
     assert.equal(this.$('label').length, 2, 'It rendered two labels');
     assert.equal(this.$('label:first').text().trim(), 'one', 'Label text is set properly');
@@ -29,7 +29,7 @@ module('Integration | Component | fm-widget:radio-group', function (hooks) {
   test('checks the radio button which value property in content array matches value', async function (assert) {
     this.set('value', 2);
     this.set('widgetAttrs', mockWidgetAttrs());
-    await render(hbs`{{fm-widgets/radio-group value=value widgetAttrs=widgetAttrs}}`);
+    await render(hbs`{{fm-widgets/radio-group value=this.value widgetAttrs=this.widgetAttrs}}`);
     assert.notOk(this.$('input')[0].checked);
     assert.ok(this.$('input')[1].checked);
   });
@@ -37,14 +37,14 @@ module('Integration | Component | fm-widget:radio-group', function (hooks) {
   test('updates value if one radio button is clicked', async function (assert) {
     this.set('value', null);
     this.set('widgetAttrs', mockWidgetAttrs());
-    await render(hbs`{{fm-widgets/radio-group value=value widgetAttrs=widgetAttrs}}`);
+    await render(hbs`{{fm-widgets/radio-group value=this.value widgetAttrs=this.widgetAttrs}}`);
     this.$('input')[0].click();
     assert.equal(this.get('value'), 1);
   });
 
   test('Observes changes of content arrays label and value', async function (assert) {
     this.set('widgetAttrs', mockWidgetAttrs(['foo', 'foo']));
-    await render(hbs`{{fm-widgets/radio-group widgetAttrs=widgetAttrs}}`);
+    await render(hbs`{{fm-widgets/radio-group widgetAttrs=this.widgetAttrs}}`);
     this.set('widgetAttrs.content.0.label', 'bar');
     assert.equal(this.$('label:first').text().trim(), 'bar');
     this.set('widgetAttrs.content.0.value', 'bar');
@@ -54,7 +54,7 @@ module('Integration | Component | fm-widget:radio-group', function (hooks) {
   test('Adds another option if an element is added to content array', async function (assert) {
     assert.expect(3);
     this.set('widgetAttrs', mockWidgetAttrs([]));
-    await render(hbs`{{fm-widgets/radio-group widgetAttrs=widgetAttrs}}`);
+    await render(hbs`{{fm-widgets/radio-group widgetAttrs=this.widgetAttrs}}`);
 
     this.get('widgetAttrs.content').pushObject({ label: 'foo', value: 'foo' });
     later(() => {
@@ -67,7 +67,7 @@ module('Integration | Component | fm-widget:radio-group', function (hooks) {
   test('Option is removed if element is removed from content array', async function (assert) {
     assert.expect(2);
     this.set('widgetAttrs', mockWidgetAttrs());
-    await render(hbs`{{fm-widgets/radio-group widgetAttrs=widgetAttrs}}`);
+    await render(hbs`{{fm-widgets/radio-group widgetAttrs=this.widgetAttrs}}`);
 
     this.get('widgetAttrs.content').removeAt(0);
     later(() => {

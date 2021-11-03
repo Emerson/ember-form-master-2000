@@ -1,27 +1,27 @@
-<div data-test={{dataTest}}
-     class="{{styles.wrapperClass}}
-            {{if isFocused styles.focusClass}}
-            {{if visibleErrors.length styles.errorClass}}
-            {{if isValid styles.isValidClass}}
-            {{formGroupClass}}">
-  {{#if label}}
-    <label for="{{forAttribute}}"
-           class="{{styles.labelClass}}">
-      {{{label}}}
+<div data-test={{this.dataTest}}
+     class="{{this.styles.wrapperClass}}
+            {{if this.isFocused this.styles.focusClass}}
+            {{if this.visibleErrors.length this.styles.errorClass}}
+            {{if this.isValid this.styles.isValidClass}}
+            {{this.formGroupClass}}">
+  {{#if this.label}}
+    <label for="{{this.forAttribute}}"
+           class="{{this.styles.labelClass}}">
+      {{{this.label}}}
     </label>
   {{/if}}
 
-  {{yield inputClasses}}
+  {{yield this.inputClasses}}
 
-  {{#if visibleErrors.length}}
-    <span class="{{styles.errortextClass}}">
-      {{visibleErrors.firstObject}}
+  {{#if this.visibleErrors.length}}
+    <span class="{{this.styles.errortextClass}}">
+      {{this.visibleErrors.firstObject}}
     </span>
   {{/if}}
 
-  {{#if helptext}}
-    <span class="{{styles.helptextClass}}">
-      {{helptext}}
+  {{#if this.helptext}}
+    <span class="{{this.styles.helptextClass}}">
+      {{this.helptext}}
     </span>
   {{/if}}
 </div>
