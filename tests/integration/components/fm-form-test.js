@@ -19,7 +19,7 @@ module('Integration | Component | fm-form', function(hooks) {
 
   test('it uses allows classNames to be passed in', async function(assert) {
     this.set('classNames', ['ember-view', 'form-horizontal']);
-    await render(hbs `{{#fm-form classNames=classNames}}{{/fm-form}}`);
+    await render(hbs `{{#fm-form classNames=this.classNames}}{{/fm-form}}`);
     assert.ok(this.$('form').hasClass('form-horizontal'), 'Has the form-horizontal class');
   });
 
@@ -29,7 +29,7 @@ module('Integration | Component | fm-form', function(hooks) {
     this.set('errors', ['error message']);
     await render(hbs `
       {{#fm-form}}
-        {{fm-field errors=errors}}
+        {{fm-field errors=this.errors}}
       {{/fm-form}}
     `);
     assert.notOk(this.$('.form-group').hasClass('has-error'));

@@ -1,13 +1,13 @@
-<div class="{{styles.checkboxWrapperClass}} {{if isFocused styles.focusClass}} {{if visibleErrors.length styles.errorClass}} {{formGroupClass}}">
+<div class="{{this.styles.checkboxWrapperClass}} {{if this.isFocused this.styles.focusClass}} {{if this.visibleErrors.length this.styles.errorClass}} {{this.formGroupClass}}">
   <div class="checkbox">
     <label>
       {{yield}}
-      {{label}}
+      {{this.label}}
     </label>
 
-    {{#if visibleErrors.length}}
-      <span class="{{styles.errortextClass}}">
-        {{visibleErrors.firstObject}}
+    {{#if this.visibleErrors.length}}
+      <span class="{{this.styles.errortextClass}}">
+        {{this.visibleErrors.firstObject}}
       </span>
     {{/if}}
   </div>

@@ -3,7 +3,7 @@
 import layout from '../../templates/components/fm-widgets/select';
 
 import Component from '@ember/component';
-import { get, getWithDefault, computed } from '@ember/object';
+import { set, get, computed } from '@ember/object';
 import { inject } from '@ember/service';
 const { reads, oneWay } = computed;
 
@@ -32,7 +32,10 @@ export default Component.extend({
 
     const selection = content.objectAt(contentIndex);
 
-    const path = getWithDefault(wAttrs, 'optionValuePath', '');
+    let path = get(wAttrs, 'optionValuePath')
+    if (path === undefined) {
+      path = ''
+    }
     const value = (path.length > 0)? get(selection, path) : selection;
     // support using two way binding or data down/actions up
     if (typeof this.attrs.action === 'function'){
