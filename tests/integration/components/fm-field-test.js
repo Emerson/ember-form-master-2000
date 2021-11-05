@@ -4,6 +4,7 @@ import { render, blur, find, findAll, triggerEvent } from '@ember/test-helpers';
 import { A } from '@ember/array';
 import hbs from 'htmlbars-inline-precompile';
 import fmConfig from 'ember-form-master-2000/services/fm-config';
+import $ from 'jquery';
 
 module('Integration | Component | fm-field', function(hooks) {
   setupRenderingTest(hooks);
@@ -58,7 +59,7 @@ module('Integration | Component | fm-field', function(hooks) {
     assert.dom('.form-group').hasNoClass('has-error', 'errorClass is not there before user interaction');
 
     // For some reason we need both the blur helper AND the jQuery trigger...
-    await triggerEvent('input', 'focusout');
+    $('input').trigger('focusout');
     await blur(findAll('input')[0]);
 
     assert.ok(
@@ -91,7 +92,7 @@ module('Integration | Component | fm-field', function(hooks) {
     assert.dom('.form-group').hasNoClass('has-error', 'errorClass is not there before user interaction');
 
     // For some reason we need both the blur helper AND the jQuery trigger...
-    await triggerEvent('textarea', 'focusout');
+    $('textarea').trigger('focusout');
     await blur(findAll('textarea')[0]);
 
     assert.ok(
@@ -115,7 +116,7 @@ module('Integration | Component | fm-field', function(hooks) {
     assert.dom('.form-group').hasNoClass('has-error', 'errorClass is not there before user interaction');
 
     // For some reason we need both the blur helper AND the jQuery trigger...
-    await triggerEvent('select', 'focusout');
+    $('select').trigger('focusout');
     await blur(findAll('select')[0]);
 
     assert.ok(
@@ -139,7 +140,7 @@ module('Integration | Component | fm-field', function(hooks) {
     assert.dom('.form-group').hasNoClass('has-error', 'there is no errorClass before user interaction');
 
     // For some reason we need both the blur helper AND the jQuery trigger...
-    await triggerEvent('input', 'focusout');
+    $('input').trigger('focusout');
     await blur(findAll('input')[0]);
 
     assert.dom('.help-block').hasText('error message', 'error message is shown after user interaction');
@@ -161,7 +162,7 @@ module('Integration | Component | fm-field', function(hooks) {
     assert.dom('.form-group').hasNoClass('has-error', 'errorClass is not present before user interaction');
 
     // For some reason we need both the blur helper AND the jQuery trigger...
-    await triggerEvent('input', 'focusout');
+    $('input').trigger('focusout');
     await blur(findAll('input')[0]);
 
     assert.dom('.help-block').hasText('error message', 'error message is shown after user interaction');
