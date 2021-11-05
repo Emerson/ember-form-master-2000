@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, find, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { A } from '@ember/array';
 import { later } from '@ember/runloop';
@@ -20,10 +20,10 @@ module('Integration | Component | fm-widget:radio-group', function (hooks) {
   test('renders radio buttons for each content item provided', async function (assert) {
     this.set('widgetAttrs', mockWidgetAttrs());
     await render(hbs`{{fm-widgets/radio-group widgetAttrs=this.widgetAttrs}}`);
-    assert.equal(this.$('input').length, 2, 'It rendered two radio buttons');
-    assert.equal(this.$('label').length, 2, 'It rendered two labels');
+    assert.dom('input').exists({ count: 2 }, 'It rendered two radio buttons');
+    assert.dom('label').exists({ count: 2 }, 'It rendered two labels');
     assert.equal(this.$('label:first').text().trim(), 'one', 'Label text is set properly');
-    assert.equal(this.$('input').attr('value'), '1', 'Value is set propery');
+    assert.dom('input').hasAttribute('value', '1', 'Value is set propery');
   });
 
   test('checks the radio button which value property in content array matches value', async function (assert) {
@@ -58,9 +58,9 @@ module('Integration | Component | fm-widget:radio-group', function (hooks) {
 
     this.get('widgetAttrs.content').pushObject({ label: 'foo', value: 'foo' });
     later(() => {
-      assert.equal(this.$('input').length, 1, 'Option is added');
-      assert.equal(this.$('input').attr('value'), 'foo', 'Value of new option is correct');
-      assert.equal(this.$('label').text().trim(), 'foo', 'Label of new option is correct');
+      assert.dom('input').exists({ count: 1 }, 'Option is added');
+      assert.dom('input').hasAttribute('value', 'foo', 'Value of new option is correct');
+      assert.dom('label').hasText('foo', 'Label of new option is correct');
     }, 100);
   });
 
@@ -71,8 +71,8 @@ module('Integration | Component | fm-widget:radio-group', function (hooks) {
 
     this.get('widgetAttrs.content').removeAt(0);
     later(() => {
-      assert.equal(this.$('input').length, 1, 'Option is removed');
-      assert.equal(this.$('input').attr('value'), '2', 'Correct option is removed');
+      assert.dom('input').exists({ count: 1 }, 'Option is removed');
+      assert.dom('input').hasAttribute('value', '2', 'Correct option is removed');
     }, 100);
   });
 });

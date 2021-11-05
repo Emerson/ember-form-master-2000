@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, triggerEvent } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | fm-widgets:input', function(hooks) {
@@ -11,8 +11,8 @@ module('Integration | Component | fm-widgets:input', function(hooks) {
     this.set('externalAction', () => {
       assert.ok(true);
     });
-     await render(hbs`{{fm-widgets/input onUserInteraction=(action this.externalAction)}}`);
-    this.$('input').trigger('focusout');
+    await render(hbs`{{fm-widgets/input onUserInteraction=(action this.externalAction)}}`);
+    await triggerEvent('input', 'focusout');
   });
 
   test('action onKeyUp is sent on key key', async function(assert) {
@@ -21,6 +21,6 @@ module('Integration | Component | fm-widgets:input', function(hooks) {
       assert.ok(true);
     });
     await render(hbs`{{fm-widgets/input onKeyUp=(action this.externalAction)}}`);
-    this.$('input').trigger('keyup');
+    await triggerEvent('input', 'keyup');
   });
 });
