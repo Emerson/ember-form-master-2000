@@ -55,17 +55,23 @@ export default Component.extend({
     } else {
       this.attrs.value.update(value);
     }
-    this.onUserInteraction();
+    if (this.onUserInteraction) {
+      this.onUserInteraction();
+    }
   },
 
   focusOut(e) {
-    this.onUserInteraction(e, this);
+    if (this.onUserInteraction) {
+      this.onUserInteraction(e, this);
+    }
     if (this.onBlur) {
       this.onBlur(e, this);
     }
   },
 
   focusIn(e) {
-    this.onFocus(e, this);
+    if (this.onFocus) {
+      this.onFocus(e, this);
+    }
   }
 });

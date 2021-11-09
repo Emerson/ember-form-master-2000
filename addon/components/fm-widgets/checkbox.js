@@ -7,15 +7,23 @@ export default Component.extend({
   layout,
 
   change(e) {
-    this.onUserInteraction(e, this);
+    if (this.onUserInteraction) {
+      this.onUserInteraction(e, this);
+    }
   },
 
   focusOut(e) {
-    this.onUserInteraction(e, this);
-    this.onBlur(e, this);
+    if (this.onUserInteraction) {
+      this.onUserInteraction(e, this);
+    }
+    if (this.onBlur) {
+      this.onBlur(e, this);
+    }
   },
 
   focusIn(e) {
-    this.onFocus(e, this);
+    if (this.onFocus) {
+      this.onFocus(e, this);
+    }
   }
 });

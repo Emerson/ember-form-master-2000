@@ -14,18 +14,24 @@ export default TextField.extend({
   }),
 
   focusOut(e) {
-    this.onUserInteraction(e, this);
+    if (this.onUserInteraction) {
+      this.onUserInteraction(e, this);
+    }
     if (this.onBlur) {
       this.onBlur(e, this);
     }
   },
 
   keyUp(e) {
-    this.onKeyUp(e, this);
+    if (this.onKeyUp) {
+      this.onKeyUp(e, this);
+    }
   },
 
   focusIn(e) {
-    this.onFocus(e, this);
+    if (this.onFocus) {
+      this.onFocus(e, this);
+    }
   },
 
   afterRender(){
