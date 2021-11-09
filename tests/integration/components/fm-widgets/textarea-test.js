@@ -1,7 +1,8 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, triggerEvent } from '@ember/test-helpers';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import $ from 'jquery';
 
 module('Integration | Component | fm-widget:textarea', function(hooks) {
   setupRenderingTest(hooks);
@@ -12,6 +13,6 @@ module('Integration | Component | fm-widget:textarea', function(hooks) {
       assert.ok(true);
     });
     await render(hbs`{{fm-widgets/textarea onUserInteraction=(action this.externalAction)}}`);
-    await triggerEvent('textarea', 'focusout');
+    $('textarea').trigger('focusout')
   });
 });

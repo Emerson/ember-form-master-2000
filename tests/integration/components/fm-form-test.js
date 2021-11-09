@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, triggerEvent, find, findAll } from '@ember/test-helpers';
+import { render, triggerEvent, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import fmConfig from 'ember-form-master-2000/services/fm-config';
 

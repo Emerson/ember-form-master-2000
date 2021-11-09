@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, find, findAll } from '@ember/test-helpers';
+import { render, findAll, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { A } from '@ember/array';
 import { later } from '@ember/runloop';
@@ -22,7 +22,7 @@ module('Integration | Component | fm-widget:radio-group', function (hooks) {
     await render(hbs`{{fm-widgets/radio-group widgetAttrs=this.widgetAttrs}}`);
     assert.dom('input').exists({ count: 2 }, 'It rendered two radio buttons');
     assert.dom('label').exists({ count: 2 }, 'It rendered two labels');
-    assert.equal(this.$('label:first').text().trim(), 'one', 'Label text is set properly');
+    assert.dom('label').includesText('one')
     assert.dom('input').hasAttribute('value', '1', 'Value is set propery');
   });
 
@@ -30,15 +30,15 @@ module('Integration | Component | fm-widget:radio-group', function (hooks) {
     this.set('value', 2);
     this.set('widgetAttrs', mockWidgetAttrs());
     await render(hbs`{{fm-widgets/radio-group value=this.value widgetAttrs=this.widgetAttrs}}`);
-    assert.notOk(this.$('input')[0].checked);
-    assert.ok(this.$('input')[1].checked);
+    assert.notOk(findAll('input')[0].checked);
+    assert.ok(findAll('input')[1].checked);
   });
 
   test('updates value if one radio button is clicked', async function (assert) {
     this.set('value', null);
     this.set('widgetAttrs', mockWidgetAttrs());
     await render(hbs`{{fm-widgets/radio-group value=this.value widgetAttrs=this.widgetAttrs}}`);
-    this.$('input')[0].click();
+    findAll('input')[0].click();
     assert.equal(this.get('value'), 1);
   });
 
@@ -46,9 +46,9 @@ module('Integration | Component | fm-widget:radio-group', function (hooks) {
     this.set('widgetAttrs', mockWidgetAttrs(['foo', 'foo']));
     await render(hbs`{{fm-widgets/radio-group widgetAttrs=this.widgetAttrs}}`);
     this.set('widgetAttrs.content.0.label', 'bar');
-    assert.equal(this.$('label:first').text().trim(), 'bar');
+    assert.equal(findAll('label')[0].textContent.trim(), 'bar')
     this.set('widgetAttrs.content.0.value', 'bar');
-    assert.equal(this.$('input:first').attr('value'), 'bar');
+    assert.equal(findAll('input')[0].getAttribute('value'), 'bar')
   });
 
   test('Adds another option if an element is added to content array', async function (assert) {
@@ -62,6 +62,7 @@ module('Integration | Component | fm-widget:radio-group', function (hooks) {
       assert.dom('input').hasAttribute('value', 'foo', 'Value of new option is correct');
       assert.dom('label').hasText('foo', 'Label of new option is correct');
     }, 100);
+    await settled();
   });
 
   test('Option is removed if element is removed from content array', async function (assert) {
@@ -74,5 +75,6 @@ module('Integration | Component | fm-widget:radio-group', function (hooks) {
       assert.dom('input').exists({ count: 1 }, 'Option is removed');
       assert.dom('input').hasAttribute('value', '2', 'Correct option is removed');
     }, 100);
+    await settled();
   });
 });
