@@ -3,7 +3,7 @@
 import layout from '../../templates/components/fm-widgets/select';
 
 import Component from '@ember/component';
-import { set, get } from '@ember/object';
+import { get } from '@ember/object';
 import { inject } from '@ember/service';
 import { reads, oneWay } from '@ember/object/computed';
 
