@@ -1,10 +1,11 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, findAll, triggerEvent, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { A } from '@ember/array';
 import { run, later } from '@ember/runloop';
 import EmberObject from '@ember/object';
+import $ from 'jquery'
 
 function mockWidgetAttrs(options = [['one', 1], ['two', 2]]) {
   return EmberObject.create({
@@ -20,18 +21,18 @@ module('Integration | Component | fm-widget:select', function (hooks) {
   test('fm-widgets/select renders properly', async function (assert) {
     this.set('widgetAttrs', mockWidgetAttrs());
     await render(hbs`{{fm-widgets/select widgetAttrs=this.widgetAttrs}}`);
-    assert.ok(this.$('select').length, 'Renders a select');
-    assert.ok(this.$('.form-control').length === 1, 'Has the class of form-control');
+    assert.ok(findAll('select').length, 'Renders a select');
+    assert.ok(findAll('.form-control').length === 1, 'Has the class of form-control');
   });
 
   test('fm-widgets/select renders an array of content options', async function (assert) {
     this.set('widgetAttrs', mockWidgetAttrs());
     await render(hbs`{{fm-widgets/select widgetAttrs=this.widgetAttrs}}`);
-    assert.ok(this.$('option').length === 2, 'It renders two options');
-    assert.equal(this.$('option:first').text().trim(), 'one');
-    assert.equal(this.$('option:last').text().trim(), 'two');
-    assert.equal(this.$('option:first').attr('value'), 1);
-    assert.equal(this.$('option:last').attr('value'), 2);
+    assert.ok(findAll('option').length === 2, 'It renders two options');
+    assert.equal(findAll('option')[0].textContent.trim(), 'one');
+    assert.equal(findAll('option')[1].textContent.trim(), 'two');
+    assert.equal(findAll('option')[0].getAttribute("value"), 1);
+    assert.equal(findAll('option')[1].getAttribute("value"), 2);
   });
 
   test('fm-widgets/select respects different optionValuePaths and optionLabelPaths', async function (assert) {
@@ -44,32 +45,20 @@ module('Integration | Component | fm-widget:select', function (hooks) {
       optionValuePath: 'itemValue'
     }));
     await render(hbs`{{fm-widgets/select widgetAttrs=this.widgetAttrs}}`);
-    assert.equal(this.$('option:first').text().trim(), 'hi');
-    assert.equal(this.$('option:last').text().trim(), 'bye');
-    assert.equal(this.$('option:first').attr('value'), 'hello');
-    assert.equal(this.$('option:last').attr('value'), 'goodbye');
+    assert.equal(findAll('option')[0].textContent.trim(), 'hi');
+    assert.equal(findAll('option')[1].textContent.trim(), 'bye');
+    assert.equal(findAll('option')[0].getAttribute("value"), 'hello');
+    assert.equal(findAll('option')[1].getAttribute("value"), 'goodbye');
   });
 
   test('entire object is set as value when optionValuePath is empty string', async function (assert) {
     this.set('widgetAttrs', mockWidgetAttrs());
     this.set('widgetAttrs.optionValuePath', '');
     await render(hbs`{{fm-widgets/select widgetAttrs=this.widgetAttrs}}`);
-    assert.equal(this.$('option:first').text().trim(), 'one');
-    assert.equal(this.$('option:last').text().trim(), 'two');
-    assert.equal(this.$('option:first').attr('value'), this.get('widgetAttrs.content').objectAt(0).toString());
-    assert.equal(this.$('option:last').attr('value'), this.get('widgetAttrs.content').objectAt(1).toString());
-  });
-
-  test('fm-widgets/select updates the value of the fm-field by default', async function (assert) {
-    this.set('value', null);
-    this.set('widgetAttrs', EmberObject.create({
-      content: A([{ label: 'one', value: 1 }, { label: 'two', value: 2 }]),
-      optionValuePath: 'value',
-      optionLabelPath: 'label'
-    }));
-    await render(hbs`{{fm-field type='select' widgetAttrs=this.widgetAttrs value=this.value}}`);
-    this.$('select').change();
-    assert.equal(this.$('option:selected').val(), this.get('value'));
+    assert.equal(findAll('option')[0].textContent.trim(), 'one');
+    assert.equal(findAll('option')[1].textContent.trim(), 'two');
+    assert.equal(findAll('option')[0].getAttribute("value"), this.get('widgetAttrs.content').objectAt(0).toString());
+    assert.equal(findAll('option')[1].getAttribute("value"), this.get('widgetAttrs.content').objectAt(1).toString());
   });
 
   test('fm-widgets/select changes the selected option when the passed in value changes', async function (assert) {
@@ -77,9 +66,9 @@ module('Integration | Component | fm-widget:select', function (hooks) {
     this.set('modelValue', 2);
     await render(hbs`{{fm-widgets/select value=this.modelValue widgetAttrs=this.widgetAttrs}}`);
     run(() => {
-      assert.equal(this.$('option:selected').val(), '2', 'The initial value is set correctly');
+      assert.dom('option:checked').hasValue('2', 'The initial value is set correctly');
       this.set('modelValue', 1);
-      assert.equal(this.$('option:selected').val(), '1', 'The selected option updated properly');
+      assert.dom('option:checked').hasValue('1', 'The selected option updated properly');
     });
   });
 
@@ -88,18 +77,18 @@ module('Integration | Component | fm-widget:select', function (hooks) {
     attrs.set('prompt', 'Testing');
     this.set('widgetAttrs', attrs);
     await render(hbs`{{fm-widgets/select widgetAttrs=this.widgetAttrs}}`);
-    assert.ok(this.$('option:disabled').length === 1, 'A prompt option was not rendered as expected');
+    assert.ok(findAll('option:disabled').length === 1, 'A prompt option was not rendered as expected');
   });
 
   test('fm-widgets/select observes changes of label and value in content array', async function (assert) {
     this.set('widgetAttrs', mockWidgetAttrs([['foo', 'foo']]));
     await render(hbs`{{fm-widgets/select widgetAttrs=this.widgetAttrs}}`);
-    assert.equal(this.$('option').text().trim(), 'foo', 'The initial label is correct');
-    assert.equal(this.$('option').attr('value'), 'foo', 'The initial value is correct');
+    assert.dom('option').hasText('foo', 'The initial label is correct');
+    assert.dom('option').hasAttribute('value', 'foo', 'The initial value is correct');
     this.set('widgetAttrs.content.0.label', 'bar');
-    assert.equal(this.$('option').text().trim(), 'bar', 'Label is updated after change of content array');
+    assert.dom('option').hasText('bar', 'Label is updated after change of content array');
     this.set('widgetAttrs.content.0.value', 'bar');
-    assert.equal(this.$('option').attr('value'), 'bar', 'Value is updated after change of content array');
+    assert.dom('option').hasAttribute('value', 'bar', 'Value is updated after change of content array');
   });
 
   test('fm-widgets/select updates options if an element is added to content array', async function (assert) {
@@ -110,10 +99,11 @@ module('Integration | Component | fm-widget:select', function (hooks) {
     this.get('widgetAttrs.content').pushObject({ value: 'qux', label: 'qux' });
 
     later(() => {
-      assert.equal(this.$('option').length, 1, 'Option is added after content array changes');
-      assert.equal(this.$('option').text().trim(), 'qux', 'Label of new content array element is added');
-      assert.equal(this.$('option').attr('value'), 'qux', 'Value of new content array element is added');
+      assert.dom('option').exists({ count: 1 }, 'Option is added after content array changes');
+      assert.dom('option').hasText('qux', 'Label of new content array element is added');
+      assert.dom('option').hasAttribute('value', 'qux', 'Value of new content array element is added');
     }, 100);
+    await settled();
   });
 
   test('fm-widgets/select updates options if an element is removed from content array', async function (assert) {
@@ -122,9 +112,13 @@ module('Integration | Component | fm-widget:select', function (hooks) {
     this.get('widgetAttrs.content').removeAt(0);
 
     later(() => {
-      assert.equal(this.$('option').length, 1, 'Option is removed after element of content array is removed');
-      assert.equal(this.$('option').text().trim(), 'bar', 'Correct element is removed');
+      assert.dom('option').exists(
+        { count: 1 },
+        'Option is removed after element of content array is removed'
+      );
+      assert.dom('option').hasText('bar', 'Correct element is removed');
     }, 100);
+    await settled();
   });
 
   test('sends action onUserAction on focus out event', async function (assert) {
@@ -134,7 +128,7 @@ module('Integration | Component | fm-widget:select', function (hooks) {
       assert.ok(true);
     });
     await render(hbs`{{fm-widgets/select widgetAttrs=this.widgetAttrs onUserInteraction=(action this.externalAction)}}`);
-    this.$('select').trigger('focusout');
+    $('select').trigger('focusout')
   });
 
   test('sends action onUserAction on change event', async function (assert) {
@@ -147,13 +141,13 @@ module('Integration | Component | fm-widget:select', function (hooks) {
     this.set('value', null);
 
     await render(hbs`{{fm-widgets/select value=this.value widgetAttrs=this.widgetAttrs onUserInteraction=(action this.externalAction)}}`);
-    this.$('select').change();
+    await triggerEvent('select', 'change');
   });
 
   test('supports undefined content in widgetAttrs', async function (assert) {
     await render(hbs`{{fm-widgets/select value=this.value widgetAttrs=(hash content=this.content optionValueLabel='label' optionValuePath='value')}}`);
-    assert.equal(this.$('option').length, 0);
+    assert.dom('option').doesNotExist();
     this.set('content', [{ label: 'one', value: 1 }]);
-    assert.equal(this.$('option').length, 1);
+    assert.dom('option').exists({ count: 1 });
   });
 });

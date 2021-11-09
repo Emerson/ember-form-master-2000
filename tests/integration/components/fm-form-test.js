@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, triggerEvent } from '@ember/test-helpers';
+import { render, triggerEvent, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import fmConfig from 'ember-form-master-2000/services/fm-config';
 
@@ -13,14 +13,14 @@ module('Integration | Component | fm-form', function(hooks) {
 
   test('renders properly', async function(assert) {
     await render(hbs `{{#fm-form}}inside{{/fm-form}}`);
-    assert.ok(this.$('form').length > 0, 'The form element did not render');
-    assert.equal(this.$('form').text(), 'inside', 'The block did not yield the form content');
+    assert.ok(findAll('form').length > 0, 'The form element did not render');
+    assert.dom('form').hasText('inside', 'The block did not yield the form content');
   });
 
   test('it uses allows classNames to be passed in', async function(assert) {
     this.set('classNames', ['ember-view', 'form-horizontal']);
     await render(hbs `{{#fm-form classNames=this.classNames}}{{/fm-form}}`);
-    assert.ok(this.$('form').hasClass('form-horizontal'), 'Has the form-horizontal class');
+    assert.dom('form').hasClass('form-horizontal', 'Has the form-horizontal class');
   });
 
   test('form shows errors on submit', async function(assert) {
@@ -32,8 +32,8 @@ module('Integration | Component | fm-form', function(hooks) {
         {{fm-field errors=this.errors}}
       {{/fm-form}}
     `);
-    assert.notOk(this.$('.form-group').hasClass('has-error'));
+    assert.dom('.form-group').hasNoClass('has-error');
     await triggerEvent('form', 'submit');
-    assert.ok(this.$('.form-group').hasClass('has-error'));
+    assert.dom('.form-group').hasClass('has-error');
   });
 });

@@ -3,9 +3,9 @@
 import layout from '../../templates/components/fm-widgets/select';
 
 import Component from '@ember/component';
-import { set, get, computed } from '@ember/object';
+import { set, get } from '@ember/object';
 import { inject } from '@ember/service';
-const { reads, oneWay } = computed;
+import { reads, oneWay } from '@ember/object/computed';
 
 export default Component.extend({
   layout: layout,
