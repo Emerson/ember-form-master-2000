@@ -4,7 +4,7 @@ import EmberObject from '@ember/object';
 import Component from '@ember/component';
 import { inject } from '@ember/service';
 import { computed, defineProperty } from '@ember/object';
-const { alias } = computed;
+import { alias } from '@ember/object/computed';
 
 const WIDGET_ATTR_ALIASES = [
   'placeholder', 'maxlength', 'content', 'optionValuePath', 'name', 'tabindex',

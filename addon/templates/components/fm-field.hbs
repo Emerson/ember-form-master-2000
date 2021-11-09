@@ -1,26 +1,26 @@
-{{#component displayName
-  formControlClass=formControlClass
-  label=label
-  helptext=helptext
-  forAttribute=forAttribute
-  visibleErrors=visibleErrors
-  isFocused=isFocused
-  isValid=isValid
-  formGroupClass=class
-  dataTest=dataTest
+{{#component this.displayName
+  formControlClass=this.formControlClass
+  label=this.label
+  helptext=this.helptext
+  forAttribute=this.forAttribute
+  visibleErrors=this.visibleErrors
+  isFocused=this.isFocused
+  isValid=this.isValid
+  formGroupClass=this.class
+  dataTest=this.dataTest
   as |inputClasses|
 }}
 
-  {{component widgetName
-    value=value
-    action=action
+  {{component this.widgetName
+    value=this.value
+    action=this.action
     onUserInteraction=(action 'userInteraction')
     onKeyUp=(action 'onKeyUp')
     onFocus=(action 'onFocus')
     onBlur=(action 'onBlur')
     classNames=inputClasses
     registerWidgetId=(action 'registerWidgetId')
-    widgetAttrs=widgetAttrs
+    widgetAttrs=this.widgetAttrs
   }}
 
   {{yield}}
