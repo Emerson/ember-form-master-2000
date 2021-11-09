@@ -1,6 +1,6 @@
 /* eslint-disable ember/closure-actions, ember/no-attrs-in-components */
 
-import TextArea from '@ember/component/text-area';
+import { TextArea } from '@ember/legacy-built-in-components';
 import { oneWay } from '@ember/object/computed'
 
 export default TextArea.extend({
