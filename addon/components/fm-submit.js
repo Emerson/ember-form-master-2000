@@ -2,7 +2,7 @@ import layout from '../templates/components/fm-submit';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { inject } from '@ember/service';
-const { reads } = computed;
+import { reads } from '@ember/object/computed';
 
 export default Component.extend({
   layout: layout,

@@ -2,7 +2,7 @@
 
 import { computed } from '@ember/object';
 import TextField from '@ember/component/text-field';
-const { oneWay } = computed;
+import { oneWay } from '@ember/object/computed';
 
 export default TextField.extend({
   placeholder: oneWay('widgetAttrs.placeholder'),
