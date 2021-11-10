@@ -19,6 +19,7 @@
   "license": "MIT",
   "devDependencies": {
     "@ember/jquery": "^2.0.0",
+    "@ember/legacy-built-in-components": "^0.2.0",
     "@ember/test-helpers": "^2.6.0",
     "bower": "^1.8.12",
     "broccoli-asset-rev": "^3.0.0",
