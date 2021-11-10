@@ -21,7 +21,7 @@
     "@ember/jquery": "^2.0.0",
     "@ember/test-helpers": "^2.6.0",
     "bower": "^1.8.12",
-    "broccoli-asset-rev": "^2.7.0",
+    "broccoli-asset-rev": "^3.0.0",
     "ember-auto-import": "^2.2.3",
     "ember-cli": "^3.26.1",
     "ember-cli-app-version": "^5.0.0",
