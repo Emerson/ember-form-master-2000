@@ -32,7 +32,7 @@ export default Component.extend({
   },
 
   change() {
-    const selectEl = this.$()[0];
+    const selectEl = document.getElementById(this.elementId);
     const wAttrs = this.getAttr('widgetAttrs');
     const selectedIndex = selectEl.selectedIndex;
     const content = get(wAttrs, 'content');
