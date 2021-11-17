@@ -4,7 +4,7 @@
   </option>
 {{/if}}
 
-{{#each this.widgetAttrs.content as |item|}}
+{{#each this.optionContent as |item|}}
   <option value="{{if this.widgetAttrs.optionValuePath (get item this.widgetAttrs.optionValuePath) item}}"
           selected={{is-equal (if this.widgetAttrs.optionValuePath (get item this.widgetAttrs.optionValuePath) item) this.value}}>
     {{get item this.widgetAttrs.optionLabelPath}}

@@ -145,7 +145,7 @@ module('Integration | Component | fm-widget:select', function (hooks) {
   });
 
   test('supports undefined content in widgetAttrs', async function (assert) {
-    await render(hbs`{{fm-widgets/select value=this.value widgetAttrs=(hash content=this.content optionValueLabel='label' optionValuePath='value')}}`);
+    await render(hbs`{{fm-widgets/select value=this.value widgetAttrs=(hash content=content optionValueLabel='label' optionValuePath='value')}}`);
     assert.dom('option').doesNotExist();
     this.set('content', [{ label: 'one', value: 1 }]);
     assert.dom('option').exists({ count: 1 });

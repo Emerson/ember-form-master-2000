@@ -14,16 +14,30 @@ export default TextField.extend({
   }),
 
   focusOut(e) {
-    this.sendAction('onUserInteraction', e, this);
-    this.sendAction('onBlur', e, this);
+    if (this.onUserInteraction && typeof this.onUserInteraction === 'function'){
+      this.onUserInteraction(e, this);
+    }
+    if (this.onBlur && typeof this.onBlur === 'function') {
+      this.onBlur(e, this);
+    }
   },
 
   keyUp(e) {
-    this.sendAction('onKeyUp', e, this);
+    if (this.onUserInteraction && typeof this.onUserInteraction === 'function'){
+      this.onUserInteraction(e, this);
+    }
+    if (this.onKeyUp && typeof this.onKeyUp === 'function') {
+      this.onKeyUp(e, this);
+    }
   },
 
   focusIn(e) {
-    this.sendAction('onFocus', e, this);
+    if (this.onUserInteraction && typeof this.onUserInteraction === 'function'){
+      this.onUserInteraction(e, this);
+    }
+    if (this.onFocus && typeof this.onFocus === 'function') {
+      this.onFocus(e, this);
+    }
   },
 
   afterRender(){

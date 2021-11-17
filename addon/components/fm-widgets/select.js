@@ -3,8 +3,9 @@
 import layout from '../../templates/components/fm-widgets/select';
 
 import Component from '@ember/component';
-import { set, get } from '@ember/object';
+import { get } from '@ember/object';
 import { inject } from '@ember/service';
+import { isArray } from '@ember/array';
 import { reads, oneWay } from '@ember/object/computed';
 
 export default Component.extend({
@@ -19,16 +20,14 @@ export default Component.extend({
   selectClass: reads('fmConfig.selectClass'),
 
   isDisabled: oneWay('widgetAttrs.disabled'),
+  optionContent: null,
 
-  init() {
-    this._super(arguments);
-    const wAttrs = this.get('widgetAttrs');
-    //if(!!this.attrs.forAttribute) {
-      //this.set('elementId', this.attrs.forAttribute);
-    //}
-
-    if(!wAttrs.content) {
-      set(wAttrs, 'content', []);
+  didReceiveAttrs() {
+    this._super(...arguments);
+    if (!isArray(this.widgetAttrs.content)) {
+      this.set('optionContent', []);
+    } else {
+      this.set('optionContent', this.widgetAttrs.content);
     }
   },
 
@@ -55,15 +54,26 @@ export default Component.extend({
     } else {
       this.attrs.value.update(value);
     }
-    this.sendAction('onUserInteraction');
+    if (this.onUserInteraction && typeof this.onUserInteraction === 'function'){
+      this.onUserInteraction();
+    }
   },
 
   focusOut(e) {
-    this.sendAction('onUserInteraction', e, this);
-    this.sendAction('onBlur', e, this);
+    if (this.onUserInteraction && typeof this.onUserInteraction === 'function'){
+      this.onUserInteraction(e, this);
+    }
+    if (this.onBlur && typeof this.onBlur === 'function') {
+      this.onBlur(e, this);
+    }
   },
 
   focusIn(e) {
-    this.sendAction('onFocus', e, this);
+    if (this.onUserInteraction && typeof this.onUserInteraction === 'function'){
+      this.onUserInteraction(e, this);
+    }
+    if (this.onFocus && typeof this.onFocus === 'function') {
+      this.onFocus(e, this);
+    }
   }
 });

@@ -6,8 +6,10 @@ import layout from '../../templates/components/fm-widgets/radio-group';
 export default Component.extend({
   layout,
   actions: {
-    radioButtonInteraction(){
-      this.sendAction('onUserInteraction');
+    radioButtonInteraction() {
+      if (this.onUserInteraction && typeof this.onUserInteraction === 'function'){
+        this.onUserInteraction();
+      }
     }
   }
 });
