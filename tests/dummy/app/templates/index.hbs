@@ -44,20 +44,6 @@
         data-test='select'
       }}
 
-            {{fm-field
-        label='Choose another'
-        widget='select'
-        content=this.model.selectOptions
-        optionValuePath='value'
-        optionLabelPath='label'
-        prompt='Select Something'
-        value=this.model.exampleModel.language
-        action=(action (mut this.model.exampleModel.language))
-        errors=this.model.exampleModel.errors.language
-        data-test='select'
-      }}
-
-
       {{fm-field
         widget='checkbox'
         label='Are you awesome?'
