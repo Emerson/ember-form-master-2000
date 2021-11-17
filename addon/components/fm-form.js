@@ -20,6 +20,8 @@ export default Component.extend({
         childView.set('shouldShowErrors', true);
       }
     });
-    this.sendAction('action', this.get('for'));
+    if (this.action && typeof this.action === 'function') {
+      this.action(e, this.for);
+    }
   }
 });

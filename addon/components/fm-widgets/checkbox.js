@@ -7,15 +7,26 @@ export default Component.extend({
   layout,
 
   change(e) {
-    this.sendAction('onUserInteraction', e, this);
+    if (this.onUserInteraction && typeof this.onUserInteraction === 'function'){
+      this.onUserInteraction(e, this);
+    }
   },
 
   focusOut(e) {
-    this.sendAction('onUserInteraction', e, this);
-    this.sendAction('onBlur', e, this);
+    if (this.onBlur && typeof this.onBlur === 'function') {
+      this.onBlur(e, this);
+    }
+    if (this.onUserInteraction && typeof this.onUserInteraction === 'function'){
+      this.onUserInteraction(e, this);
+    }
   },
 
   focusIn(e) {
-    this.sendAction('onFocus', e, this);
+    if (this.onFocus && typeof this.onFocus === 'function') {
+      this.onFocus(e, this);
+    }
+    if (this.onUserInteraction && typeof this.onUserInteraction === 'function'){
+      this.onUserInteraction();
+    }
   }
 });

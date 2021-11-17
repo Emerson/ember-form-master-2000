@@ -16,10 +16,17 @@ export default Component.extend({
 
   change() {
     this.set('value', this.get('widgetAttrs.targetValue'));
-    this.sendAction('onUserInteraction');
+    if (this.onUserInteraction && typeof this.onUserInteraction === 'function'){
+      this.onUserInteraction();
+    }
   },
 
-  focusOut() {
-    this.sendAction('onUserInteraction');
+  focusOut(e) {
+    if (this.onUserInteraction && typeof this.onUserInteraction === 'function'){
+      this.onUserInteraction();
+    }
+    if (this.onBlur && typeof this.onBlur === 'function') {
+      this.onBlur(e, this);
+    }
   },
 });
