@@ -4,8 +4,8 @@
     {{#fm-form action='submit'}}
 
       {{fm-field label='First Name'
-        value=model.exampleModel.first_name
-        errors=model.exampleModel.errors.first_name
+        value=this.model.exampleModel.first_name
+        errors=this.model.exampleModel.errors.first_name
         placeholder='Foo'
         widgetAttrs=(hash
           name='first_name'
@@ -15,8 +15,8 @@
       }}
 
       {{fm-field label='Last Name'
-        value=model.exampleModel.last_name
-        errors=model.exampleModel.errors.last_name
+        value=this.model.exampleModel.last_name
+        errors=this.model.exampleModel.errors.last_name
         placeholder='Bar'
         data-test='input2'
       }}
@@ -24,8 +24,8 @@
       {{fm-field
         label='Write an Essay'
         widget='textarea'
-        value=model.exampleModel.essay
-        errors=model.exampleModel.errors.essay
+        value=this.model.exampleModel.essay
+        errors=this.model.exampleModel.errors.essay
         rows='6'
         helptext='Make sure its good!'
         data-test='textarea'
@@ -34,21 +34,21 @@
       {{fm-field
         label='Choose Something'
         widget='select'
-        content=model.selectOptions
+        content=this.model.selectOptions
         optionValuePath='value'
         optionLabelPath='label'
         prompt='Select Something'
-        value=model.exampleModel.language
-        action=(action (mut model.exampleModel.language))
-        errors=model.exampleModel.errors.language
+        value=this.model.exampleModel.language
+        action=(action (mut this.model.exampleModel.language))
+        errors=this.model.exampleModel.errors.language
         data-test='select'
       }}
 
       {{fm-field
         widget='checkbox'
         label='Are you awesome?'
-        value=model.exampleModel.isAwesome
-        errors=model.exampleModel.errors.isAwesome
+        value=this.model.exampleModel.isAwesome
+        errors=this.model.exampleModel.errors.isAwesome
         data-test='checkbox'
       }}
 
@@ -56,17 +56,17 @@
         widget='radio-group'
         label='Choose the best language'
         name='bestLanguage'
-        content=model.radioOptions
+        content=this.model.radioOptions
         optionValuePath='value'
         optionLabelPath='label'
-        value=model.exampleModel.bestLanguage
-        errors=model.exampleModel.errors.bestLanguage
+        value=this.model.exampleModel.bestLanguage
+        errors=this.model.exampleModel.errors.bestLanguage
         data-test='radioGroup'
       }}
 
       {{fm-submit
         value='Submit the Form'
-        disabled=model.disableSubmit
+        disabled=this.model.disableSubmit
         data-test="submit"
       }}
 
@@ -82,26 +82,26 @@
     <hr>
     <h4>Model Values</h4>
     <ul>
-      <li>First Name: {{model.exampleModel.first_name}}</li>
-      <li>Last Name: {{model.exampleModel.last_name}}</li>
+      <li>First Name: {{this.model.exampleModel.first_name}}</li>
+      <li>Last Name: {{this.model.exampleModel.last_name}}</li>
       <li>
         Essay:
-        {{#if model.exampleModel.essay}}
+        {{#if this.model.exampleModel.essay}}
           <br>
-          <em>{{{model.exampleModel.essay}}}</em>
+          <em>{{{this.model.exampleModel.essay}}}</em>
           <br>
         {{/if}}
       </li>
-      <li>Choose Something: {{model.exampleModel.language}}</li>
+      <li>Choose Something: {{this.model.exampleModel.language}}</li>
       <li>
         Are you awesome?
-        {{#if model.exampleModel.isAwesome}}
+        {{#if this.model.exampleModel.isAwesome}}
           Yup
         {{else}}
           Nope
         {{/if}}
       </li>
-      <li>Best Language: {{model.exampleModel.bestLanguage}}</li>
+      <li>Best Language: {{this.model.exampleModel.bestLanguage}}</li>
     </ul>
   </div>
 
